@@ -6,7 +6,8 @@
 
     <groupId>Grupo1</groupId>
         <artifactId>ProyectoBack</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
