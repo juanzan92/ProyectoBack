@@ -29,6 +29,14 @@ public class PocController {
         return map;
     }
 
+    @GetMapping("/poc/dynamo")
+    public String dynamo()
+    {
+
+        return "";
+    }
+
+
     @GetMapping("/poc/entity")
     public PocDTO pocEntity() {
         PocDTO poc = new PocDTO();
