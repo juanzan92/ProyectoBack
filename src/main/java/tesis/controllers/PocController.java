@@ -32,8 +32,7 @@ public class PocController {
     @GetMapping("/poc/dynamo")
     public String dynamo()
     {
-
-        return "";
+        return pocService.dynamo();
     }
 
 
