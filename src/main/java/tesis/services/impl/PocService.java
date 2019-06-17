@@ -18,7 +18,7 @@ public class PocService implements PocInterface {
     }
 
 
-    public String dynamo() {
+    public PocDTO dynamo() {
         return pocDynamoService.prueba();
     }
 }
