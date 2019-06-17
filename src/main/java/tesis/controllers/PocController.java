@@ -48,6 +48,11 @@ public class PocController {
         return pocService.getDTO(123);
     }
 
+    @GetMapping("/poc/asd")
+    public PocDTO pocService1() {
+        return pocService.getDTO(123);
+    }
+
     @PostMapping("/poc/post")
     public PocDTO addMemberV1(@RequestBody Object member) {
         System.out.println("entró al post");
