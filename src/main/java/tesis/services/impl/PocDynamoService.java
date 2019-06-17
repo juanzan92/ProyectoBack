@@ -8,20 +8,29 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import tesis.dtos.entities.PocDTO;
 
 import java.util.Arrays;
 
 @Service
 public class PocDynamoService {
- @Autowired
- RestTemplate restTemplate;
 
- public String prueba() {
-  String urlstr = "https://kusmq1it9k.execute-api.us-east-1.amazonaws.com/Stage/asfasdfa/bf4efe76-deab-4c58-bda2-56c546b08fa4";
-  HttpHeaders headers = new HttpHeaders();
-  headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-  HttpEntity<String> entity = new HttpEntity<String>(headers);
+    @Autowired
+    RestTemplate restTemplate;
 
-  return restTemplate.exchange(urlstr, HttpMethod.GET, entity, String.class).getBody();
- }
+    @Bean
+    public RestTemplate getRestTemplate() {
+        return new RestTemplate();
+    }
+
+    public PocDTO prueba() {
+        String urlstr = "https://kusmq1it9k.execute-api.us-east-1.amazonaws.com/Stage/asfasdfa/bf4efe76-deab-4c58-bda2-56c546b08fa4";
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        HttpEntity<String> entity = new HttpEntity<String>(headers);
+
+        PocDTO pocDTO = restTemplate.exchange(urlstr, HttpMethod.GET, entity, PocDTO.class).getBody();
+
+        return pocDTO;
+    }
 }
