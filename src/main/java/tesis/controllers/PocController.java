@@ -29,6 +29,12 @@ public class PocController {
         return map;
     }
 
+    @GetMapping("/poc/dynamo")
+    public PocDTO dynamo()
+    {
+        return pocService.dynamo();
+    }
+
     @GetMapping("/poc/entity")
     public PocDTO pocEntity() {
         PocDTO poc = new PocDTO();
@@ -39,6 +45,11 @@ public class PocController {
 
     @GetMapping("/poc/service")
     public PocDTO pocService() {
+        return pocService.getDTO(123);
+    }
+
+    @GetMapping("/poc/asd")
+    public PocDTO pocService1() {
         return pocService.getDTO(123);
     }
 
