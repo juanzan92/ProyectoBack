@@ -28,3 +28,23 @@ public class PocDTO {
         this.description = description;
     }
 }
+/*
+public class SampleDBObject {
+    int id;
+    String attr1;
+    String attr2;
+
+    public SampleDBObject (int id, String attr1, String attr2) {
+        this.id = id;
+        this.attr1 = attr1;
+        this.attr2 = attr2;
+    }
+
+    public SampleDBObject () {}
+
+    public int getId() {
+        this.id = id;
+        return id;
+    }
+}
+ */
