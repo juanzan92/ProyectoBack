@@ -1,5 +1,5 @@
 branch-defaults:
-  fix/aws_dynamo:
+  feature/poc:
     environment: Proyectoback-env
 deploy:
   artifact: target/ProyectoBack-1.0.0.jar
