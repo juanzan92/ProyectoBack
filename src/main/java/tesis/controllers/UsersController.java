@@ -9,7 +9,7 @@ import tesis.services.impl.PocService;
 import tesis.services.impl.UsersService;
 
 @RestController  // o @Controller
-@RequestMapping("/usersXX")
+@RequestMapping("/users")
 public class UsersController {
     @Autowired
     UsersService usersService;
