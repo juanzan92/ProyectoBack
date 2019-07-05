@@ -15,13 +15,15 @@ import java.util.Arrays;
 @Service
 public class PocDynamoService {
 
+
     @Autowired
     RestTemplate restTemplate;
 
+    /* // Esto debe ir en el Main.
     @Bean
     public RestTemplate getRestTemplate() {
         return new RestTemplate();
-    }
+    }*/
 
     public PocDTO prueba() {
         String urlstr = "https://kusmq1it9k.execute-api.us-east-1.amazonaws.com/Stage/asfasdfa/bf4efe76-deab-4c58-bda2-56c546b08fa4";

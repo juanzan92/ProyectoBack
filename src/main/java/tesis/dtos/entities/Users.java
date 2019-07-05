@@ -38,4 +38,7 @@ public class Users {
         this.userId = userId;
         this.userRole = userRole;
     }
+    // alt + insert = Generate - ie: constructor
+
+    public Users() { }
 }

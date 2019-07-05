@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import tesis.dtos.entities.PocDTO;
+import tesis.services.impl.PocDynamoService;
 import tesis.services.impl.PocService;
 
 import java.util.HashMap;
