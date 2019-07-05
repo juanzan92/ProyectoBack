@@ -14,20 +14,32 @@ public class UsersController2 {
     @Autowired
     UsersService usersService;
 
+    @PostMapping("/create_user_hc")
+    @ResponseBody
+    //public String createUser(@RequestParam("user_id") Long userId, @RequestParam("role") String role ) {
+    public String createUserHC(
+            @RequestBody Users newuser)
+    {
+        usersService.create_user_hc();
+        return ("Usuario Creado (hard coded @ service)");
+    }
+
     @PostMapping("/create_user")
     @ResponseBody
     //public String createUser(@RequestParam("user_id") Long userId, @RequestParam("role") String role ) {
     public String createUser(
             @RequestBody Users newuser)
     {
-        return ("Usuario Creado - fake");
+        usersService.create_user(newuser);
+        return ("Usuario Creado (4real)");
     }
 
     @PostMapping("/create_user_fake")
-    public Users createUser(@RequestBody Object member) {
+    public Users createUserFake(@RequestBody Users newuserfake) {
         System.out.println("entró al post");
         //return pocService.getDTO(123);
-        return usersService.getUser(1234L);
+        //usersService.createUser();
+        return usersService.getUserHC(1234L);
     }
     /*
     public ResponseTransfer postResponseController(
