@@ -16,9 +16,4 @@ public class PocService implements PocInterface {
         dto.setValue1(44444);
         return dto;
     }
-
-
-    public PocDTO dynamo() {
-        return pocDynamoService.prueba();
-    }
 }
