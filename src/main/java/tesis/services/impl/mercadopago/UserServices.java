@@ -6,6 +6,9 @@ import com.mercadopago.exceptions.MPException;
 import com.mercadopago.resources.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import tesis.services.impl.RestClient;
 
 import java.util.HashMap;
 
@@ -13,6 +16,8 @@ import java.util.HashMap;
 public class UserServices {
     @Autowired
     CardService cardService;
+    @Autowired
+    RestClient restClient;
 
     public String createUser() {
         try {
@@ -65,5 +70,16 @@ public class UserServices {
             throw e;
         }
         return customers;
+    }
+
+    public String createMarketplaceAuth(String authCode) {
+        MultiValueMap<String, String> requestBody = new LinkedMultiValueMap<>();
+        requestBody.add("client_id", "5912969040584293");
+        requestBody.add("client_secret", "7f0EFL7Ers6j3CU9bjlFBurNErUufQZv");
+        requestBody.add("grant_type", "authorization_code");
+        requestBody.add("code", authCode);
+        requestBody.add("redirect_uri", "http://localhost:3000/login");
+
+        return restClient.formRequest("https://api.mercadopago.com/oauth/token", requestBody);
     }
 }

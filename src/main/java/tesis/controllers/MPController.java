@@ -8,6 +8,7 @@ import com.mercadopago.resources.Payment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import tesis.services.impl.mercadopago.CardService;
 import tesis.services.impl.mercadopago.PaymentService;
@@ -52,6 +53,11 @@ public class MPController {
     @PostMapping("/mp/cards/create_card")
     public Card createCard() throws MPException {
         return cardService.createCard("449730233-vpQkKAveTRQgJV");
+    }
+
+    @PostMapping("/mp/users/marketplace_auth")
+    public String createMarketplaceAuth(@RequestParam String code) {
+        return userServices.createMarketplaceAuth(code);
     }
 
 

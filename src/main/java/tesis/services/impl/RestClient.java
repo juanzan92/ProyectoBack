@@ -8,6 +8,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
@@ -28,18 +29,26 @@ public class RestClient {
             ObjectMapper objectMapper = new ObjectMapper();
             String newObject = objectMapper.writeValueAsString(body);
 
-            String urlstr = url + "?access_token=TEST-5912969040584293-092110-771d21ab7cc96c709fbcc464d05c409b-187271358";
-
             HttpHeaders headers = new HttpHeaders();
             headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
             HttpEntity<String> entity = new HttpEntity<>(newObject, headers);
 
-            return restTemplate.exchange(urlstr, httpMethod, entity, String.class).getBody();
+            return restTemplate.exchange(url, httpMethod, entity, String.class).getBody();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         return null;
+    }
+
+    public String formRequest(String url, MultiValueMap<String, String> requestBody) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+        HttpEntity entity = new HttpEntity<>(requestBody, headers);
+
+        return restTemplate.exchange(url, HttpMethod.POST, entity, String.class).getBody();
     }
 }
