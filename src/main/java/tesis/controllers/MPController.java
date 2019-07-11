@@ -5,10 +5,8 @@ import com.mercadopago.exceptions.MPException;
 import com.mercadopago.resources.Card;
 import com.mercadopago.resources.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import tesis.entities.dtos.mercadopago.PreferenceDTO;
 import tesis.services.mercadopago.CardService;
 import tesis.services.mercadopago.PreferenceService;
 import tesis.services.mercadopago.UserServices;
@@ -56,8 +54,8 @@ public class MPController {
     }
 
     @PostMapping("/mp/preferences/create")
-    public HashMap<String, String> createPreference() throws MPException {
-     return preferenceService.createPreference();
+    public HashMap<String, String> createPreference(@RequestBody PreferenceDTO preferenceDTO) throws MPException {
+     return preferenceService.createPreference(preferenceDTO);
     }
 
 }
