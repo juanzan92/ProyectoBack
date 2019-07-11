@@ -1,6 +1,8 @@
 package tesis.dtos.entities;
 
 public class Users {
+    String TableName = "users";
+    String TablePrimary = "userId";
     Long userId;
     String name;
     String userRole;
@@ -36,6 +38,11 @@ public class Users {
     }
     public Users(Long userId, String userRole) {
         this.userId = userId;
+        this.userRole = userRole;
+    }
+
+    public Users(String name, String userRole) {
+        this.name = name;
         this.userRole = userRole;
     }
     // alt + insert = Generate - ie: constructor

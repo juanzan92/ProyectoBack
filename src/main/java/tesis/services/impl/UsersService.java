@@ -20,6 +20,7 @@ public class UsersService {
     public RestTemplate getRestTemplate() {
         return new RestTemplate();
     }*/
+    //private String dynamo_table = "Users";
 
     public Users createUser(Long id,String role){
         Users user = new Users(id,role);
@@ -33,6 +34,28 @@ public class UsersService {
         user.setName("Yerbon");
         return user;
     }
+
+    public Users get_user_by_id(String user_id) {
+        Users user = new Users();
+
+        String urlstr = "https://kusmq1it9k.execute-api.us-east-1.amazonaws.com/prod/{items}/{id}/{attribute}";
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        // HttpEntity<String> entity = new HttpEntity<String>(headers);
+
+        //setting up the request body
+        HttpEntity<Users> requestEntity = new HttpEntity<>(user, headers);
+
+        ResponseEntity<Users> responseEntity = restTemplate.exchange(
+                urlstr,
+                HttpMethod.GET,
+                requestEntity,
+                Users.class
+        );
+        return user;
+    }
+
 
     public void create_user_hc() {
         String urlstr = "https://lrxqme2z7k.execute-api.us-east-1.amazonaws.com/Prod/users/create_user";

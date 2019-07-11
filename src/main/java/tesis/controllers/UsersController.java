@@ -34,6 +34,12 @@ public class UsersController {
         return ("Usuario Creado (4real)");
     }
 
+    @GetMapping("/get_user/{user_id}")
+    public Users get_user_by_id() {
+        return usersService.get_user_by_id("1111");
+    }
+
+    /*
     @PostMapping("/create_user_fake")
     public Users createUserFake(@RequestBody Users newuserfake) {
         System.out.println("entró al post");
@@ -41,6 +47,8 @@ public class UsersController {
         //usersService.createUser();
         return usersService.getUserHC(1234L);
     }
+    */
+
     /*
     public ResponseTransfer postResponseController(
             @RequestBody LoginForm loginForm) {
