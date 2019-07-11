@@ -1,4 +1,4 @@
-package tesis.services.impl.mercadopago;
+package tesis.services.mercadopago;
 
 
 import com.mercadopago.MercadoPago;

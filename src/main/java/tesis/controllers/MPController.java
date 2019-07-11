@@ -4,17 +4,17 @@ import com.mercadopago.core.MPResourceArray;
 import com.mercadopago.exceptions.MPException;
 import com.mercadopago.resources.Card;
 import com.mercadopago.resources.Customer;
-import com.mercadopago.resources.Payment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import tesis.services.impl.mercadopago.CardService;
-import tesis.services.impl.mercadopago.PaymentService;
-import tesis.services.impl.mercadopago.UserServices;
+import tesis.services.mercadopago.CardService;
+import tesis.services.mercadopago.PreferenceService;
+import tesis.services.mercadopago.UserServices;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 @RestController
 public class MPController {
@@ -23,7 +23,7 @@ public class MPController {
     @Autowired
     CardService cardService;
     @Autowired
-    PaymentService paymentService;
+    PreferenceService preferenceService;
 
     @PostMapping("/mp/users/create_user")
     public String createUser() {
@@ -45,11 +45,6 @@ public class MPController {
         return cardService.getUserCards("449730233-vpQkKAveTRQgJV");
     }
 
-    @PostMapping("/mp/payments/create_payment")
-    public Payment createPayment() throws MPException {
-        return paymentService.createPayment();
-    }
-
     @PostMapping("/mp/cards/create_card")
     public Card createCard() throws MPException {
         return cardService.createCard("449730233-vpQkKAveTRQgJV");
@@ -60,5 +55,9 @@ public class MPController {
         return userServices.createMarketplaceAuth(code);
     }
 
+    @PostMapping("/mp/preferences/create")
+    public HashMap<String, String> createPreference() throws MPException {
+     return preferenceService.createPreference();
+    }
 
 }

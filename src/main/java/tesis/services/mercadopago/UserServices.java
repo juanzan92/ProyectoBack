@@ -1,4 +1,4 @@
-package tesis.services.impl.mercadopago;
+package tesis.services.mercadopago;
 
 import com.mercadopago.MercadoPago;
 import com.mercadopago.core.MPResourceArray;
@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import tesis.services.impl.RestClient;
+import tesis.services.RestClient;
 
 import java.util.HashMap;
 
