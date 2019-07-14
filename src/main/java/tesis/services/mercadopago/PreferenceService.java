@@ -3,9 +3,7 @@ package tesis.services.mercadopago;
 import com.mercadopago.MercadoPago;
 import com.mercadopago.exceptions.MPException;
 import com.mercadopago.resources.Preference;
-import com.mercadopago.resources.datastructures.preference.BackUrls;
-import com.mercadopago.resources.datastructures.preference.Item;
-import com.mercadopago.resources.datastructures.preference.Payer;
+import com.mercadopago.resources.datastructures.preference.*;
 import org.springframework.stereotype.Service;
 import tesis.entities.dtos.mercadopago.PreferenceDTO;
 import tesis.entities.marshallers.PreferenceMarshaller;
@@ -28,9 +26,21 @@ public class PreferenceService {
                 .setUnitPrice((float) 1.2);
 
         Payer payer = new Payer();
-        payer.setEmail("kathryne_schiller@hotmail.com");
+        payer.setName("pepito")
+                .setSurname("gomez")
+                .setEmail("kathryne_schiller@hotmail.com")
+                .setPhone(new Phone()
+                        .setAreaCode("351")
+                        .setNumber("3702304"))
+                .setIdentification(new Identification().setType("DNI").
+                        setNumber("38333123"))
+                .setAddress(new Address().setStreetName("sol de mayo").
+                        setZipCode("5000").
+                        setStreetNumber(123));
 
-        BackUrls backUrls = new BackUrls("localhost:8080/success", "localhost:8080/pending", "localhost:8080/failure");
+        BackUrls backUrls = new BackUrls("localhost:8080/success",
+                "localhost:8080/pending",
+                "localhost:8080/failure");
 
         preference.appendItem(item);
         preference.setMarketplaceFee((float) 1.1);
