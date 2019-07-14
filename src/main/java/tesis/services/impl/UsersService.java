@@ -22,14 +22,14 @@ public class UsersService {
     }*/
     //private String dynamo_table = "Users";
 
-    public Users createUser(Long id,String role){
+    /*public Users createUser(String id,String role){
         Users user = new Users(id,role);
         return user;
-    }
+    }*/
 
-    public Users getUserHC(Long user_id){
+    public Users getUserHC(String user_id){
         Users user = new Users();
-        user.setUserId(1234567879L);
+        user.setUserId("54565465456");
         user.setUserRole("collaborador");
         user.setName("Yerbon");
         return user;
@@ -68,7 +68,7 @@ public class UsersService {
         Users user = new Users();
         user.setName("PostmanBackEnd01");
         user.setUserRole("collaborador");
-        user.setUserId(123456789L);
+        user.setUserId("1231231231");
 
         HttpEntity<Users> requestEntity = new HttpEntity<>(user, headers);
 

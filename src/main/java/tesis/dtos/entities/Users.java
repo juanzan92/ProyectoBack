@@ -1,17 +1,34 @@
 package tesis.dtos.entities;
 
 public class Users {
-    String TableName = "users";
-    String TablePrimary = "userId";
-    Long userId;
+    String tableName = "users";
+    String tablePrimary = "userId";
+    String userId;
     String name;
     String userRole;
 
-    public Long getUserId() {
+//
+    public String getTableName() {
+        return tableName;
+    }
+
+    public void setTableName(String tableName) {
+        this.tableName = tableName;
+    }
+//
+    public String getTablePrimary() {
+        return tablePrimary;
+    }
+
+    public void setTablePrimary(String tablePrimary) {
+        this.tablePrimary = tablePrimary;
+    }
+//
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 //
@@ -30,21 +47,27 @@ public class Users {
     public void setUserRole(String userRole) {
         this.userRole = userRole;
     }
-
-    public Users(Long userId, String name, String userRole) {
+//
+    public Users (String userId, String name, String userRole) {
         this.userId = userId;
         this.name = name;
         this.userRole = userRole;
     }
-    public Users(Long userId, String userRole) {
-        this.userId = userId;
-        this.userRole = userRole;
-    }
 
+    /*public Users(String userId, String name, String userRole) {
+        this.userId = userId;
+        this.name = name;
+        this.userRole = userRole;
+        this.TableName = "users";
+        this.TablePrimary = "userId";
+    }*/
+/*
     public Users(String name, String userRole) {
         this.name = name;
         this.userRole = userRole;
-    }
+        this.TableName = "users";
+        this.TablePrimary = "userId";
+    }*/
     // alt + insert = Generate - ie: constructor
 
     public Users() { }
