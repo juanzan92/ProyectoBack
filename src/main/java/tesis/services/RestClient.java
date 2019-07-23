@@ -24,7 +24,7 @@ public class RestClient {
         return new RestTemplate();
     }
 
-    public String request(String url, Object body, HttpMethod httpMethod) {
+    public <T> T request(String url, Object body, HttpMethod httpMethod, Class<T> responseClass) {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             String newObject = objectMapper.writeValueAsString(body);
@@ -33,7 +33,7 @@ public class RestClient {
             headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
             HttpEntity<String> entity = new HttpEntity<>(newObject, headers);
 
-            return restTemplate.exchange(url, httpMethod, entity, String.class).getBody();
+            return restTemplate.exchange(url, httpMethod, entity, responseClass).getBody();
 
         } catch (IOException e) {
             e.printStackTrace();

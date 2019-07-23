@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import tesis.services.RestClient;
+import tesis.services.account.UserService;
 
 import java.util.HashMap;
 
@@ -18,6 +19,8 @@ public class UserServices {
     CardService cardService;
     @Autowired
     RestClient restClient;
+    @Autowired
+    UserService userService;
 
     public String createUser() {
         try {
@@ -78,7 +81,7 @@ public class UserServices {
         requestBody.add("client_secret", "7f0EFL7Ers6j3CU9bjlFBurNErUufQZv");
         requestBody.add("grant_type", "authorization_code");
         requestBody.add("code", authCode);
-        requestBody.add("redirect_uri", "http://localhost:3000/login");
+        requestBody.add("redirect_uri", "http://localhost:3000/splash");
 
         return restClient.formRequest("https://api.mercadopago.com/oauth/token", requestBody);
     }
