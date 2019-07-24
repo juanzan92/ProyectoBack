@@ -1,5 +1,6 @@
 package tesis.services.mercadopago;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.mercadopago.MercadoPago;
 import com.mercadopago.core.MPResourceArray;
 import com.mercadopago.exceptions.MPException;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import tesis.entities.dtos.mercadopago.Vendor;
 import tesis.services.RestClient;
 import tesis.services.account.UserService;
 
@@ -75,14 +77,16 @@ public class UserServices {
         return customers;
     }
 
-    public String createMarketplaceAuth(String authCode) {
+    public String createMarketplaceAuth(String authCode, String userId) throws JsonProcessingException {
         MultiValueMap<String, String> requestBody = new LinkedMultiValueMap<>();
         requestBody.add("client_id", "5912969040584293");
         requestBody.add("client_secret", "7f0EFL7Ers6j3CU9bjlFBurNErUufQZv");
         requestBody.add("grant_type", "authorization_code");
         requestBody.add("code", authCode);
-        requestBody.add("redirect_uri", "http://localhost:3000/splash");
+        requestBody.add("redirect_uri", "http://localhost:3000/splash?user_id=" + userId);
 
-        return restClient.formRequest("https://api.mercadopago.com/oauth/token", requestBody);
+        Vendor vendor = restClient.formRequest("https://api.mercadopago.com/oauth/token", requestBody, Vendor.class);
+        userService.createVendorUser(vendor);
+        return "";
     }
 }

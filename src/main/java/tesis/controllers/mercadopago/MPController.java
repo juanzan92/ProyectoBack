@@ -1,5 +1,6 @@
 package tesis.controllers.mercadopago;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.mercadopago.core.MPResourceArray;
 import com.mercadopago.exceptions.MPException;
 import com.mercadopago.resources.Card;
@@ -13,6 +14,7 @@ import tesis.services.mercadopago.UserServices;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 public class MPController {
@@ -49,13 +51,13 @@ public class MPController {
     }
 
     @PostMapping("/mp/users/marketplace_auth")
-    public String createMarketplaceAuth(@RequestParam String code) {
-        return userServices.createMarketplaceAuth(code);
+    public String createMarketplaceAuth(@RequestParam Map<String, String> allParams) throws JsonProcessingException {
+        return userServices.createMarketplaceAuth(allParams.get("code"), allParams.get("user_id"));
     }
 
     @PostMapping("/mp/preferences/create")
     public HashMap<String, String> createPreference(@RequestBody PreferenceDTO preferenceDTO) throws MPException {
-     return preferenceService.createPreference(preferenceDTO);
+        return preferenceService.createPreference(preferenceDTO);
     }
 
 }
