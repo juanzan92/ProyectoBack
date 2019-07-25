@@ -16,14 +16,12 @@ public class UserService {
 
     String urlBase = "https://lrxqme2z7k.execute-api.us-east-1.amazonaws.com/Prod/users";
 
-    public Object createUser(User newUser) throws JsonProcessingException {
-        User user = restClient.request(urlBase + "/create_user", newUser, HttpMethod.POST, User.class);
-        return user;
+    public String createUser(User newUser) throws JsonProcessingException {
+        return restClient.request(urlBase + "/create_user", newUser, HttpMethod.POST, String.class);
     }
 
-    public Object createVendorUser(Vendor newUser) throws JsonProcessingException {
-        User user = restClient.request(urlBase + "/create_user", newUser, HttpMethod.POST, User.class);
-        return restClient.request(urlBase + "/create_user", newUser, HttpMethod.POST, String.class);
+    public String createVendorUser(Vendor vendor) throws JsonProcessingException {
+        return restClient.request(urlBase + "/update_user", vendor, HttpMethod.PUT, String.class);
     }
 
 }

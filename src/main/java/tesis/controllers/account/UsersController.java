@@ -14,7 +14,7 @@ public class UsersController {
     UserService usersService;
 
     @PostMapping("/account/users/create_user")
-    public Object createUser(@RequestBody User newUser) throws JsonProcessingException {
-        return  usersService.createUser(newUser);
-   }
+    public String createUser(@RequestBody User newUser) throws JsonProcessingException {
+        return usersService.createUser(newUser);
+    }
 }
