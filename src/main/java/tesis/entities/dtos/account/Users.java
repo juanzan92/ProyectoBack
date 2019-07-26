@@ -1,40 +1,27 @@
 package tesis.entities.dtos.account;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import tesis.entities.dtos.ForDynamo;
 
 public class Users extends ForDynamo {
 
-    String userId;
-    String name;
-    String userRole;
+    @JsonProperty("username")
+    private String username;
+
+    @JsonProperty("first_name")
+    private String firstName;
+
+    @JsonProperty("last_name")
+    private String lastName;
+
+    @JsonProperty("user_role")
+    private String userRole;
+
+    @JsonProperty("email")
+    private String email;
 
     public Users() {
-        super("users", "userId");
+        super("users", "username");
     }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getUserRole() {
-        return userRole;
-    }
-
-    public void setUserRole(String userRole) {
-        this.userRole = userRole;
-    }
-
 
 }
