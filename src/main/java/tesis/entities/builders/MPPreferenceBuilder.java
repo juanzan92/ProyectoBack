@@ -12,7 +12,7 @@ public class MPPreferenceBuilder {
 
         Preference preference = new Preference();
         preference.appendItem(MPItemBuilder.buildItem(preferenceDTO, item));
-        preference.setMarketplaceFee((float) 1.1);
+        preference.setMarketplaceFee((float) ((item.getInitialPrice()) * 0.2));
         preference.setPayer(MPPayerBuilder.buildPayer(consumer));
         preference.setBackUrls(MPBackUrlsBuilder.buildBackUrls());
         preference.save();
