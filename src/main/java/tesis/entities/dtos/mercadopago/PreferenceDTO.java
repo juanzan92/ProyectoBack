@@ -6,10 +6,7 @@ public class PreferenceDTO {
     @JsonProperty("item_name")
     private String itemName;
 
-    @JsonProperty("vendor_name")
-    private String vendorName;
-
-    @JsonProperty("consumer_info")
+    @JsonProperty("consumer")
     Consumer consumer;
 
     public Consumer getConsumer() {
@@ -24,11 +21,4 @@ public class PreferenceDTO {
         this.itemName = itemName;
     }
 
-    public String getVendorName() {
-        return vendorName;
-    }
-
-    public void setVendorName(String vendorName) {
-        this.vendorName = vendorName;
-    }
 }

@@ -29,6 +29,14 @@ public class Item extends ForDynamo {
         super("", "");
     }
 
+    public String getVendorName() {
+        return vendorName;
+    }
+
+    public void setVendorName(String vendorName) {
+        this.vendorName = vendorName;
+    }
+
     public String getTableName() {
         return tableName;
     }

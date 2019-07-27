@@ -29,14 +29,17 @@ public class PreferenceService {
     ItemService itemService;
 
     public HashMap<String, String> createPreference(PreferenceDTO preferenceDTO) throws MPException, JsonProcessingException {
-        Consumer consumer = preferenceDTO.getConsumer();
-        Vendor vendor = userService.getVendor(preferenceDTO.getVendorName());
-        Item item = itemService.getItem(preferenceDTO.getItemName());
+        try {
+            Item item = itemService.getItem(preferenceDTO.getItemName());
+            Vendor vendor = userService.getVendor(item.getVendorName());
 
-        MercadoPago.SDK.setAccessToken(vendor.getAccessToken());
+            MercadoPago.SDK.setAccessToken(vendor.getAccessToken());
 
-        Preference preference = MPPreferenceBuilder.buildPreference(preferenceDTO, item, consumer);
+            Preference preference = MPPreferenceBuilder.buildPreference(preferenceDTO, item, preferenceDTO.getConsumer());
 
-        return PreferenceMarshaller.buildUrlPreference(preference);
+            return PreferenceMarshaller.buildUrlPreference(preference);
+        } catch (Exception e) {
+            throw e;
+        }
     }
 }
