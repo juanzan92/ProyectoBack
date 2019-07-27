@@ -3,36 +3,32 @@ package tesis.entities.dtos.mercadopago;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class PreferenceDTO {
-    @JsonProperty("item_id")
-    private Long itemId;
+    @JsonProperty("item_name")
+    private String itemName;
 
-    @JsonProperty("user_id")
-    private Long userId;
+    @JsonProperty("vendor_name")
+    private String vendorName;
 
-    private int quantity;
+    @JsonProperty("consumer_info")
+    Consumer consumer;
 
-    public Long getUserId() {
-        return userId;
+    public Consumer getConsumer() {
+        return consumer;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public String getItemName() {
+        return itemName;
     }
 
-
-    public Long getItemId() {
-        return itemId;
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
     }
 
-    public void setItemId(Long itemId) {
-        this.itemId = itemId;
+    public String getVendorName() {
+        return vendorName;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setVendorName(String vendorName) {
+        this.vendorName = vendorName;
     }
 }
