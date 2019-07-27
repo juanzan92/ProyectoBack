@@ -15,6 +15,7 @@ public class MPPreferenceBuilder {
         preference.setMarketplaceFee((float) ((item.getInitialPrice()) * 0.2));
         preference.setPayer(MPPayerBuilder.buildPayer(consumer));
         preference.setBackUrls(MPBackUrlsBuilder.buildBackUrls());
+        preference.setNotificationUrl("http://localhost:8080/mp/payments/notification");
         preference.save();
 
         return preference;
