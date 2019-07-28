@@ -18,7 +18,7 @@ public class ItemService {
     }
 
     public String saveItem(Item item) throws JsonProcessingException {
-        return restClient.request(urlBase + "/item_id", item, HttpMethod.GET, String.class);
+        return restClient.request(urlBase + "/item_id", item, HttpMethod.PUT, String.class);
     }
 
     public String deleteItem(String itemId) throws JsonProcessingException {
