@@ -28,26 +28,21 @@ public class AmazonClient {
 
     @Value("${bucketName:s-market-images}")
     private String bucketName;
-    @Value("${accessKey:AKIA5SGM5K7CSLMBSLXC}")
+    @Value("${accessKey:AKIA5SGM5K7C7FGUMJQC}")
     private String accessKey;
-    @Value("${secretKey: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}")
+    @Value("${secretKey:z9kMn8JMTFX0H4DuFegTgd4aab8h8JHgk43XWJY4}")
     private String secretKey;
     @Value("${endpointUrl:https://s3.us-east-1.amazonaws.com}")
     private String endpointUrl;
 
     @PostConstruct
     private void initializeAmazon() {
-        //AWSCredentials credentials = new BasicAWSCredentials(this.accessKey, this.secretKey);
-        AWSCredentials credentials = new BasicAWSCredentials("AKIA5SGM5K7C34VO7EOK", "1O6R9NrNjTm5nfBZvCWcUypF01SIBJLdON7KnsfY");
-        //this.s3client = new AmazonS3Client(credentials) {
-        //};
-        this.s3client = AmazonS3ClientBuilder
+        AWSCredentials credentials = new BasicAWSCredentials(accessKey, secretKey);
+        s3client = AmazonS3ClientBuilder
                 .standard()
                 .withCredentials(new AWSStaticCredentialsProvider(credentials))
                 .withRegion(Regions.US_EAST_1)
                 .build();
-        this.bucketName = "s-market-images";
-        this.endpointUrl= "https://s3.us-east-1.amazonaws.com";
     }
 
     private File convertMultiPartToFile(MultipartFile file) throws IOException {

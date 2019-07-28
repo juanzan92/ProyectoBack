@@ -9,20 +9,16 @@ import tesis.services.AmazonClient;
 @RequestMapping("/catalog/img")
 public class BucketController {
 
-    private AmazonClient amazonClient;
-
     @Autowired
-    BucketController(AmazonClient amazonClient) {
-        this.amazonClient = amazonClient;
-    }
+    private AmazonClient amazonClient;
 
     @PostMapping("/upload")
     public String uploadFile(@RequestPart(value = "file") MultipartFile file) {
-        return this.amazonClient.uploadFile(file);
+        return amazonClient.uploadFile(file);
     }
 
     @DeleteMapping("/delete")
     public String deleteFile(@RequestPart(value = "url") String fileUrl) {
-        return this.amazonClient.deleteFileFromS3Bucket(fileUrl);
+        return amazonClient.deleteFileFromS3Bucket(fileUrl);
     }
 }
