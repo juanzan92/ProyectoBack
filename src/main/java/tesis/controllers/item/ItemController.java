@@ -7,17 +7,23 @@ import tesis.entities.dtos.item.Item;
 import tesis.services.item.ItemService;
 
 @RestController
+@RequestMapping("/catalog/items/{id}")
 public class ItemController {
     @Autowired
     ItemService itemService;
 
-    @GetMapping("/catalog/items/get_item")
-    public Item getItem(@RequestParam String itemId) throws JsonProcessingException {
+    @GetMapping()
+    public Item getItem(@PathVariable("id") String itemId) throws JsonProcessingException {
         return itemService.getItem(itemId);
     }
 
-    @PostMapping("/catalog/items/save_item")
-    public String saveItem(@RequestBody Item item) {
+    @PostMapping()
+    public String saveItem(@RequestBody Item item) throws JsonProcessingException {
         return itemService.saveItem(item);
+    }
+
+    @DeleteMapping()
+    public String deleteItem(@PathVariable("id") String itemId) throws JsonProcessingException {
+        return itemService.deleteItem(itemId);
     }
 }

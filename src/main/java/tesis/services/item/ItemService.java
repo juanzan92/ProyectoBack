@@ -11,13 +11,17 @@ import tesis.services.RestClient;
 public class ItemService {
     @Autowired
     RestClient restClient;
-    String urlBase = "https://lrxqme2z7k.execute-api.us-east-1.amazonaws.com/Prod/users";
+    String urlBase = "https://kusmq1it9k.execute-api.us-east-1.amazonaws.com/prod/items/";
 
-    public Item getItem(String item) throws JsonProcessingException {
-        return restClient.request(urlBase + "/items/get_item", item, HttpMethod.GET, Item.class);
+    public Item getItem(String itemId) throws JsonProcessingException {
+        return restClient.request(urlBase + itemId + "/item_id", null, HttpMethod.GET, Item.class);
     }
 
-    public String saveItem(Item item) {
-        return "";
+    public String saveItem(Item item) throws JsonProcessingException {
+        return restClient.request(urlBase + "/item_id", item, HttpMethod.GET, String.class);
+    }
+
+    public String deleteItem(String itemId) throws JsonProcessingException {
+        return restClient.request(urlBase + itemId + "/item_id", null, HttpMethod.DELETE, String.class);
     }
 }

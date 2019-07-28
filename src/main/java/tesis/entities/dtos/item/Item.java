@@ -26,7 +26,7 @@ public class Item extends ForDynamo {
     private String last_updated;
 
     public Item() {
-        super("", "");
+        super("items", "item_id");
     }
 
     public String getVendorName() {
