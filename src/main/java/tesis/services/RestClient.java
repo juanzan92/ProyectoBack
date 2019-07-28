@@ -1,5 +1,6 @@
 package tesis.services;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -24,7 +25,7 @@ public class RestClient {
         return new RestTemplate();
     }
 
-    public String request(String url, Object body, HttpMethod httpMethod) {
+    public <T> T request(String url, Object body, HttpMethod httpMethod, Class<T> responseClass) throws JsonProcessingException {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             String newObject = objectMapper.writeValueAsString(body);
@@ -33,22 +34,24 @@ public class RestClient {
             headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
             HttpEntity<String> entity = new HttpEntity<>(newObject, headers);
 
-            return restTemplate.exchange(url, httpMethod, entity, String.class).getBody();
+            return restTemplate.exchange(url, httpMethod, entity, responseClass).getBody();
 
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            throw e;
         }
-
-        return null;
     }
 
-    public String formRequest(String url, MultiValueMap<String, String> requestBody) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+    public <T> T formRequest(String url, MultiValueMap<String, String> requestBody, Class<T> responseClass) {
+        try {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
-        HttpEntity entity = new HttpEntity<>(requestBody, headers);
+            HttpEntity entity = new HttpEntity<>(requestBody, headers);
 
-        return restTemplate.exchange(url, HttpMethod.POST, entity, String.class).getBody();
+            return restTemplate.exchange(url, HttpMethod.POST, entity, responseClass).getBody();
+        } catch (Exception e) {
+            throw e;
+        }
     }
 }
