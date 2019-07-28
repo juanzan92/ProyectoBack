@@ -16,4 +16,8 @@ public class ItemService {
     public Item getItem(String item) throws JsonProcessingException {
         return restClient.request(urlBase + "/items/get_item", item, HttpMethod.GET, Item.class);
     }
+
+    public String saveItem(Item item) {
+        return "";
+    }
 }

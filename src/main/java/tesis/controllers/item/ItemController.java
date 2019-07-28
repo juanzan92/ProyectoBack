@@ -2,9 +2,7 @@ package tesis.controllers.item;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import tesis.entities.dtos.item.Item;
 import tesis.services.item.ItemService;
 
@@ -14,7 +12,12 @@ public class ItemController {
     ItemService itemService;
 
     @GetMapping("/catalog/items/get_item")
-    public Item getUser(@RequestParam String itemId) throws JsonProcessingException {
+    public Item getItem(@RequestParam String itemId) throws JsonProcessingException {
         return itemService.getItem(itemId);
+    }
+
+    @PostMapping("/catalog/items/save_item")
+    public String saveItem(@RequestBody Item item) {
+        return itemService.saveItem(item);
     }
 }
