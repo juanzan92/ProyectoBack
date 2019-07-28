@@ -11,6 +11,7 @@ import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -25,13 +26,13 @@ public class AmazonClient {
 
     private AmazonS3 s3client;
 
-    //@Value("${amazonProperties.bucketName}")
+    @Value("${bucketName:s-market-images}")
     private String bucketName;
-    //@Value("${amazonProperties.accessKey}")
+    @Value("${accessKey:AKIA5SGM5K7CSLMBSLXC}")
     private String accessKey;
-    //@Value("${amazonProperties.secretKey}")
+    @Value("${secretKey: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}")
     private String secretKey;
-    //@Value("${amazonProperties.endpointUrl}")
+    @Value("${endpointUrl:https://s3.us-east-1.amazonaws.com}")
     private String endpointUrl;
 
     @PostConstruct
