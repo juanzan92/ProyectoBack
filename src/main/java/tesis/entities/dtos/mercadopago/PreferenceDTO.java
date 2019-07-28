@@ -4,12 +4,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class PreferenceDTO {
     @JsonProperty("item_id")
-    Long itemId;
+    private Long itemId;
 
     @JsonProperty("user_id")
-    Long userId;
+    private Long userId;
 
-    int quantity;
+    private int quantity;
 
     public Long getUserId() {
         return userId;

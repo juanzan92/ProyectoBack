@@ -1,9 +1,10 @@
 package tesis.controllers.account;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import tesis.entities.dtos.account.Users;
+import tesis.entities.dtos.account.User;
 
 import tesis.services.account.UserService;
 
@@ -13,12 +14,7 @@ public class UsersController {
     UserService usersService;
 
     @PostMapping("/account/users/create_user")
-    public String createUser(@RequestBody Users newUser) {
-        return  usersService.createUser(newUser);
-   }
-
-   /* @GetMapping("/account/users/get_user/{user_id}")
-    public Users get_user_by_id() {
-        return usersService.get_user_by_id("1111");
-    }*/
+    public String createUser(@RequestBody User newUser) throws JsonProcessingException {
+        return usersService.createUser(newUser);
+    }
 }
