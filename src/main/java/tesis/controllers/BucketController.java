@@ -6,7 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 import tesis.services.AmazonClient;
 
 @RestController
-@RequestMapping("/storage/")
+@RequestMapping("/catalog/img")
 public class BucketController {
 
     private AmazonClient amazonClient;
@@ -16,12 +16,12 @@ public class BucketController {
         this.amazonClient = amazonClient;
     }
 
-    @PostMapping("/uploadFile")
+    @PostMapping("/upload")
     public String uploadFile(@RequestPart(value = "file") MultipartFile file) {
         return this.amazonClient.uploadFile(file);
     }
 
-    @DeleteMapping("/deleteFile")
+    @DeleteMapping("/delete")
     public String deleteFile(@RequestPart(value = "url") String fileUrl) {
         return this.amazonClient.deleteFileFromS3Bucket(fileUrl);
     }
