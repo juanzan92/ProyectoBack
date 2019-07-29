@@ -1,8 +1,8 @@
-package tesis.entities.builders;
+package tesis.entities.builders.mercadopago;
 
 import com.mercadopago.resources.datastructures.preference.BackUrls;
 
-public class MPBackUrlsBuilder {
+public class BackUrlsBuilder {
     public static BackUrls buildBackUrls(){
 
         BackUrls backUrls = new BackUrls("localhost:8080/success",

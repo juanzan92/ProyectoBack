@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
+import tesis.entities.builders.dynamo.ItemBuilder;
 import tesis.entities.dtos.item.Item;
 import tesis.services.RestClient;
 
@@ -11,6 +12,7 @@ import tesis.services.RestClient;
 public class ItemService {
     @Autowired
     RestClient restClient;
+
     String urlBase = "https://kusmq1it9k.execute-api.us-east-1.amazonaws.com/prod/items/";
 
     public Item getItem(String itemId) throws JsonProcessingException {
@@ -18,7 +20,7 @@ public class ItemService {
     }
 
     public String saveItem(Item item) throws JsonProcessingException {
-        return restClient.request(urlBase + "/item_id", item, HttpMethod.PUT, String.class);
+        return restClient.request(urlBase + "/item_id", ItemBuilder.buildDynamo(item), HttpMethod.PUT, String.class);
     }
 
     public String deleteItem(String itemId) throws JsonProcessingException {

@@ -1,10 +1,10 @@
-package tesis.entities.builders;
+package tesis.entities.builders.mercadopago;
 
 import com.mercadopago.resources.datastructures.preference.Item;
 import tesis.entities.dtos.mercadopago.PreferenceDTO;
 import tesis.entities.enums.item.CategoryId;
 
-public class MPItemBuilder {
+public class ItemBuilder {
 
     public static Item buildItem(PreferenceDTO preferenceDTO, tesis.entities.dtos.item.Item dynamoItem) {
         Item item = new Item();

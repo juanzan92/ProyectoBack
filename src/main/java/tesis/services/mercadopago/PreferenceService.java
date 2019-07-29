@@ -6,12 +6,8 @@ import com.mercadopago.exceptions.MPException;
 import com.mercadopago.resources.Preference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tesis.entities.builders.MPBackUrlsBuilder;
-import tesis.entities.builders.MPItemBuilder;
-import tesis.entities.builders.MPPayerBuilder;
-import tesis.entities.builders.MPPreferenceBuilder;
+import tesis.entities.builders.mercadopago.PreferenceBuilder;
 import tesis.entities.dtos.item.Item;
-import tesis.entities.dtos.mercadopago.Consumer;
 import tesis.entities.dtos.mercadopago.PreferenceDTO;
 import tesis.entities.dtos.mercadopago.Vendor;
 import tesis.entities.marshallers.PreferenceMarshaller;
@@ -35,7 +31,7 @@ public class PreferenceService {
 
             MercadoPago.SDK.setAccessToken(vendor.getAccessToken());
 
-            Preference preference = MPPreferenceBuilder.buildPreference(preferenceDTO, item, preferenceDTO.getConsumer());
+            Preference preference = PreferenceBuilder.buildPreference(preferenceDTO, item, preferenceDTO.getConsumer());
 
             return PreferenceMarshaller.buildUrlPreference(preference);
         } catch (Exception e) {

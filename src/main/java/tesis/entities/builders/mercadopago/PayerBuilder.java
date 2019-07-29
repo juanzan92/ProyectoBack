@@ -1,4 +1,4 @@
-package tesis.entities.builders;
+package tesis.entities.builders.mercadopago;
 
 import com.mercadopago.resources.datastructures.preference.Address;
 import com.mercadopago.resources.datastructures.preference.Identification;
@@ -7,7 +7,7 @@ import com.mercadopago.resources.datastructures.preference.Phone;
 import tesis.entities.dtos.mercadopago.Consumer;
 import tesis.entities.enums.user.DocumentType;
 
-public class MPPayerBuilder {
+public class PayerBuilder {
 
     public static Payer buildPayer(Consumer consumer) {
 
