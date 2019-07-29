@@ -4,11 +4,20 @@ public class ForDynamo {
 
     String tableName;
     String tablePrimary;
+    String tableIndex;
+    String searchValue;
+
+    public ForDynamo(String tableName, String tablePrimary, String tableIndex, String searchValue) {
+        this.tableName = tableName;
+        this.tablePrimary = tablePrimary;
+        this.tableIndex = tableIndex;
+        this.searchValue = searchValue;
+    }
 
     public ForDynamo(String tableName, String tablePrimary) {
         this.tableName = tableName;
         this.tablePrimary = tablePrimary;
-    }
+        }
 
     public String getTableName() {
         return tableName;

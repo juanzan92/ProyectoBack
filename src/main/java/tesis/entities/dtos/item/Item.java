@@ -1,32 +1,71 @@
 package tesis.entities.dtos.item;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import tesis.entities.dtos.ForDynamo;
 
 import java.util.List;
 
 public class Item extends ForDynamo {
-    private String tableName;
-    private String tablePrimary;
+
+    //private String tableName;
+    //private String tablePrimary;
+
+    @JsonProperty("title")
     private String title;
+
+    @JsonProperty("item_id")
+    private String itemId;
+
+    @JsonProperty("category")
     private String category;
+
+    @JsonProperty("vendor_name")
     private String vendorName;
+
+    @JsonProperty("initial_price")
     private float initialPrice;
+
+    @JsonProperty("actual_price")
     private float actualPrice;
+
+    @JsonProperty("in_discount")
     private boolean inDiscount;
+
+    @JsonProperty("initial_stock")
     private float initialStock;
+
+    @JsonProperty("stock")
     private int stock;
+
+    @JsonProperty("status")
     private String status;
-    private String description_short;
+
+    @JsonProperty("description_short")
+    private String descriptionShort;
+
+    @JsonProperty("description")
     private String description;
+
+    @JsonProperty("pictures")
     List<Picture> pictures;
+
+    @JsonProperty("thumbnails")
     List<Object> thumbnails;
+
+    @JsonProperty("attributes")
     List<Object> attributes;
+
+    @JsonProperty("tags")
     List<Object> tags;
-    private String date_created;
-    private String last_updated;
+
+    @JsonProperty("date_created")
+    private String dateCreated;
+
+    @JsonProperty("last_updated")
+    private String lastUpdated;
 
     public Item() {
-        super("items", "item_id");
+        super("items", "item_id", "category", "Moda");
     }
 
     public String getVendorName() {
@@ -35,14 +74,6 @@ public class Item extends ForDynamo {
 
     public void setVendorName(String vendorName) {
         this.vendorName = vendorName;
-    }
-
-    public String getTableName() {
-        return tableName;
-    }
-
-    public String getTablePrimary() {
-        return tablePrimary;
     }
 
     public String getTitle() {
@@ -77,31 +108,23 @@ public class Item extends ForDynamo {
         return status;
     }
 
-    public String getDescription_short() {
-        return description_short;
+    public String getDescriptionShort() {
+        return descriptionShort;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public String getDate_created() {
-        return date_created;
+    public String getDateCreated() {
+        return dateCreated;
     }
 
-    public String getLast_updated() {
-        return last_updated;
+    public String getLastUpdated() {
+        return lastUpdated;
     }
 
     // Setter Methods
-
-    public void setTableName(String tableName) {
-        this.tableName = tableName;
-    }
-
-    public void setTablePrimary(String tablePrimary) {
-        this.tablePrimary = tablePrimary;
-    }
 
     public void setTitle(String title) {
         this.title = title;
@@ -135,19 +158,31 @@ public class Item extends ForDynamo {
         this.status = status;
     }
 
-    public void setDescription_short(String description_short) {
-        this.description_short = description_short;
+    public void setDescriptionShort(String descriptionShort) {
+        this.descriptionShort = descriptionShort;
     }
 
     public void setDescription(String description) {
         this.description = description;
     }
 
-    public void setDate_created(String date_created) {
-        this.date_created = date_created;
+    public void setDateCreated(String dateCreated) {
+        this.dateCreated = dateCreated;
     }
 
-    public void setLast_updated(String last_updated) {
-        this.last_updated = last_updated;
+    public void setLastUpdated(String lastUpdated) {
+        this.lastUpdated = lastUpdated;
+    }
+
+    public String getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(String itemId) {
+        this.itemId = itemId;
+    }
+
+    public boolean isInDiscount() {
+        return inDiscount;
     }
 }
