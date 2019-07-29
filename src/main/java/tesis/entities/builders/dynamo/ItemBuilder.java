@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class ItemBuilder {
 
-    public static Map buildDynamo(Item item) {
+    public static Map saveItem(Item item) {
         HashMap<String, Map> body = queryParameteres();
 
         body.put("object", new ObjectMapper().convertValue(item, Map.class));
@@ -19,6 +19,7 @@ public class ItemBuilder {
 
     public static HashMap queryParameteres() {
         HashMap<String, Map> dynamoItem = new HashMap<>();
+
         dynamoItem.put("dynamo", new ObjectMapper().convertValue(new ForDynamo("items", "itemId"), Map.class));
 
         return dynamoItem;

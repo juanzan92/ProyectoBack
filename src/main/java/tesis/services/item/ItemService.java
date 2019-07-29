@@ -20,7 +20,7 @@ public class ItemService {
     }
 
     public String saveItem(Item item) throws JsonProcessingException {
-        return restClient.request(urlBase + "/item_id", ItemBuilder.buildDynamo(item), HttpMethod.PUT, String.class);
+        return restClient.request(urlBase + "/item_id", ItemBuilder.saveItem(item), HttpMethod.PUT, String.class);
     }
 
     public String deleteItem(String itemId) throws JsonProcessingException {
