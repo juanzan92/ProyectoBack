@@ -41,21 +41,28 @@ public class Item extends ForDynamo {
     private String status;
 
     @JsonProperty("description_short")
-    private String description_short;
+    private String descriptionShort;
 
     @JsonProperty("description")
     private String description;
 
+    @JsonProperty("pictures")
     List<Picture> pictures;
+
+    @JsonProperty("thumbnails")
     List<Object> thumbnails;
+
+    @JsonProperty("attributes")
     List<Object> attributes;
+
+    @JsonProperty("tags")
     List<Object> tags;
 
     @JsonProperty("date_created")
-    private String date_created;
+    private String dateCreated;
 
     @JsonProperty("last_updated")
-    private String last_updated;
+    private String lastUpdated;
 
     public Item() {
         super("items", "item_id", "category", "Moda");
@@ -101,20 +108,20 @@ public class Item extends ForDynamo {
         return status;
     }
 
-    public String getDescription_short() {
-        return description_short;
+    public String getDescriptionShort() {
+        return descriptionShort;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public String getDate_created() {
-        return date_created;
+    public String getDateCreated() {
+        return dateCreated;
     }
 
-    public String getLast_updated() {
-        return last_updated;
+    public String getLastUpdated() {
+        return lastUpdated;
     }
 
     // Setter Methods
@@ -151,19 +158,31 @@ public class Item extends ForDynamo {
         this.status = status;
     }
 
-    public void setDescription_short(String description_short) {
-        this.description_short = description_short;
+    public void setDescriptionShort(String descriptionShort) {
+        this.descriptionShort = descriptionShort;
     }
 
     public void setDescription(String description) {
         this.description = description;
     }
 
-    public void setDate_created(String date_created) {
-        this.date_created = date_created;
+    public void setDateCreated(String dateCreated) {
+        this.dateCreated = dateCreated;
     }
 
-    public void setLast_updated(String last_updated) {
-        this.last_updated = last_updated;
+    public void setLastUpdated(String lastUpdated) {
+        this.lastUpdated = lastUpdated;
+    }
+
+    public String getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(String itemId) {
+        this.itemId = itemId;
+    }
+
+    public boolean isInDiscount() {
+        return inDiscount;
     }
 }
