@@ -8,19 +8,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ItemBuilder {
-    private static ForDynamo forDynamo = new ForDynamo("items", "itemId");
 
     public static Map buildDynamo(Item item) {
-        HashMap<String, Map> dynamoItem = new HashMap<>();
-        queryParameteres(dynamoItem);
+        HashMap<String, Map> body = queryParameteres();
 
-        Map<String, Object> map = new ObjectMapper().convertValue(item, Map.class);
-        dynamoItem.put("object", map);
+        body.put("object", new ObjectMapper().convertValue(item, Map.class));
 
-        return dynamoItem;
+        return body;
     }
 
-    public static void queryParameteres(HashMap<String, Map> dynamoItem) {
-        dynamoItem.put("dynamo", new ObjectMapper().convertValue(forDynamo, Map.class));
+    public static HashMap queryParameteres() {
+        HashMap<String, Map> dynamoItem = new HashMap<>();
+        dynamoItem.put("dynamo", new ObjectMapper().convertValue(new ForDynamo("items", "itemId"), Map.class));
+
+        return dynamoItem;
     }
 }
