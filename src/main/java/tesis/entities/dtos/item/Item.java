@@ -1,32 +1,64 @@
 package tesis.entities.dtos.item;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import tesis.entities.dtos.ForDynamo;
 
 import java.util.List;
 
 public class Item extends ForDynamo {
-    private String tableName;
-    private String tablePrimary;
+
+    //private String tableName;
+    //private String tablePrimary;
+
+    @JsonProperty("title")
     private String title;
+
+    @JsonProperty("item_id")
+    private String itemId;
+
+    @JsonProperty("category")
     private String category;
+
+    @JsonProperty("vendor_name")
     private String vendorName;
+
+    @JsonProperty("initial_price")
     private float initialPrice;
+
+    @JsonProperty("actual_price")
     private float actualPrice;
+
+    @JsonProperty("in_discount")
     private boolean inDiscount;
+
+    @JsonProperty("initial_stock")
     private float initialStock;
+
+    @JsonProperty("stock")
     private int stock;
+
+    @JsonProperty("status")
     private String status;
+
+    @JsonProperty("description_short")
     private String description_short;
+
+    @JsonProperty("description")
     private String description;
+
     List<Picture> pictures;
     List<Object> thumbnails;
     List<Object> attributes;
     List<Object> tags;
+
+    @JsonProperty("date_created")
     private String date_created;
+
+    @JsonProperty("last_updated")
     private String last_updated;
 
     public Item() {
-        super("items", "item_id");
+        super("items", "item_id", "category", "Moda");
     }
 
     public String getVendorName() {
@@ -35,14 +67,6 @@ public class Item extends ForDynamo {
 
     public void setVendorName(String vendorName) {
         this.vendorName = vendorName;
-    }
-
-    public String getTableName() {
-        return tableName;
-    }
-
-    public String getTablePrimary() {
-        return tablePrimary;
     }
 
     public String getTitle() {
@@ -94,14 +118,6 @@ public class Item extends ForDynamo {
     }
 
     // Setter Methods
-
-    public void setTableName(String tableName) {
-        this.tableName = tableName;
-    }
-
-    public void setTablePrimary(String tablePrimary) {
-        this.tablePrimary = tablePrimary;
-    }
 
     public void setTitle(String title) {
         this.title = title;

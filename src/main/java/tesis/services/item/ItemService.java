@@ -11,10 +11,14 @@ import tesis.services.RestClient;
 public class ItemService {
     @Autowired
     RestClient restClient;
-    String urlBase = "https://kusmq1it9k.execute-api.us-east-1.amazonaws.com/prod/items/";
+    String urlBase = "https://rtge19cj13.execute-api.us-east-1.amazonaws.com/prod/items/";
 
     public Item getItem(String itemId) throws JsonProcessingException {
         return restClient.request(urlBase + itemId + "/item_id", null, HttpMethod.GET, Item.class);
+    }
+
+    public Item searchItems(Item item) throws JsonProcessingException {
+        return restClient.request(urlBase +  "/search", item, HttpMethod.GET, Item.class);
     }
 
     public String saveItem(Item item) throws JsonProcessingException {
@@ -23,5 +27,9 @@ public class ItemService {
 
     public String deleteItem(String itemId) throws JsonProcessingException {
         return restClient.request(urlBase + itemId + "/item_id", null, HttpMethod.DELETE, String.class);
+    }
+
+    public String createItem(Item item) throws JsonProcessingException {
+        return restClient.request(urlBase + "/666", item, HttpMethod.POST, String.class);
     }
 }
