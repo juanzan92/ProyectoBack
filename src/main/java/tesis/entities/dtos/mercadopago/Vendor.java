@@ -1,12 +1,8 @@
 package tesis.entities.dtos.mercadopago;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import tesis.entities.dtos.ForDynamo;
 
-public class Vendor extends ForDynamo {
-    public Vendor() {
-        super("users", "username");
-    }
+public class Vendor {
 
     @JsonProperty("access_token")
     private String accessToken;

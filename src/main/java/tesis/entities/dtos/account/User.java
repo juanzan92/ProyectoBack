@@ -1,9 +1,8 @@
 package tesis.entities.dtos.account;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import tesis.entities.dtos.ForDynamo;
 
-public class User extends ForDynamo {
+public class User {
 
     @JsonProperty("username")
     private String username;
@@ -19,8 +18,4 @@ public class User extends ForDynamo {
 
     @JsonProperty("email")
     private String email;
-
-    public User() {
-        super("users", "username");
-    }
 }

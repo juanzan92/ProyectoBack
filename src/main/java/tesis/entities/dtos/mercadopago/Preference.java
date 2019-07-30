@@ -2,7 +2,7 @@ package tesis.entities.dtos.mercadopago;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class PreferenceDTO {
+public class Preference {
     @JsonProperty("item_id")
     private String itemId;
 

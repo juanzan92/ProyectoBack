@@ -10,9 +10,7 @@ import tesis.entities.enums.user.DocumentType;
 public class PayerBuilder {
 
     public static Payer buildPayer(Consumer consumer) {
-
-        Payer payer = new Payer();
-        payer.setName(consumer.getFirstName())
+        return new Payer().setName(consumer.getFirstName())
                 .setSurname(consumer.getGivenName())
                 .setEmail(consumer.getEmail())
                 .setPhone(new Phone()
@@ -23,6 +21,5 @@ public class PayerBuilder {
                 .setAddress(new Address().setStreetName(consumer.getAddressName()).
                         setZipCode(consumer.getAddressCode().toString()).
                         setStreetNumber(consumer.getAddressNumber()));
-        return new Payer();
     }
 }

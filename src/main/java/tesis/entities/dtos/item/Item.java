@@ -1,7 +1,6 @@
 package tesis.entities.dtos.item;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import tesis.entities.dtos.ForDynamo;
 
 import java.util.List;
 

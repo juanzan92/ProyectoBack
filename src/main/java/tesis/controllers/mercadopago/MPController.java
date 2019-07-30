@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import tesis.entities.dtos.mercadopago.PreferenceDTO;
+import tesis.entities.dtos.mercadopago.Preference;
 import tesis.services.mercadopago.PaymentService;
 import tesis.services.mercadopago.PreferenceService;
 import tesis.services.mercadopago.UserServices;
@@ -31,8 +31,8 @@ public class MPController {
     }
 
     @PostMapping("/mp/preferences/create")
-    public HashMap<String, String> createPreference(@RequestBody PreferenceDTO preferenceDTO) throws MPException, JsonProcessingException {
-        return preferenceService.createPreference(preferenceDTO);
+    public HashMap<String, String> createPreference(@RequestBody Preference preference) throws MPException, JsonProcessingException {
+        return preferenceService.createPreference(preference);
     }
 
     @PostMapping("/mp/payments/notification")

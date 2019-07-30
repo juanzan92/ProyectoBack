@@ -23,9 +23,7 @@ public class DynamoBuilder {
 
     public static HashMap queryParameters(ForDynamo forDynamo) {
         HashMap<String, ForDynamo> dynamoItem = new HashMap<>();
-
         dynamoItem.put("dynamo", forDynamo);
-
         return dynamoItem;
     }
 }
