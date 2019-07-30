@@ -1,4 +1,4 @@
-package tesis.entities.marshallers;
+package tesis.entities.marshallers.mercadopago;
 
 import com.mercadopago.resources.Preference;
 

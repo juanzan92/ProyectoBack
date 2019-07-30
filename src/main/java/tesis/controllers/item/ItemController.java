@@ -6,34 +6,36 @@ import org.springframework.web.bind.annotation.*;
 import tesis.entities.dtos.item.Item;
 import tesis.services.item.ItemService;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/catalog/items")
 public class ItemController {
     @Autowired
     ItemService itemService;
 
-    @GetMapping("/{id}")
-    public Item getItem(@PathVariable("id") String itemId) throws JsonProcessingException {
-        return itemService.getItem(itemId);
-    }
-
-    @GetMapping("/search")
-    public Item searchItems(@RequestBody Item item) throws JsonProcessingException {
-        return itemService.searchItems(item);
-    }
-
     @PostMapping()
     public String createItem(@RequestBody Item item) throws JsonProcessingException {
         return itemService.createItem(item);
     }
 
+    @GetMapping()
+    public Item getItem(@RequestBody Map<String, String> param) throws JsonProcessingException {
+        return itemService.getItem(param);
+    }
+
+    @GetMapping("/search")
+    public Item[] searchItems(Map<String, String> param) throws JsonProcessingException {
+        return itemService.searchItems(param);
+    }
+
     @PutMapping("/{id}")
     public String updateItem(@RequestBody Item item) throws JsonProcessingException {
-        return itemService.saveItem(item);
+        return itemService.updateItem(item);
     }
 
     @DeleteMapping("/{id}")
-    public String deleteItem(@PathVariable("id") String itemId) throws JsonProcessingException {
-        return itemService.deleteItem(itemId);
+    public String deleteItem(Map<String, String> param) throws JsonProcessingException {
+        return itemService.deleteItem(param);
     }
 }

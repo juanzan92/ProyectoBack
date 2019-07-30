@@ -5,10 +5,7 @@ import tesis.entities.dtos.ForDynamo;
 
 import java.util.List;
 
-public class Item extends ForDynamo {
-
-    //private String tableName;
-    //private String tablePrimary;
+public class Item {
 
     @JsonProperty("title")
     private String title;
@@ -63,10 +60,6 @@ public class Item extends ForDynamo {
 
     @JsonProperty("last_updated")
     private String lastUpdated;
-
-    public Item() {
-        super("items", "item_id", "category", "Moda");
-    }
 
     public String getVendorName() {
         return vendorName;

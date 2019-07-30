@@ -1,11 +1,11 @@
-package tesis.entities.marshallers.mercadopago;
+package tesis.entities.builders.mercadopago;
 
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
 import javax.validation.constraints.NotNull;
 
-public class VendorMarshaller {
+public class VendorBuilder {
 
     public static MultiValueMap<String, String> buildVendorForDynamo(@NotNull String authCode, @NotNull String userId) {
         MultiValueMap<String, String> requestBody = new LinkedMultiValueMap<>();
