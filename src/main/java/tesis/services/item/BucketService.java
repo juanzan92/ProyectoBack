@@ -26,9 +26,9 @@ public class BucketService {
 
     @Value("${bucketName:s-market-images}")
     private String bucketName;
-    @Value("${accessKey:AKIA5SGM5K7CVTVTFFHF}")
+    @Value("${accessKey:XXXXXXXXXXXX}")
     private String accessKey;
-    @Value("${secretKey:Lm7IXs2LQCSeCmziYfw8yExVx5jeH4Tye4SurUDw}")
+    @Value("${secretKey:XXXXXXXXXXXXXXXXXXXXXXXXXXX}")
     private String secretKey;
     @Value("${endpointUrl:https://s3.us-east-1.amazonaws.com}")
     private String endpointUrl;
