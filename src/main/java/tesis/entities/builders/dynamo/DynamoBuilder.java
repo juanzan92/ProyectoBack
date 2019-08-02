@@ -9,13 +9,17 @@ public class DynamoBuilder {
 
     public static <T> Map saveObject(T object, ForDynamo forDynamo) {
         HashMap<String, T> body = queryParameters(forDynamo);
-
         body.put("object", object);
-
         return body;
     }
 
     public static Map getObject(Map<String, String> param, ForDynamo forDynamo) {
+        HashMap<String, Map> body = queryParameters(forDynamo);
+        body.put("object", param);
+        return body;
+    }
+
+    public static Map searchObjects(Map<String, String> param, ForDynamo forDynamo) {
         HashMap<String, Map> body = queryParameters(forDynamo);
         body.put("search_parameter", param);
         return body;

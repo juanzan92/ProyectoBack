@@ -25,17 +25,17 @@ public class ItemController {
     }
 
     @GetMapping("/search")
-    public Item[] searchItems(Map<String, String> param) throws JsonProcessingException {
+    public Item[] searchItems(@RequestBody Map<String, String> param) throws JsonProcessingException {
         return itemService.searchItems(param);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping()
     public String updateItem(@RequestBody Item item) throws JsonProcessingException {
         return itemService.updateItem(item);
     }
 
-    @DeleteMapping("/{id}")
-    public String deleteItem(Map<String, String> param) throws JsonProcessingException {
+    @DeleteMapping()
+    public String deleteItem(@RequestBody Map<String, String> param) throws JsonProcessingException {
         return itemService.deleteItem(param);
     }
 }
