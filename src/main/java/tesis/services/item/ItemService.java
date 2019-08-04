@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
+import org.springframework.util.MultiValueMap;
 import tesis.entities.builders.dynamo.DynamoBuilder;
 import tesis.entities.dtos.ForDynamo;
 import tesis.entities.dtos.item.Item;
@@ -21,7 +22,11 @@ public class ItemService {
     public String createItem(Item item) throws JsonProcessingException {
         return restClient.request(urlBase, DynamoBuilder.saveObject(item, forDynamo), HttpMethod.POST, String.class);
     }
-
+    // yerbas - safe delete
+    public Item getItem(MultiValueMap<String, String> param) throws JsonProcessingException {
+        return restClient.request(DynamoBuilder.getObject(param, forDynamo, urlBase), HttpMethod.GET, Item.class);
+    }
+    // Gabo - kept for PreferenceService
     public Item getItem(Map<String, String> param) throws JsonProcessingException {
         return restClient.request(urlBase, DynamoBuilder.getObject(param, forDynamo), HttpMethod.GET, Item.class);
     }

@@ -33,7 +33,7 @@ public class Item {
     @JsonProperty("stock")
     private int stock;
 
-    @JsonProperty("status")
+    @JsonProperty("item_status")
     private String status;
 
     @JsonProperty("description_short")
