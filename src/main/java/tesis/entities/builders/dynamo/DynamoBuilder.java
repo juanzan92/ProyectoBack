@@ -26,12 +26,8 @@ public class DynamoBuilder {
     // Yerbas - Pasar
     public static String getObject(MultiValueMap<String, String> param, ForDynamo forDynamo, String urlbase) {
         UriComponentsBuilder uriComponentsBuilder = UriComponentsBuilder.fromHttpUrl(urlbase)
-                .queryParam("table_name" , "items")
-                .queryParam("table_primary", "item_id")
-                //.queryParam("object_id", "666888")
+                .queryParams(convert2multi(forDynamo))
                 .queryParams(param);
-
-        HashMap<String, Map> queryParam = queryParameters(forDynamo);
         return uriComponentsBuilder.toUriString();
     }
 
@@ -58,7 +54,6 @@ public class DynamoBuilder {
         MultiValueMap parameters = new LinkedMultiValueMap<String, String>();
         Map<String, String> maps = objectMapper.convertValue(object, new TypeReference<Map<String, String>>() {});
         parameters.setAll(maps);
-
         return parameters;
     }
 }
