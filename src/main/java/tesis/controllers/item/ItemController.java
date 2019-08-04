@@ -30,7 +30,8 @@ public class ItemController {
 
     @GetMapping("/search")
     public Item[] searchItems(@RequestBody Map<String, String> param) throws JsonProcessingException {
-        return itemService.searchItems(param);
+        // Negrada #2
+        return itemService.searchItems((MultiValueMap<String, String>) DynamoBuilder.convert2multi(param));
     }
 
     @PutMapping()

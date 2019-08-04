@@ -30,20 +30,21 @@ public class DynamoBuilder {
                 .queryParams(param);
         return uriComponentsBuilder.toUriString();
     }
-
+    //Gabo
     public static Map searchObjects(Map<String, String> param, ForDynamo forDynamo) {
         HashMap<String, Map> body = bodyParameters(forDynamo);
         body.put("search_parameter", param);
         return body;
     }
+    // Yerbas
+    public static String searchObjects(MultiValueMap<String, String> param, ForDynamo forDynamo, String urlbase) {
+        UriComponentsBuilder uriComponentsBuilder = UriComponentsBuilder.fromHttpUrl(urlbase)
+                .queryParams(convert2multi(forDynamo))
+                .queryParams(param);
+        return uriComponentsBuilder.toUriString();
+    }
 
     public static HashMap bodyParameters(ForDynamo forDynamo) {
-        HashMap<String, ForDynamo> dynamoItem = new HashMap<>();
-        dynamoItem.put("dynamo", forDynamo);
-        return dynamoItem;
-    }
-    // Yerbas pasar a hashmap el objeto forDyanmo
-    public static HashMap queryParameters(ForDynamo forDynamo) {
         HashMap<String, ForDynamo> dynamoItem = new HashMap<>();
         dynamoItem.put("dynamo", forDynamo);
         return dynamoItem;

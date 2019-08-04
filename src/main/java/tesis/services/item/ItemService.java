@@ -30,9 +30,13 @@ public class ItemService {
     public Item getItem(Map<String, String> param) throws JsonProcessingException {
         return restClient.request(urlBase, DynamoBuilder.getObject(param, forDynamo), HttpMethod.GET, Item.class);
     }
-
+    // Gabo - safe delete??
     public Item[] searchItems(Map<String, String> param) throws JsonProcessingException {
         return restClient.request(urlBase + "/index_search", DynamoBuilder.searchObjects(param, forDynamo), HttpMethod.GET, Item[].class);
+    }
+    // Yerbas
+    public Item[] searchItems(MultiValueMap<String, String> param) throws JsonProcessingException {
+        return restClient.request(DynamoBuilder.searchObjects(param, forDynamo, urlBase+ "/index_search"), HttpMethod.GET, Item[].class);
     }
 
     public String updateItem(Item item) throws JsonProcessingException {
