@@ -24,8 +24,7 @@ public class ItemController {
 
     @GetMapping()
     public Item getItem(@RequestBody Map<String, String> param) throws JsonProcessingException {
-       // return itemService.getItem((MultiValueMap<String, String>) DynamoBuilder.convert2multi(param));
-        return itemService.getItem((MultiValueMap<String, String>) DynamoBuilder.convert2multi(param));
+        return itemService.getItem(param);
     }
 
     @GetMapping("/search")

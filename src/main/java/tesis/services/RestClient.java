@@ -42,7 +42,6 @@ public class RestClient {
         }
     }
 
-    //yerbas
     public <T> T request(String url, HttpMethod httpMethod, Class<T> responseClass) throws JsonProcessingException {
         try {
             HttpHeaders headers = new HttpHeaders();

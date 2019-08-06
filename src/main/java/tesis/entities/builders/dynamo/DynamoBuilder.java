@@ -17,17 +17,17 @@ public class DynamoBuilder {
         body.put("object", object);
         return body;
     }
-    // Gabo
+
     public static Map getObject(Map<String, String> param, ForDynamo forDynamo) {
         HashMap<String, Map> body = bodyParameters(forDynamo);
         body.put("object", param);
         return body;
     }
-    // Yerbas - Pasar
-    public static String getObject(MultiValueMap<String, String> param, ForDynamo forDynamo, String urlbase) {
+
+    public static String getObject(Map<String, String> param, ForDynamo forDynamo, String urlbase) {
         UriComponentsBuilder uriComponentsBuilder = UriComponentsBuilder.fromHttpUrl(urlbase)
                 .queryParams(convert2multi(forDynamo))
-                .queryParams(param);
+                .queryParams(convert2multi(param));
         return uriComponentsBuilder.toUriString();
     }
 

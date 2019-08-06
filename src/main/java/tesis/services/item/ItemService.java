@@ -22,13 +22,9 @@ public class ItemService {
     public String createItem(Item item) throws JsonProcessingException {
         return restClient.request(urlBase, DynamoBuilder.saveObject(item, forDynamo), HttpMethod.POST, String.class);
     }
-    // yerbas - safe delete
-    public Item getItem(MultiValueMap<String, String> param) throws JsonProcessingException {
-        return restClient.request(DynamoBuilder.getObject(param, forDynamo, urlBase), HttpMethod.GET, Item.class);
-    }
-    // Gabo - kept for PreferenceService
+
     public Item getItem(Map<String, String> param) throws JsonProcessingException {
-        return restClient.request(urlBase, DynamoBuilder.getObject(param, forDynamo), HttpMethod.GET, Item.class);
+        return restClient.request(DynamoBuilder.getObject(param, forDynamo, urlBase), HttpMethod.GET, Item.class);
     }
 
     public Item[] searchItems(Map<String, String> param) throws JsonProcessingException {
