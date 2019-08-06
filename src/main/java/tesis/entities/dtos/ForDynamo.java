@@ -1,8 +1,13 @@
 package tesis.entities.dtos;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class ForDynamo {
 
+    @JsonProperty("table_name")
     String tableName;
+
+    @JsonProperty("table_primary")
     String tablePrimary;
 
     public ForDynamo(String tableName, String tablePrimary) {
