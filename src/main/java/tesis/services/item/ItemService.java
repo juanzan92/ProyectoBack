@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
-import org.springframework.util.MultiValueMap;
 import tesis.entities.builders.dynamo.DynamoBuilder;
 import tesis.entities.dtos.ForDynamo;
 import tesis.entities.dtos.item.Item;
@@ -28,7 +27,7 @@ public class ItemService {
     }
 
     public Item[] searchItems(Map<String, String> param) throws JsonProcessingException {
-        return restClient.request(DynamoBuilder.searchObjects(param, forDynamo, urlBase+ "/index_search"), HttpMethod.GET, Item[].class);
+        return restClient.request(DynamoBuilder.searchObjects(param, forDynamo, urlBase + "/index_search"), HttpMethod.GET, Item[].class);
     }
 
     public String updateItem(Item item) throws JsonProcessingException {

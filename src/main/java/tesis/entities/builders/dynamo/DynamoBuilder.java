@@ -44,10 +44,11 @@ public class DynamoBuilder {
         return dynamoItem;
     }
 
-    public static MultiValueMap buildMultiValueMap(Object object){
+    public static MultiValueMap buildMultiValueMap(Object object) {
         ObjectMapper objectMapper = new ObjectMapper();
         MultiValueMap parameters = new LinkedMultiValueMap<String, String>();
-        Map<String, String> maps = objectMapper.convertValue(object, new TypeReference<Map<String, String>>() {});
+        Map<String, String> maps = objectMapper.convertValue(object, new TypeReference<Map<String, String>>() {
+        });
         parameters.setAll(maps);
         return parameters;
     }
