@@ -26,15 +26,15 @@ public class DynamoBuilder {
 
     public static String getObject(Map<String, String> param, ForDynamo forDynamo, String urlbase) {
         UriComponentsBuilder uriComponentsBuilder = UriComponentsBuilder.fromHttpUrl(urlbase)
-                .queryParams(convert2multi(forDynamo))
-                .queryParams(convert2multi(param));
+                .queryParams(buildMultiValueMap(forDynamo))
+                .queryParams(buildMultiValueMap(param));
         return uriComponentsBuilder.toUriString();
     }
 
     public static String searchObjects(Map<String, String> param, ForDynamo forDynamo, String urlbase) {
         UriComponentsBuilder uriComponentsBuilder = UriComponentsBuilder.fromHttpUrl(urlbase)
-                .queryParams(convert2multi(forDynamo))
-                .queryParams(convert2multi(param));
+                .queryParams(buildMultiValueMap(forDynamo))
+                .queryParams(buildMultiValueMap(param));
         return uriComponentsBuilder.toUriString();
     }
 
@@ -44,7 +44,7 @@ public class DynamoBuilder {
         return dynamoItem;
     }
 
-    public static MultiValueMap convert2multi (Object object){
+    public static MultiValueMap buildMultiValueMap(Object object){
         ObjectMapper objectMapper = new ObjectMapper();
         MultiValueMap parameters = new LinkedMultiValueMap<String, String>();
         Map<String, String> maps = objectMapper.convertValue(object, new TypeReference<Map<String, String>>() {});
