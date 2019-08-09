@@ -10,17 +10,17 @@ import tesis.services.home.ItemHomeService;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/catalog/items/home")
+@RequestMapping("/catalog/items/home/carrousel_main")
 public class ItemHomeController {
     @Autowired
     ItemHomeService itemHomeService;
 
-    @PostMapping("/carrousel_main")
+    @PostMapping()
     public String createItemHomeCarrouselMain(@RequestBody ItemHomeCarrouselMain itemHomeCarrouselMain) throws JsonProcessingException {
         return itemHomeService.createItemHomeCarrouselMain(itemHomeCarrouselMain);
     }
 
-    @GetMapping("/carrousel_main/search")
+    @GetMapping("/search")
     public ItemHomeCarrouselMain[] searchItemsHomeCarrouselMain(@RequestBody Map<String, String> param) throws JsonProcessingException {
         return itemHomeService.searchItemsHomeCarrouselMain(param);
     }
