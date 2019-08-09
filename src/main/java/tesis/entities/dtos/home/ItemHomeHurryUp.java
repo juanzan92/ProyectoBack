@@ -9,6 +9,6 @@ public class ItemHomeHurryUp extends ItemHome {
     private String endDate;
 
     @JsonProperty("url_to_search")
-    private String url_to_search;
+    private String urlToSearch;
 
 }
