@@ -1,4 +1,4 @@
-package tesis.entities.dtos.item;
+package tesis.entities.dtos.home;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

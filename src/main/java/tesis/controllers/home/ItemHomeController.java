@@ -1,10 +1,10 @@
-package tesis.controllers.item;
+package tesis.controllers.home;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import tesis.entities.dtos.item.ItemHomeCarrouselMain;
-import tesis.services.item.ItemHomeService;
+import tesis.entities.dtos.home.ItemHomeCarrouselMain;
+import tesis.services.home.ItemHomeService;
 
 
 import java.util.Map;

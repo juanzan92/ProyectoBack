@@ -1,9 +1,7 @@
-package tesis.entities.dtos.item;
+package tesis.entities.dtos.home;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.springframework.stereotype.Component;
-
-import javax.annotation.PostConstruct;
+import tesis.entities.dtos.home.ItemHome;
 
 public class ItemHomeCarrouselMain extends ItemHome {
 

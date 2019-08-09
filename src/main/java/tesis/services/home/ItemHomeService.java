@@ -1,4 +1,4 @@
-package tesis.services.item;
+package tesis.services.home;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,7 +6,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import tesis.entities.builders.dynamo.DynamoBuilder;
 import tesis.entities.dtos.ForDynamo;
-import tesis.entities.dtos.item.ItemHomeCarrouselMain;
+import tesis.entities.dtos.home.ItemHomeCarrouselMain;
 import tesis.services.RestClient;
 
 import java.util.Map;
