@@ -12,7 +12,7 @@ import tesis.services.RestClient;
 import java.util.Map;
 
 @Service
-public class ItemHomeService {
+public class ItemHomeCarrouselMainService {
     @Autowired
     RestClient restClient;
     String urlBase = "https://rtge19cj13.execute-api.us-east-1.amazonaws.com/prod/generic_ep";

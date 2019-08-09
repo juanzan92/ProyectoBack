@@ -4,16 +4,16 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tesis.entities.dtos.home.ItemHomeCarrouselMain;
-import tesis.services.home.ItemHomeService;
+import tesis.services.home.ItemHomeCarrouselMainService;
 
 
 import java.util.Map;
 
 @RestController
 @RequestMapping("/catalog/items/home/carrousel_main")
-public class ItemHomeController {
+public class ItemHomeCarrouselMainController {
     @Autowired
-    ItemHomeService itemHomeService;
+    ItemHomeCarrouselMainService itemHomeService;
 
     @PostMapping()
     public String createItemHomeCarrouselMain(@RequestBody ItemHomeCarrouselMain itemHomeCarrouselMain) throws JsonProcessingException {
