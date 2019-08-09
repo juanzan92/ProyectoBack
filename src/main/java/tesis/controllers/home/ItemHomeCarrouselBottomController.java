@@ -20,7 +20,7 @@ public class ItemHomeCarrouselBottomController {
     }
 
     @GetMapping("/search")
-    public ItemHomeCarrouselBottom[] searchItemsHomeCarrouselBottom(@RequestBody Map<String, String> param) throws JsonProcessingException {
-        return itemHomeService.searchItemsHomeCarrouselBottom(param);
+    public ItemHomeCarrouselBottom[] searchItemsHomeCarrouselBottom() throws JsonProcessingException {
+        return itemHomeService.searchItemsHomeCarrouselBottom();
     }
 }

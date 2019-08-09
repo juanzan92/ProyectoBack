@@ -23,8 +23,13 @@ public class ItemHomeCarrouselBottomService {
         return restClient.request(urlBase, DynamoBuilder.saveObject(itemHomeCarrouselBottom, forDynamo), HttpMethod.POST, String.class);
     }
 
-    public ItemHomeCarrouselBottom[] searchItemsHomeCarrouselBottom(Map<String, String> param) throws JsonProcessingException {
-        return restClient.request(DynamoBuilder.searchObjects(param, forDynamo, urlBase + "/index_search"), HttpMethod.GET, ItemHomeCarrouselBottom[].class);
+//    public ItemHomeCarrouselBottom[] searchItemsHomeCarrouselBottom(Map<String, String> param) throws JsonProcessingException {
+  //      return restClient.request(DynamoBuilder.searchObjects(param, forDynamo, urlBase + "/index_search"), HttpMethod.GET, ItemHomeCarrouselBottom[].class);
+    //}
+
+    public ItemHomeCarrouselBottom[] searchItemsHomeCarrouselBottom() throws JsonProcessingException {
+        forDynamo.setSearchParams("tag", "CarrouselBottom");
+        return restClient.request(DynamoBuilder.searchObjects(forDynamo, urlBase + "/index_search"), HttpMethod.GET, ItemHomeCarrouselBottom[].class);
     }
 
 }
