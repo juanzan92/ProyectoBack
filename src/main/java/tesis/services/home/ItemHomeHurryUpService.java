@@ -23,8 +23,9 @@ public class ItemHomeHurryUpService {
         return restClient.request(urlBase, DynamoBuilder.saveObject(itemHomeHurryUp, forDynamo), HttpMethod.POST, String.class);
     }
 
-    public ItemHomeHurryUp[] searchItemsHomeHurryUp(Map<String, String> param) throws JsonProcessingException {
-        return restClient.request(DynamoBuilder.searchObjects(param, forDynamo, urlBase + "/index_search"), HttpMethod.GET, ItemHomeHurryUp[].class);
+    public ItemHomeHurryUp[] searchItemsHomeHurryUp() throws JsonProcessingException {
+        forDynamo.setSearchParams("tag", "HurryUp");
+        return restClient.request(DynamoBuilder.searchObjects(forDynamo, urlBase + "/index_search"), HttpMethod.GET, ItemHomeHurryUp[].class);
     }
 
 }

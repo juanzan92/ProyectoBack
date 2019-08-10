@@ -20,7 +20,7 @@ public class ItemHomeHurryUpController {
     }
 
     @GetMapping("/search")
-    public ItemHomeHurryUp[] searchItemsHomeCarrouselMain(@RequestBody Map<String, String> param) throws JsonProcessingException {
-        return itemHomeHurryUpService.searchItemsHomeHurryUp(param);
+    public ItemHomeHurryUp[] searchItemsHomeCarrouselMain() throws JsonProcessingException {
+        return itemHomeHurryUpService.searchItemsHomeHurryUp();
     }
 }
