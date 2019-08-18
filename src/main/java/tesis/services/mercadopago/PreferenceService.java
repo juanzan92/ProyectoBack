@@ -5,6 +5,7 @@ import com.mercadopago.MercadoPago;
 import com.mercadopago.exceptions.MPException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tesis.entities.builders.dynamo.DynamoBuilder;
 import tesis.entities.builders.mercadopago.PreferenceBuilder;
 import tesis.entities.dtos.item.Item;
 import tesis.entities.dtos.mercadopago.Preference;
@@ -25,11 +26,9 @@ public class PreferenceService {
 
     public HashMap<String, String> createPreference(Preference preferenceDTO) throws MPException, JsonProcessingException {
         try {
-            HashMap<String, String> hola = new HashMap<>();
-            hola.put("item_id", preferenceDTO.getItemName());
 
-            Item item = itemService.getItem(hola);
-            Vendor vendor = userService.getVendor(item.getVendorName());
+            Item item = itemService.getItem(DynamoBuilder.buildMap("item_id", preferenceDTO.getItemName()));
+            Vendor vendor = userService.getVendor(DynamoBuilder.buildMap("username", item.getVendorName()));
 
             MercadoPago.SDK.setAccessToken(vendor.getAccessToken());
 

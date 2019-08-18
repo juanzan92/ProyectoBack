@@ -27,18 +27,14 @@ public class UserService {
         return restClient.request(urlBase, DynamoBuilder.saveObject(user, forDynamo), HttpMethod.POST, String.class);
     }
 
-    // Falta Actualizar , el create vendor es solo un update del user para pasarlo a Vendor????? porque el PUT sino? //
-    // Porque lleva 2 parametros de tipo persona la funcion? vendor y username????? //
     public String createVendorUser(@NotNull Vendor vendor, @NotNull String username) throws JsonProcessingException {
         return restClient.request(urlBase, DynamoBuilder.saveObject(vendor, forDynamo), HttpMethod.PUT, String.class);
     }
 
-    // Los Vendors  de MP también los vamos a guardar en la tabla Users???? //
     public Vendor getVendor(@NotNull Map<String, String> param) throws JsonProcessingException {
         return restClient.request(DynamoBuilder.getObject(param, forDynamo, urlBase), HttpMethod.GET, Vendor.class);
     }
 
-    // Los Consumer de MP los vamos a guardar en la tabla Users???? //
     public Consumer getConsumer(@NotNull Map<String, String> param) throws JsonProcessingException {
         return restClient.request(DynamoBuilder.getObject(param, forDynamo, urlBase), HttpMethod.GET, Consumer.class);
     }
