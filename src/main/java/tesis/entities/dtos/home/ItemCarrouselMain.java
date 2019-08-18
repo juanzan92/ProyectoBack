@@ -3,7 +3,7 @@ package tesis.entities.dtos.home;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import tesis.entities.dtos.home.ItemHome;
 
-public class ItemHomeCarrouselMain extends ItemHome {
+public class ItemCarrouselMain extends ItemHome {
 
     @JsonProperty("price")
     private String price;
