@@ -8,6 +8,9 @@ import tesis.entities.dtos.account.User;
 import tesis.entities.dtos.mercadopago.Vendor;
 import tesis.services.account.UserService;
 
+import javax.validation.constraints.NotNull;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/account/users")
 public class UsersController {
@@ -19,9 +22,9 @@ public class UsersController {
         return usersService.createUser(newUser);
     }
 
-    @GetMapping("/{user_id}")
-    public Vendor getVendor(@PathVariable("user_id") String userId) throws JsonProcessingException {
-        return usersService.getVendor(userId);
+    @GetMapping()
+    public Vendor getVendor(@RequestBody Map<String, String> param) throws JsonProcessingException {
+        return usersService.getVendor(param);
     }
 }
 
