@@ -27,8 +27,8 @@ public class PreferenceService {
     public HashMap<String, String> createPreference(Preference preferenceDTO) throws MPException, JsonProcessingException {
         try {
 
-            Item item = itemService.getItem(DynamoBuilder.buildMap("item_id", preferenceDTO.getItemName()));
-            Vendor vendor = userService.getVendor(DynamoBuilder.buildMap("username", item.getVendorName()));
+            Item item = itemService.getItem(DynamoBuilder.buildMap("item_id", preferenceDTO.getItemId()));
+            Vendor vendor = userService.getVendor(DynamoBuilder.buildMap("username", item.getVendorUsername()));
 
             MercadoPago.SDK.setAccessToken(vendor.getAccessToken());
 

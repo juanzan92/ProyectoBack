@@ -13,6 +13,17 @@ public class Vendor {
     @JsonProperty("refresh_token")
     private String refreshToken;
 
+    @JsonProperty("username")
+    private String username;
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
     public String getAccessToken() {
         return accessToken;
     }

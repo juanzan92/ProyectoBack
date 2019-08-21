@@ -17,9 +17,15 @@ public class UserServices {
     UserService userService;
 
     public String createMarketplaceAuth(String authCode, String username) throws JsonProcessingException {
-        MultiValueMap<String, String> requestBody = VendorBuilder.buildVendorForDynamo(authCode, username);
+        try {
+            MultiValueMap<String, String> requestBody = VendorBuilder.buildVendorForDynamo(authCode, username);
 
-        Vendor vendor = restClient.formRequest("https://api.mercadopago.com/oauth/token", requestBody, Vendor.class);
-        return userService.createVendorUser(vendor, username);
+            Vendor vendor = restClient.formRequest("https://api.mercadopago.com/oauth/token", requestBody, Vendor.class);
+            vendor.setUsername(username);
+
+            return userService.createVendorUser(vendor);
+        } catch (Exception e) {
+            throw e;
+        }
     }
 }
