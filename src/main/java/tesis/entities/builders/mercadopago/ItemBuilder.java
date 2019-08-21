@@ -1,7 +1,6 @@
 package tesis.entities.builders.mercadopago;
 
 import com.mercadopago.resources.datastructures.preference.Item;
-import tesis.entities.dtos.mercadopago.Preference;
 import tesis.entities.enums.item.CategoryId;
 
 public class ItemBuilder {
