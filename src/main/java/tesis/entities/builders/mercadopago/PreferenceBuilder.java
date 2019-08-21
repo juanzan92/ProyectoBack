@@ -8,7 +8,7 @@ import tesis.entities.dtos.mercadopago.Preference;
 public class PreferenceBuilder {
 
     public static com.mercadopago.resources.Preference buildPreference(Preference preference, Item item, Consumer consumer) throws MPException {
-        return new com.mercadopago.resources.Preference().appendItem(ItemBuilder.buildItem(preference, item))
+        return new com.mercadopago.resources.Preference().appendItem(ItemBuilder.buildItem(item, preference.getQuantity()))
                 .setMarketplaceFee((float) ((item.getInitialPrice()) * 0.2))
                 .setPayer(PayerBuilder.buildPayer(consumer))
                 .setBackUrls(BackUrlsBuilder.buildBackUrls())

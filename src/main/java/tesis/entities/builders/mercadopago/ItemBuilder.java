@@ -6,10 +6,10 @@ import tesis.entities.enums.item.CategoryId;
 
 public class ItemBuilder {
 
-    public static Item buildItem(Preference preference, tesis.entities.dtos.item.Item dynamoItem) {
-        return new Item().setId(preference.getItemName())
+    public static Item buildItem(tesis.entities.dtos.item.Item dynamoItem, int quantity) {
+        return new Item().setId(dynamoItem.getItemId())
                 .setTitle(dynamoItem.getTitle())
-                .setQuantity(dynamoItem.getStock())
+                .setQuantity(quantity)
                 .setCategoryId(CategoryId.ARS.toString())
                 .setUnitPrice(dynamoItem.getInitialPrice());
     }
