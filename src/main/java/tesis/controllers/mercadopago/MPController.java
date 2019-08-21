@@ -28,7 +28,7 @@ public class MPController {
         return userServices.createMarketplaceAuth(allParams.get("code"), allParams.get("user_id"));
     }
 
-    @PostMapping("/preferences/create")
+    @PostMapping("/preferences")
     public HashMap<String, String> createPreference(@RequestBody Preference preference) throws MPException, JsonProcessingException {
         return preferenceService.createPreference(preference);
     }

@@ -15,8 +15,8 @@ public class Item {
     @JsonProperty("category")
     private String category;
 
-    @JsonProperty("vendor_name")
-    private String vendorName;
+    @JsonProperty("vendor_username")
+    private String vendorUsername;
 
     @JsonProperty("initial_price")
     private float initialPrice;
@@ -60,12 +60,12 @@ public class Item {
     @JsonProperty("last_updated")
     private String lastUpdated;
 
-    public String getVendorName() {
-        return vendorName;
+    public String getVendorUsername() {
+        return vendorUsername;
     }
 
-    public void setVendorName(String vendorName) {
-        this.vendorName = vendorName;
+    public void setVendorUsername(String vendorUsername) {
+        this.vendorUsername = vendorUsername;
     }
 
     public String getTitle() {

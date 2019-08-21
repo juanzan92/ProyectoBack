@@ -3,7 +3,10 @@ package tesis.entities.dtos.item;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Picture {
+    @JsonProperty("index")
     private String index;
+
+    @JsonProperty("src")
     private String src;
 
     @JsonProperty("img_desc")
@@ -16,7 +19,6 @@ public class Picture {
     public String getSrc() {
         return src;
     }
-
 
     public void setIndex(String index) {
         this.index = index;
