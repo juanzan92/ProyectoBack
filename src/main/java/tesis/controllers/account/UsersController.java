@@ -8,7 +8,6 @@ import tesis.entities.dtos.account.User;
 import tesis.entities.dtos.mercadopago.Vendor;
 import tesis.services.account.UserService;
 
-import javax.validation.constraints.NotNull;
 import java.util.Map;
 
 @RestController

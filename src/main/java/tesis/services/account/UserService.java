@@ -20,14 +20,14 @@ public class UserService {
     @Autowired
     RestClient restClient;
 
-    String urlBase = "https://rtge19cj13.execute-api.us-east-1.amazonaws.com/prod/generic_ep";
+    String urlBase = "https://rtge19cj13.execute-api.us-east-1.amazonaws.com/prod/user_ep";
     ForDynamo forDynamo = new ForDynamo("users", "username");
 
     public String createUser(@NotNull User user) throws JsonProcessingException {
         return restClient.request(urlBase, DynamoBuilder.saveObject(user, forDynamo), HttpMethod.POST, String.class);
     }
 
-    public String createVendorUser(@NotNull Vendor vendor, @NotNull String username) throws JsonProcessingException {
+    public String createVendorUser(Vendor vendor) throws JsonProcessingException {
         return restClient.request(urlBase, DynamoBuilder.saveObject(vendor, forDynamo), HttpMethod.PUT, String.class);
     }
 
