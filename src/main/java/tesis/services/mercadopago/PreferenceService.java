@@ -14,6 +14,7 @@ import tesis.entities.marshallers.mercadopago.PreferenceMarshaller;
 import tesis.services.account.UserService;
 import tesis.services.item.ItemService;
 
+import javax.annotation.PostConstruct;
 import java.util.HashMap;
 
 @Service
@@ -23,6 +24,11 @@ public class PreferenceService {
 
     @Autowired
     ItemService itemService;
+
+    @PostConstruct
+    private void configureSDK() {
+        MercadoPago.SDK.configure("5912969040584293", "7f0EFL7Ers6j3CU9bjlFBurNErUufQZv");
+    }
 
     public HashMap<String, String> createPreference(Preference preferenceDTO) throws MPException, JsonProcessingException {
         try {
