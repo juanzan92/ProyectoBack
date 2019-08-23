@@ -11,9 +11,9 @@ public class PreferenceBuilder {
         return new com.mercadopago.resources.Preference().appendItem(ItemBuilder.buildItem(item, preference.getQuantity()))
                 .setMarketplaceFee(sMarketFeeByPurchase(item.getInitialPrice()))
                 .setPayer(PayerBuilder.buildPayer(consumer))
-                .setExternalReference("prueba_123")
+                .setExternalReference("prueba_12345")
                 .setBackUrls(BackUrlsBuilder.buildBackUrls())
-                .setNotificationUrl("http://localhost:8080/mp/payments/notification")
+                /*.setNotificationUrl("https://localhost:8080/mp/payments/notification")*/
                 .save();
     }
 

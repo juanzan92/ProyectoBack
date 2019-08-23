@@ -25,11 +25,6 @@ public class PreferenceService {
     @Autowired
     ItemService itemService;
 
-    @PostConstruct
-    private void configureSDK() {
-        MercadoPago.SDK.configure("7662807553309957", "bhvJ3QKMypEzzphnnLhqdkQ5LVVZQx1n");
-    }
-
     public HashMap<String, String> createPreference(Preference preferenceDTO) throws MPException, JsonProcessingException {
         try {
 
