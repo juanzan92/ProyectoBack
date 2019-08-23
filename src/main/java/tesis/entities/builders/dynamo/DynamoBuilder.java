@@ -50,6 +50,12 @@ public class DynamoBuilder {
         return dynamoItem;
     }
 
+    public static HashMap buildMap(String parameter, String value) {
+        HashMap<String, String> user = new HashMap<>();
+        user.put(parameter, value);
+        return user;
+    }
+
     public static MultiValueMap buildMultiValueMap(Object object) {
         ObjectMapper objectMapper = new ObjectMapper();
         MultiValueMap parameters = new LinkedMultiValueMap<String, String>();

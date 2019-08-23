@@ -16,8 +16,20 @@ public class Preference {
         return consumer;
     }
 
-    public String getItemName() {
+    public String getItemId() {
         return itemId;
+    }
+
+    public void setConsumer(Consumer consumer) {
+        this.consumer = consumer;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public void setItemId(String itemId) {
