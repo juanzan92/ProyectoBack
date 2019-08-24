@@ -10,9 +10,6 @@ public class Subscription {
     @JsonProperty("item_id")
     private String itemId;
 
-    @JsonProperty("item_title")
-    private String itemTitle ;
-
     @JsonProperty("username")
     private String username;
 
@@ -21,6 +18,9 @@ public class Subscription {
 
     @JsonProperty("amount")
     private String amount;
+
+    @JsonProperty("quantity")
+    private String quantity;
 
     @JsonProperty("subscribed_date")
     private String subscribedDate;
