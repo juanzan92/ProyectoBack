@@ -1,4 +1,4 @@
-package tesis.services;
+package tesis.services.item;
 
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
@@ -20,15 +20,15 @@ import java.io.IOException;
 import java.util.Date;
 
 @Service
-public class AmazonClient {
+public class BucketService {
 
     private AmazonS3 s3client;
 
     @Value("${bucketName:s-market-images}")
     private String bucketName;
-    @Value("${accessKey:AKIA5SGM5K7C7FGUMJQC}")
+    @Value("${accessKey:XXXXXXXXXXXX}")
     private String accessKey;
-    @Value("${secretKey:z9kMn8JMTFX0H4DuFegTgd4aab8h8JHgk43XWJY4}")
+    @Value("${secretKey:XXXXXXXXXXXXXXXXXXXXXXXXXXX}")
     private String secretKey;
     @Value("${endpointUrl:https://s3.us-east-1.amazonaws.com}")
     private String endpointUrl;

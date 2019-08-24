@@ -1,53 +1,43 @@
 package tesis.services.mercadopago;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.mercadopago.MercadoPago;
 import com.mercadopago.exceptions.MPException;
-import com.mercadopago.resources.Preference;
-import com.mercadopago.resources.datastructures.preference.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tesis.entities.dtos.mercadopago.PreferenceDTO;
-import tesis.entities.marshallers.PreferenceMarshaller;
+import tesis.entities.builders.dynamo.DynamoBuilder;
+import tesis.entities.builders.mercadopago.PreferenceBuilder;
+import tesis.entities.dtos.item.Item;
+import tesis.entities.dtos.mercadopago.Preference;
+import tesis.entities.dtos.mercadopago.Vendor;
+import tesis.entities.marshallers.mercadopago.PreferenceMarshaller;
+import tesis.services.account.UserService;
+import tesis.services.item.ItemService;
 
+import javax.annotation.PostConstruct;
 import java.util.HashMap;
 
 @Service
 public class PreferenceService {
+    @Autowired
+    UserService userService;
 
-    public HashMap<String, String> createPreference(PreferenceDTO preferenceDTO) throws MPException {
-        MercadoPago.SDK.setAccessToken("APP_USR-5912969040584293-070913-71e68e7c6673f0c983ef7efbfdddfc4b-450661168"); //acá debería ir el token del vendedor
+    @Autowired
+    ItemService itemService;
 
-        Preference preference = new Preference();
+    public HashMap<String, String> createPreference(Preference preferenceDTO) throws MPException, JsonProcessingException {
+        try {
 
-        Item item = new Item();
-        item.setId(preferenceDTO.getItemId().toString())
-                .setTitle("Durable Concrete Gloves")
-                .setQuantity(1)
-                .setCategoryId("ARS")
-                .setUnitPrice((float) 1.2);
+            Item item = itemService.getItem(DynamoBuilder.buildMap("item_id", preferenceDTO.getItemId()));
+            Vendor vendor = userService.getVendor(DynamoBuilder.buildMap("username", item.getVendorUsername()));
 
-        Payer payer = new Payer();
-        payer.setName("pepito")
-                .setSurname("gomez")
-                .setEmail("kathryne_schiller@hotmail.com")
-                .setPhone(new Phone()
-                        .setAreaCode("351")
-                        .setNumber("3702304"))
-                .setIdentification(new Identification().setType("DNI").
-                        setNumber("38333123"))
-                .setAddress(new Address().setStreetName("sol de mayo").
-                        setZipCode("5000").
-                        setStreetNumber(123));
+            MercadoPago.SDK.setAccessToken(vendor.getAccessToken());
 
-        BackUrls backUrls = new BackUrls("localhost:8080/success",
-                "localhost:8080/pending",
-                "localhost:8080/failure");
+            com.mercadopago.resources.Preference preference = PreferenceBuilder.buildPreference(preferenceDTO, item, preferenceDTO.getConsumer());
 
-        preference.appendItem(item);
-        preference.setMarketplaceFee((float) 1.1);
-        preference.setPayer(payer);
-        preference.setBackUrls(backUrls);
-        preference.save();
-
-        return PreferenceMarshaller.buildUrlPreference(preference);
+            return PreferenceMarshaller.buildUrlPreference(preference);
+        } catch (Exception e) {
+            throw e;
+        }
     }
 }

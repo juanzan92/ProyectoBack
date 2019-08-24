@@ -1,24 +1,24 @@
-package tesis.controllers;
+package tesis.controllers.item;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import tesis.services.AmazonClient;
+import tesis.services.item.BucketService;
 
 @RestController
-@RequestMapping("/catalog/img")
+@RequestMapping("/catalog/img/{id}")
 public class BucketController {
 
     @Autowired
-    private AmazonClient amazonClient;
+    private BucketService bucketService;
 
-    @PostMapping("/upload")
+    @PostMapping()
     public String uploadFile(@RequestPart(value = "file") MultipartFile file) {
-        return amazonClient.uploadFile(file);
+        return bucketService.uploadFile(file);
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping()
     public String deleteFile(@RequestPart(value = "url") String fileUrl) {
-        return amazonClient.deleteFileFromS3Bucket(fileUrl);
+        return bucketService.deleteFileFromS3Bucket(fileUrl);
     }
 }

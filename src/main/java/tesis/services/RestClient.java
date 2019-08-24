@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
-import java.io.IOException;
 import java.util.Arrays;
 
 @Service
@@ -33,6 +32,19 @@ public class RestClient {
             HttpHeaders headers = new HttpHeaders();
             headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
             HttpEntity<String> entity = new HttpEntity<>(newObject, headers);
+
+            return restTemplate.exchange(url, httpMethod, entity, responseClass).getBody();
+
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    public <T> T request(String url, HttpMethod httpMethod, Class<T> responseClass) throws JsonProcessingException {
+        try {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+            HttpEntity<String> entity = new HttpEntity<>(headers);
 
             return restTemplate.exchange(url, httpMethod, entity, responseClass).getBody();
 

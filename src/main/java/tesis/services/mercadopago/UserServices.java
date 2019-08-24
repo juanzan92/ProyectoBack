@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
 import tesis.entities.dtos.mercadopago.Vendor;
-import tesis.entities.marshallers.mercadopago.VendorMarshaller;
+import tesis.entities.builders.mercadopago.VendorBuilder;
 import tesis.services.RestClient;
 import tesis.services.account.UserService;
 
@@ -17,9 +17,15 @@ public class UserServices {
     UserService userService;
 
     public String createMarketplaceAuth(String authCode, String username) throws JsonProcessingException {
-        MultiValueMap<String, String> requestBody = VendorMarshaller.buildVendorForDynamo(authCode, username);
+        try {
+            MultiValueMap<String, String> requestBody = VendorBuilder.buildVendorForDynamo(authCode, username);
 
-        Vendor vendor = restClient.formRequest("https://api.mercadopago.com/oauth/token", requestBody, Vendor.class);
-        return userService.createVendorUser(vendor.setUsername(username));
+            Vendor vendor = restClient.formRequest("https://api.mercadopago.com/oauth/token", requestBody, Vendor.class);
+            vendor.setUsername(username);
+
+            return userService.createVendorUser(vendor);
+        } catch (Exception e) {
+            throw e;
+        }
     }
 }
