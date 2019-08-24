@@ -5,3 +5,7 @@
 !.elasticbeanstalk/*.global.yml
 .idea/
 target/
+
+# Ignore property files to avoid being targeted by AWS Credential Scanner Bot.
+*/application.properties
+*/aws.properties
