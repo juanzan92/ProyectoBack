@@ -3,7 +3,7 @@ package tesis.controllers.item;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import tesis.entities.dtos.item.Subscription;
+import tesis.entities.dtos.account.Subscription;
 import tesis.services.item.SubscriptionService;
 
 import java.util.Map;

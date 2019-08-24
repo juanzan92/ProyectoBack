@@ -1,4 +1,4 @@
-package tesis.entities.dtos.mercadopago;
+package tesis.entities.dtos.account;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.mercadopago.resources.datastructures.merchantorder.MerchantOrderPayment;
@@ -6,9 +6,15 @@ import com.mercadopago.resources.datastructures.merchantorder.Shipment;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Map;
 
-public class Order {
+public class Subscription {
+
+    @JsonProperty("username")
+    private String username;
+
+    @JsonProperty("quantity")
+    private int quantity;
+
     @JsonProperty("preference_id")
     String preferenceId;
 
@@ -36,11 +42,29 @@ public class Order {
     @JsonProperty("item_id")
     String itemId;
 
+    public String getUsername() {
+        return username;
+    }
+
+    public Subscription setUsername(String username) {
+        this.username = username;
+        return this;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public Subscription setQuantity(int quantity) {
+        this.quantity = quantity;
+        return this;
+    }
+
     public String getPreferenceId() {
         return preferenceId;
     }
 
-    public Order setPreferenceId(String preferenceId) {
+    public Subscription setPreferenceId(String preferenceId) {
         this.preferenceId = preferenceId;
         return this;
     }
@@ -49,7 +73,7 @@ public class Order {
         return payment;
     }
 
-    public Order setPayment(ArrayList<MerchantOrderPayment> payment) {
+    public Subscription setPayment(ArrayList<MerchantOrderPayment> payment) {
         this.payment = payment;
         return this;
     }
@@ -58,7 +82,7 @@ public class Order {
         return shipments;
     }
 
-    public Order setShipments(ArrayList<Shipment> shipments) {
+    public Subscription setShipments(ArrayList<Shipment> shipments) {
         this.shipments = shipments;
         return this;
     }
@@ -67,7 +91,7 @@ public class Order {
         return vendorName;
     }
 
-    public Order setVendorName(String vendorName) {
+    public Subscription setVendorName(String vendorName) {
         this.vendorName = vendorName;
         return this;
     }
@@ -76,7 +100,7 @@ public class Order {
         return dateCreated;
     }
 
-    public Order setDateCreated(Date dateCreated) {
+    public Subscription setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
         return this;
     }
@@ -85,7 +109,7 @@ public class Order {
         return totalAmount;
     }
 
-    public Order setTotalAmount(float totalAmount) {
+    public Subscription setTotalAmount(float totalAmount) {
         this.totalAmount = totalAmount;
         return this;
     }
@@ -94,7 +118,7 @@ public class Order {
         return paidAmount;
     }
 
-    public Order setPaidAmount(float paidAmount) {
+    public Subscription setPaidAmount(float paidAmount) {
         this.paidAmount = paidAmount;
         return this;
     }
@@ -103,7 +127,7 @@ public class Order {
         return refundedAmount;
     }
 
-    public Order setRefundedAmount(float refundedAmount) {
+    public Subscription setRefundedAmount(float refundedAmount) {
         this.refundedAmount = refundedAmount;
         return this;
     }
@@ -112,7 +136,7 @@ public class Order {
         return itemId;
     }
 
-    public Order setItemId(String itemId) {
+    public Subscription setItemId(String itemId) {
         this.itemId = itemId;
         return this;
     }
