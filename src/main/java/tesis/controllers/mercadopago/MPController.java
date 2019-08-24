@@ -1,8 +1,9 @@
 package tesis.controllers.mercadopago;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.mercadopago.exceptions.MPConfException;
 import com.mercadopago.exceptions.MPException;
+import com.mercadopago.exceptions.MPRestException;
+import com.mercadopago.resources.Payment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tesis.entities.dtos.mercadopago.Preference;
@@ -10,6 +11,7 @@ import tesis.services.mercadopago.PaymentService;
 import tesis.services.mercadopago.PreferenceService;
 import tesis.services.mercadopago.UserServices;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,8 +36,13 @@ public class MPController {
     }
 
     @PostMapping("/payments/notification")
-    public String paymentNotification(@RequestParam String topic, @RequestParam Long id) throws MPConfException, JsonProcessingException {
+    public Payment paymentNotification(@RequestParam String topic, @RequestParam Long id) throws JsonProcessingException {
         return paymentService.analizeNotification(topic, id);
     }
 
+    @PostMapping("/merchant_order")
+    public String merchantOrder(@RequestParam Long merchant_order_id) throws IOException, MPRestException {
+        paymentService.createMerchantOrder(merchant_order_id);
+        return "";
+    }
 }
