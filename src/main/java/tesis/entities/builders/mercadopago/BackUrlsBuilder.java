@@ -4,9 +4,8 @@ import com.mercadopago.resources.datastructures.preference.BackUrls;
 
 public class BackUrlsBuilder {
     public static BackUrls buildBackUrls() {
-        return new BackUrls("localhost:8080/success",
-                "localhost:8080/pending",
-                "localhost:8080/failure");
-
+        return new BackUrls("http://localhost:3000",
+                "http://localhost:3000",
+                "http://localhost:3000");
     }
 }
