@@ -24,6 +24,11 @@ public class SubscriptionController {
         return subscriptionService.searchSubscription(param);
     }
 
+    @PostMapping()
+    public String createSubscription(@RequestBody Subscription subscription) throws JsonProcessingException {
+        return subscriptionService.createSubscription(subscription);
+    }
+
     @PutMapping()
     public String updateSubscription(@RequestBody Subscription subscription) throws JsonProcessingException {
         return subscriptionService.updateSubscription(subscription);
