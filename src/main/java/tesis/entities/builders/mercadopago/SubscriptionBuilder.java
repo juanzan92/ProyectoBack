@@ -11,13 +11,14 @@ public class SubscriptionBuilder {
         return new Subscription().setDateCreated(merchantOrder.getDateCreated() != null ? merchantOrder.getDateCreated() : new Date())
                 .setItemId(merchantOrder.getItems().get(0).getId())
                 .setQuantity(merchantOrder.getItems().get(0).getQuantity())
-                .setPaidAmount(merchantOrder.getPaidAmount())
                 .setPayment(merchantOrder.getPayments())
                 .setPreferenceId(merchantOrder.getPreferenceId())
                 .setRefundedAmount(merchantOrder.getRefundedAmount())
                 .setShipments(merchantOrder.getShipments())
-                .setTotalAmount(merchantOrder.getTotalAmount());
-                /*.setVendorName(); TODO necesito obtener el vendor name , puede que no sea el misom en mp que en cognito*/
-
+                .setPaidAmount(merchantOrder.getPaidAmount())
+                .setTotalAmount(merchantOrder.getTotalAmount())
+                .setUsername("pepito_comprador");
+                /*.setUsername(merchantOrder.getPayer().getNickname())*test_user_94940646@testuser.com/
+                .setVendorName(merchantOrder.getCollector().getNickname()); //TODO necesito obtener el vendor name , puede que no sea el misom en mp que en cognito*/
     }
 }
