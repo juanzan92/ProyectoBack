@@ -41,8 +41,7 @@ public class MPController {
     }
 
     @PostMapping("/merchant_order")
-    public String merchantOrder(@RequestParam Long merchant_order_id) throws IOException, MPRestException {
-        paymentService.createMerchantOrder(merchant_order_id);
-        return "";
+    public String merchantOrder(@RequestParam Long merchant_order_id) throws IOException {
+        return paymentService.createMerchantOrder(merchant_order_id);
     }
 }

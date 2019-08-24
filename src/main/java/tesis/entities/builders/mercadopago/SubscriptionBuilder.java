@@ -17,7 +17,7 @@ public class SubscriptionBuilder {
                 .setRefundedAmount(merchantOrder.getRefundedAmount())
                 .setShipments(merchantOrder.getShipments())
                 .setTotalAmount(merchantOrder.getTotalAmount());
-        /*.setVendorName(); TODO necesito obtener el vendor name , puede que no sea el misom en mp que en cognito*/
+                /*.setVendorName(); TODO necesito obtener el vendor name , puede que no sea el misom en mp que en cognito*/
 
     }
 }
