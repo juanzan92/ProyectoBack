@@ -64,4 +64,10 @@ public class DynamoBuilder {
         parameters.setAll(maps);
         return parameters;
     }
+
+    public static ForDynamo buildSearchParameters(ForDynamo forDynamo, String filter, String value) {
+        forDynamo.setIndexName(filter);
+        forDynamo.setSearchPattern(value);
+        return forDynamo;
+    }
 }

@@ -7,7 +7,7 @@ import java.util.Date;
 
 public class SubscriptionBuilder {
 
-    public static Subscription orderBuilder(MerchantOrder merchantOrder) {
+    public static Subscription orderBuilder(MerchantOrder merchantOrder, String vendorName, String consumerName) {
         return new Subscription().setDateCreated(merchantOrder.getDateCreated() != null ? merchantOrder.getDateCreated() : new Date())
                 .setItemId(merchantOrder.getItems().get(0).getId())
                 .setQuantity(merchantOrder.getItems().get(0).getQuantity())
@@ -17,8 +17,7 @@ public class SubscriptionBuilder {
                 .setShipments(merchantOrder.getShipments())
                 .setPaidAmount(merchantOrder.getPaidAmount())
                 .setTotalAmount(merchantOrder.getTotalAmount())
-                .setUsername("pepito_comprador");
-                /*.setUsername(merchantOrder.getPayer().getNickname())*test_user_94940646@testuser.com/
-                .setVendorName(merchantOrder.getCollector().getNickname()); //TODO necesito obtener el vendor name , puede que no sea el misom en mp que en cognito*/
+                .setVendorName(vendorName)
+                .setUsername(consumerName);
     }
 }
