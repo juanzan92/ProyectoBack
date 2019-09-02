@@ -38,4 +38,8 @@ public class UserService {
     public Consumer getConsumer(@NotNull Map<String, String> param) throws JsonProcessingException {
         return restClient.request(DynamoBuilder.getObject(param, forDynamo, urlBase), HttpMethod.GET, Consumer.class);
     }
+
+    public User[] getAllUser() throws JsonProcessingException {
+        return restClient.request(DynamoBuilder.getAllObject(forDynamo, urlBase + "/get_all"), HttpMethod.GET, User[].class);
+    }
 }

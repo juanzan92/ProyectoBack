@@ -27,6 +27,11 @@ public class ItemController {
         return itemService.getItem(param);
     }
 
+    @GetMapping("/get_all")
+    public Item[] getAllItem() throws JsonProcessingException {
+        return itemService.getAllItem();
+    }
+
     @GetMapping("/search")
     public Item[] searchItems(@RequestBody Map<String, String> param) throws JsonProcessingException {
         return itemService.searchItems(param);
