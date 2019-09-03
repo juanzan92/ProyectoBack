@@ -31,6 +31,7 @@ public class HomeService {
     }
 
     public String updateItemCarrouselMain(ItemCarrouselMain itemCarrouselMain) throws JsonProcessingException {
+        itemCarrouselMain.setTag("CarrouselMain");
         return restClient.request(urlBase, DynamoBuilder.saveObject(itemCarrouselMain, forDynamo), HttpMethod.PUT, String.class);
     }
 
@@ -49,6 +50,7 @@ public class HomeService {
     }
 
     public String updateItemHurryUp(ItemHurryUp itemHurryUp) throws JsonProcessingException {
+        itemHurryUp.setTag("HurryUp");
         return restClient.request(urlBase, DynamoBuilder.saveObject(itemHurryUp, forDynamo), HttpMethod.PUT, String.class);
     }
 
@@ -67,6 +69,7 @@ public class HomeService {
     }
 
     public String updateItemCarrouselBottom(ItemCarrouselBottom itemCarrouselBottom) throws JsonProcessingException {
+        itemCarrouselBottom.setTag("CarrouselBottom");
         return restClient.request(urlBase, DynamoBuilder.saveObject(itemCarrouselBottom, forDynamo), HttpMethod.PUT, String.class);
     }
 
