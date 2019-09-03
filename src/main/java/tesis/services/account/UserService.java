@@ -39,6 +39,10 @@ public class UserService {
         return restClient.request(DynamoBuilder.getObject(param, forDynamo, urlBase), HttpMethod.GET, Consumer.class);
     }
 
+    public User[] getAllUser() throws JsonProcessingException {
+        return restClient.request(DynamoBuilder.getAllObject(forDynamo, urlBase + "/get_all"), HttpMethod.GET, User[].class);
+    }
+
     public User[] searchUsers(@NotNull String filter, @NotNull String value) throws JsonProcessingException {
         forDynamo.setIndexName(filter);
         forDynamo.setSearchPattern(value);
