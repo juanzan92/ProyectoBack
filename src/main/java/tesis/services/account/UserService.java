@@ -27,16 +27,8 @@ public class UserService {
         return restClient.request(urlBase, DynamoBuilder.saveObject(user, forDynamo), HttpMethod.POST, String.class);
     }
 
-    public String createVendorUser(Vendor vendor) throws JsonProcessingException {
-        return restClient.request(urlBase, DynamoBuilder.saveObject(vendor, forDynamo), HttpMethod.PUT, String.class);
-    }
-
-    public Vendor getVendor(@NotNull Map<String, String> param) throws JsonProcessingException {
-        return restClient.request(DynamoBuilder.getObject(param, forDynamo, urlBase), HttpMethod.GET, Vendor.class);
-    }
-
-    public Consumer getConsumer(@NotNull Map<String, String> param) throws JsonProcessingException {
-        return restClient.request(DynamoBuilder.getObject(param, forDynamo, urlBase), HttpMethod.GET, Consumer.class);
+    public User getUser(Map<String, String> param) throws JsonProcessingException {
+        return restClient.request(DynamoBuilder.getObject(param, forDynamo, urlBase), HttpMethod.GET, User.class);
     }
 
     public User[] getAllUser() throws JsonProcessingException {
@@ -52,5 +44,21 @@ public class UserService {
     public User searchUser(@NotNull String filter, @NotNull String value) throws JsonProcessingException {
         User[] users = restClient.request(DynamoBuilder.searchObjects(DynamoBuilder.buildSearchParameters(forDynamo, filter, value), urlBase + "/index_search"), HttpMethod.GET, User[].class);
         return users[0];
+    }
+
+    public String createVendorUser(Vendor vendor) throws JsonProcessingException {
+        return restClient.request(urlBase, DynamoBuilder.saveObject(vendor, forDynamo), HttpMethod.PUT, String.class);
+    }
+
+    public Vendor getVendor(@NotNull Map<String, String> param) throws JsonProcessingException {
+        return restClient.request(DynamoBuilder.getObject(param, forDynamo, urlBase), HttpMethod.GET, Vendor.class);
+    }
+
+    public Vendor[] getAllVendor() throws JsonProcessingException {
+        return restClient.request(DynamoBuilder.getAllObject(forDynamo, urlBase + "/get_all"), HttpMethod.GET, Vendor[].class);
+    }
+
+    public Consumer getConsumer(@NotNull Map<String, String> param) throws JsonProcessingException {
+        return restClient.request(DynamoBuilder.getObject(param, forDynamo, urlBase), HttpMethod.GET, Consumer.class);
     }
 }

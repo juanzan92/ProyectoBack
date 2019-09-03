@@ -22,8 +22,8 @@ public class UsersController {
     }
 
     @GetMapping()
-    public User getUser(@RequestBody Map<String, String> param) throws JsonProcessingException {
-        return usersService.getUser(param);
+    public User getUser(@RequestParam Map<String, String>  username) throws JsonProcessingException {
+        return usersService.getUser(username);
     }
 
     @GetMapping("/get_all")
@@ -31,14 +31,19 @@ public class UsersController {
         return usersService.getAllUser();
     }
 
-    @GetMapping()
+    @GetMapping("/vendors")  // Cambiar a @RequestParam
     public Vendor getVendor(@RequestBody Map<String, String> param) throws JsonProcessingException {
         return usersService.getVendor(param);
     }
 
-    @PostMapping()
+    @PostMapping("/vendors")
     public String createVendor(@RequestBody Vendor newVendor) throws JsonProcessingException {
-        return usersService.createVendor(newVendor);
+        return usersService.createVendorUser(newVendor);
+    }
+
+    @GetMapping("/vendors/get_all")
+    public Vendor[] getAllVendor() throws JsonProcessingException {
+        return usersService.getAllVendor();
     }
 }
 
