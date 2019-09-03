@@ -22,8 +22,18 @@ public class UsersController {
     }
 
     @GetMapping()
+    public User getUser(@RequestBody Map<String, String> param) throws JsonProcessingException {
+        return usersService.getUser(param);
+    }
+
+    @GetMapping()
     public Vendor getVendor(@RequestBody Map<String, String> param) throws JsonProcessingException {
         return usersService.getVendor(param);
+    }
+
+    @PostMapping()
+    public String createVendor(@RequestBody Vendor newVendor) throws JsonProcessingException {
+        return usersService.createVendor(newVendor);
     }
 }
 
