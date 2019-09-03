@@ -23,8 +23,9 @@ public class ItemController {
     }
 
     @GetMapping()
-    public Item getItem(@RequestBody Map<String, String> param) throws JsonProcessingException {
-        return itemService.getItem(param);
+    // public Item getItem(@RequestBody Map<String, String> param) throws JsonProcessingException {
+    public Item getItem(@RequestParam Map<String, String>  item_id) throws JsonProcessingException {
+        return itemService.getItem(item_id);
     }
 
     @GetMapping("/get_all")
