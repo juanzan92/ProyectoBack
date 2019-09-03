@@ -42,4 +42,15 @@ public class UserService {
     public User[] getAllUser() throws JsonProcessingException {
         return restClient.request(DynamoBuilder.getAllObject(forDynamo, urlBase + "/get_all"), HttpMethod.GET, User[].class);
     }
+
+    public User[] searchUsers(@NotNull String filter, @NotNull String value) throws JsonProcessingException {
+        forDynamo.setIndexName(filter);
+        forDynamo.setSearchPattern(value);
+        return restClient.request(DynamoBuilder.searchObjects(forDynamo, urlBase + "/index_search"), HttpMethod.GET, User[].class);
+    }
+
+    public User searchUser(@NotNull String filter, @NotNull String value) throws JsonProcessingException {
+        User[] users = restClient.request(DynamoBuilder.searchObjects(DynamoBuilder.buildSearchParameters(forDynamo, filter, value), urlBase + "/index_search"), HttpMethod.GET, User[].class);
+        return users[0];
+    }
 }

@@ -3,11 +3,15 @@ package tesis.entities.dtos.account;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.mercadopago.resources.datastructures.merchantorder.MerchantOrderPayment;
 import com.mercadopago.resources.datastructures.merchantorder.Shipment;
+import tesis.entities.enums.user.SubscriptionStatus;
 
 import java.util.ArrayList;
 import java.util.Date;
 
 public class Subscription {
+
+    @JsonProperty("merchant_order_id")
+    private String merchantOrderId;
 
     @JsonProperty("username")
     private String username;
@@ -41,6 +45,27 @@ public class Subscription {
 
     @JsonProperty("item_id")
     String itemId;
+
+    @JsonProperty("subscription_status")
+    SubscriptionStatus subscriptionStatus;
+
+    public String getMerchantOrderId() {
+        return merchantOrderId;
+    }
+
+    public Subscription setMerchantOrderId(String merchantOrderId) {
+        this.merchantOrderId = merchantOrderId;
+        return this;
+    }
+
+    public SubscriptionStatus getSubscriptionStatus() {
+        return subscriptionStatus;
+    }
+
+    public Subscription setSubscriptionStatus(SubscriptionStatus subscriptionStatus) {
+        this.subscriptionStatus = subscriptionStatus;
+        return this;
+    }
 
     public String getUsername() {
         return username;

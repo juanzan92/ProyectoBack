@@ -2,7 +2,6 @@ package tesis.controllers.mercadopago;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.mercadopago.exceptions.MPException;
-import com.mercadopago.exceptions.MPRestException;
 import com.mercadopago.resources.Payment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -43,5 +42,10 @@ public class MPController {
     @PostMapping("/merchant_order")
     public String merchantOrder(@RequestParam Long merchant_order_id) throws IOException {
         return paymentService.createMerchantOrder(merchant_order_id);
+    }
+
+    @DeleteMapping("/payments")
+    public void cancelPayment(@RequestParam String subscriptionId) throws IOException, MPException {
+        paymentService.cancelPayment(subscriptionId);
     }
 }
