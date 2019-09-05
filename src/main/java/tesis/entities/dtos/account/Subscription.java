@@ -10,6 +10,9 @@ import java.util.Date;
 
 public class Subscription {
 
+    @JsonProperty("subscription_id")
+    private String subscriptionId;
+
     @JsonProperty("merchant_order_id")
     private String merchantOrderId;
 
