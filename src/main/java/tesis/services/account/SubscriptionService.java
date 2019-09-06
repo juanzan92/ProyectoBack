@@ -26,6 +26,10 @@ public class SubscriptionService {
         return restClient.request(DynamoBuilder.getObject(param, forDynamo, urlBase), HttpMethod.GET, Subscription.class);
     }
 
+    public Subscription[] getAllSubscription() throws JsonProcessingException {
+        return restClient.request(DynamoBuilder.getAllObject(forDynamo, urlBase + "/get_all"), HttpMethod.GET, Subscription[].class);
+    }
+
     public Subscription[] searchSubscription(Map<String, String> param) throws JsonProcessingException {
         return restClient.request(DynamoBuilder.searchObjects(param, forDynamo, urlBase + "/index_search"), HttpMethod.GET, Subscription[].class);
     }

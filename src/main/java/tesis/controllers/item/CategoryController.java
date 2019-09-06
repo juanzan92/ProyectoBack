@@ -24,6 +24,11 @@ public class CategoryController {
         return categoryService.getCategory(param);
     }
 
+    @GetMapping("/get_all")
+    public Category[] getAllCategory() throws JsonProcessingException {
+        return categoryService.getAllCategory();
+    }
+
     @GetMapping("/search")
     public Category[] searchCategory(@RequestBody Map<String, String> param) throws JsonProcessingException {
         return categoryService.searchCategories(param);

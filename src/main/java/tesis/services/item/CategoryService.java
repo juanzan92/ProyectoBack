@@ -26,6 +26,10 @@ public class CategoryService {
         return restClient.request(DynamoBuilder.getObject(param, forDynamo, urlBase), HttpMethod.GET, Category.class);
     }
 
+    public Category[] getAllCategory() throws JsonProcessingException {
+        return restClient.request(DynamoBuilder.getAllObject(forDynamo, urlBase + "/get_all"), HttpMethod.GET, Category[].class);
+    }
+
     public Category[] searchCategories(Map<String, String> param) throws JsonProcessingException {
         return restClient.request(DynamoBuilder.searchObjects(param, forDynamo, urlBase + "/index_search"), HttpMethod.GET, Category[].class);
     }
