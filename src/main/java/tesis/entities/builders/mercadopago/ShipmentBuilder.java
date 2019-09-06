@@ -7,6 +7,7 @@ import tesis.entities.dtos.mercadopago.Consumer;
 public class ShipmentBuilder {
     public static Shipments buildShipment(Consumer consumer) {
         AddressReceiver addressReceiver = new AddressReceiver();
+
         addressReceiver.AddressReceiver(consumer.getAddressCode().toString(), consumer.getAddressNumber(), consumer.getAddressName(), "", "");
         return new Shipments()
                 .setMode(Shipments.ShipmentMode.me2)
