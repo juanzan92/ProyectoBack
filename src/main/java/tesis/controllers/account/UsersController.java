@@ -31,7 +31,7 @@ public class UsersController {
         return usersService.getAllUser();
     }
 
-    @GetMapping("/vendors")  // Cambiar a @RequestParam
+    @GetMapping("/vendors")
     public Vendor getVendor(@RequestParam Map<String, String> username) throws JsonProcessingException {
         return usersService.getVendor(username);
     }

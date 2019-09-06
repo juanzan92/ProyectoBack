@@ -20,7 +20,7 @@ public class SubscriptionController {
     }
 
     @GetMapping("/search")
-    public Subscription[] searchSubscription(@RequestBody Map<String, String> param) throws JsonProcessingException {
+    public Subscription[] searchSubscription(@RequestParam Map<String, String> param) throws JsonProcessingException {
         return subscriptionService.searchSubscription(param);
     }
 
