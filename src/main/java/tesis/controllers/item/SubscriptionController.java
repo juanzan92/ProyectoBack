@@ -14,9 +14,9 @@ public class SubscriptionController {
     @Autowired
     SubscriptionService subscriptionService;
 
-    @GetMapping()    // Cabmbiar a REquestParam
-    public Subscription getSubscription(@RequestBody Map<String, String> param) throws JsonProcessingException {
-        return subscriptionService.getSubscription(param);
+    @GetMapping()
+    public Subscription getSubscription(@RequestParam Map<String, String> subscription_id) throws JsonProcessingException {
+        return subscriptionService.getSubscription(subscription_id);
     }
 
     @GetMapping("/search")
@@ -43,5 +43,4 @@ public class SubscriptionController {
     public String deleteSubscription(@RequestBody Map<String, String> param) throws JsonProcessingException {
         return subscriptionService.deleteSubscription(param);
     }
-
 }

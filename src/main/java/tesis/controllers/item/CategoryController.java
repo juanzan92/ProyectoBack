@@ -20,8 +20,8 @@ public class CategoryController {
     }
 
     @GetMapping()
-    public Category getCategory(@RequestBody Map<String, String> param) throws JsonProcessingException {
-        return categoryService.getCategory(param);
+    public Category getCategory(@RequestParam Map<String, String> category_id) throws JsonProcessingException {
+        return categoryService.getCategory(category_id);
     }
 
     @GetMapping("/get_all")

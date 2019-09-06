@@ -20,12 +20,12 @@ public class HomeController {
 
 
     @PostMapping("/carrousel_main")
-    public String createItemHomeCarrouselMain(@RequestBody ItemCarrouselMain itemCarrouselMain) throws JsonProcessingException {
+    public String createItemCarrouselMain(@RequestBody ItemCarrouselMain itemCarrouselMain) throws JsonProcessingException {
         return homeService.createItemCarrouselMain(itemCarrouselMain);
     }
 
     @GetMapping("/carrousel_main/search")
-    public ItemCarrouselMain[] searchItemsHomeCarrouselMain() throws JsonProcessingException {
+    public ItemCarrouselMain[] searchItemsCarrouselMain() throws JsonProcessingException {
         return homeService.searchItemsCarrouselMain();
     }
 
@@ -60,12 +60,12 @@ public class HomeController {
     }
 
     @PostMapping("/carrousel_bottom")
-    public String createItemHomeCarrouselBottom(@RequestBody ItemCarrouselBottom itemCarrouselBottom) throws JsonProcessingException {
+    public String createItemCarrouselBottom(@RequestBody ItemCarrouselBottom itemCarrouselBottom) throws JsonProcessingException {
         return homeService.createItemCarrouselBottom(itemCarrouselBottom);
     }
 
     @GetMapping("/carrousel_bottom/search")
-    public ItemCarrouselBottom[] searchItemsHomeCarrouselBottom() throws JsonProcessingException {
+    public ItemCarrouselBottom[] searchItemsCarrouselBottom() throws JsonProcessingException {
         return homeService.searchItemsCarrouselBottom();
     }
 
