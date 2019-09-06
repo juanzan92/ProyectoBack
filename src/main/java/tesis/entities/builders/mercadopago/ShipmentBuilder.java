@@ -12,10 +12,5 @@ public class ShipmentBuilder {
                 .setMode(Shipments.ShipmentMode.me2)
                 .setDimensions("30x30x30,500")
                 .setReceiverAddress(addressReceiver);
-
-        /*consumer.getAddressCode().toString(), consumer.getAddressNumber(), consumer.getAddressName(), "", "");*/
-                                /*.setZipCode(consumer.getAddressCode().toString())
-                                .setStreetName(consumer.getAddressName())
-                                .setStreetNumber(consumer.getAddressNumber()));*/
     }
 }
