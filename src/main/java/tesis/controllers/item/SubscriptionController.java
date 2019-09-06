@@ -14,7 +14,7 @@ public class SubscriptionController {
     @Autowired
     SubscriptionService subscriptionService;
 
-    @GetMapping()
+    @GetMapping()    // Cabmbiar a REquestParam
     public Subscription getSubscription(@RequestBody Map<String, String> param) throws JsonProcessingException {
         return subscriptionService.getSubscription(param);
     }
