@@ -3,6 +3,7 @@ package tesis.entities.dtos.item;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
+import java.util.Map;
 
 public class Item {
 
@@ -59,6 +60,18 @@ public class Item {
 
     @JsonProperty("last_updated")
     private String lastUpdated;
+
+    @JsonProperty("dimentions")
+    Map<String, Float> dimentions;
+
+    public Map<String, Float> getDimentions() {
+        return dimentions;
+    }
+
+    public Item setDimentions(Map<String, Float> dimentions) {
+        this.dimentions = dimentions;
+        return this;
+    }
 
     public String getVendorUsername() {
         return vendorUsername;
