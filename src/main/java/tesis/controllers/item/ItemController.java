@@ -2,13 +2,10 @@ package tesis.controllers.item;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
-import tesis.entities.builders.dynamo.DynamoBuilder;
 import tesis.entities.dtos.item.Item;
 import tesis.services.item.ItemService;
 
-import java.util.HashMap;
 import java.util.Map;
 
 @RestController

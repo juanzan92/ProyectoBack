@@ -12,6 +12,7 @@ public class PreferenceBuilder {
                 .setMarketplaceFee(sMarketFeeByPurchase(item.getInitialPrice()))
                 .setPayer(PayerBuilder.buildPayer(consumer))
                 .setBackUrls(BackUrlsBuilder.buildBackUrls())
+                .setShipments(ShipmentBuilder.buildShipment(consumer))
                 /*.setNotificationUrl("https://localhost:8080/mp/payments/notification")*/ //TODO realizar endpoint notification y external reference
                 .save();
     }
