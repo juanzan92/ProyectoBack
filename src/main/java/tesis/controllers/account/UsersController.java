@@ -32,13 +32,8 @@ public class UsersController {
     }
 
     @GetMapping("/vendors")
-<<<<<<< HEAD
     public Vendor getVendor(@RequestParam Map<String, String> username) throws JsonProcessingException {
         return usersService.getVendor(username);
-=======
-    public Vendor getVendor(@RequestParam Map<String, String> param) throws JsonProcessingException {
-        return usersService.getVendor(param);
->>>>>>> d3a19691bd77038481b30f0c86ed5194232ed7e4
     }
 
     @PostMapping("/vendors")
