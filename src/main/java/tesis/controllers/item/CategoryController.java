@@ -30,7 +30,7 @@ public class CategoryController {
     }
 
     @GetMapping("/search")
-    public Category[] searchCategory(@RequestBody Map<String, String> param) throws JsonProcessingException {
+    public Category[] searchCategory(@RequestParam Map<String, String> param) throws JsonProcessingException {
         return categoryService.searchCategories(param);
     }
 

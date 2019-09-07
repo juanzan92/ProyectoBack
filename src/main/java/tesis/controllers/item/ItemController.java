@@ -33,7 +33,7 @@ public class ItemController {
     }
 
     @GetMapping("/search")
-    public Item[] searchItems(@RequestBody Map<String, String> param) throws JsonProcessingException {
+    public Item[] searchItems(@RequestParam Map<String, String> param) throws JsonProcessingException {
         return itemService.searchItems(param);
     }
 
