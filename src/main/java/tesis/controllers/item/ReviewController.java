@@ -31,7 +31,7 @@ public class ReviewController {
     }
 
     @GetMapping("/search")
-    public Review[] searchReviews(@RequestBody Map<String, String> param) throws JsonProcessingException {
+    public Review[] searchReviews(@RequestParam Map<String, String> param) throws JsonProcessingException {
         return reviewService.searchReviews(param);
     }
 

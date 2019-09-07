@@ -15,12 +15,12 @@ public class SubscriptionController {
     SubscriptionService subscriptionService;
 
     @GetMapping()
-    public Subscription getSubscription(@RequestBody Map<String, String> param) throws JsonProcessingException {
-        return subscriptionService.getSubscription(param);
+    public Subscription getSubscription(@RequestParam Map<String, String> subscription_id) throws JsonProcessingException {
+        return subscriptionService.getSubscription(subscription_id);
     }
 
     @GetMapping("/search")
-    public Subscription[] searchSubscription(@RequestBody Map<String, String> param) throws JsonProcessingException {
+    public Subscription[] searchSubscription(@RequestParam Map<String, String> param) throws JsonProcessingException {
         return subscriptionService.searchSubscription(param);
     }
 
@@ -43,5 +43,4 @@ public class SubscriptionController {
     public String deleteSubscription(@RequestBody Map<String, String> param) throws JsonProcessingException {
         return subscriptionService.deleteSubscription(param);
     }
-
 }
