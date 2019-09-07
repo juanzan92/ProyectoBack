@@ -16,7 +16,7 @@ public class Subscription {
     @JsonProperty("item_id")
     String itemId;
 
-    @JsonProperty("merchant_order_id") // gone
+    @JsonProperty("merchant_order_id")
     private String merchantOrderId;
 
     @JsonProperty("preference_id")
