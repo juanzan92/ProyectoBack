@@ -10,47 +10,47 @@ import java.util.Date;
 
 public class Subscription {
 
-    @JsonProperty("subscription_id")
-    private String subscriptionId;
-
-    @JsonProperty("merchant_order_id")
-    private String merchantOrderId;
-
-    @JsonProperty("username")
-    private String username;
-
-    @JsonProperty("quantity")
-    private int quantity;
-
-    @JsonProperty("preference_id")
-    String preferenceId;
-
-    @JsonProperty("payment")
-    ArrayList<MerchantOrderPayment> payment;
-
-    @JsonProperty("shipments")
-    ArrayList<Shipment> shipments;
-
-    @JsonProperty("vendor_name")
-    String vendorName;
-
     @JsonProperty("date_created")
     Date dateCreated;
-
-    @JsonProperty("total_amount")
-    float totalAmount;
-
-    @JsonProperty("paid_amount")
-    float paidAmount;
-
-    @JsonProperty("refunded_amount")
-    float refundedAmount;
 
     @JsonProperty("item_id")
     String itemId;
 
+    @JsonProperty("merchant_order_id") // gone
+    private String merchantOrderId;
+
+    @JsonProperty("preference_id")
+    String preferenceId;
+
+    @JsonProperty("paid_amount")
+    float paidAmount;
+
+    @JsonProperty("payment")
+    ArrayList<MerchantOrderPayment> payment;
+
+    @JsonProperty("quantity")
+    private int quantity;
+
+    @JsonProperty("refunded_amount")
+    float refundedAmount;
+
+    @JsonProperty("shipments")
+    ArrayList<Shipment> shipments;
+
+    @JsonProperty("subscription_id")
+    private String subscriptionId;
+
     @JsonProperty("subscription_status")
     SubscriptionStatus subscriptionStatus;
+
+    @JsonProperty("total_amount")
+    float totalAmount;
+
+    @JsonProperty("username")
+    private String username;
+
+    @JsonProperty("vendor_name")
+    String vendorName;
 
     public String getMerchantOrderId() {
         return merchantOrderId;
