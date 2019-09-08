@@ -46,6 +46,10 @@ public class UserService {
         return users[0];
     }
 
+    public String deleteUser(Map<String, String> username) throws JsonProcessingException {
+        return restClient.request(urlBase, DynamoBuilder.getObject(username, forDynamo), HttpMethod.DELETE, String.class);
+    }
+
     public String createVendorUser(Vendor vendor) throws JsonProcessingException {
         return restClient.request(urlBase, DynamoBuilder.saveObject(vendor, forDynamo), HttpMethod.PUT, String.class);
     }
