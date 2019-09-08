@@ -20,12 +20,17 @@ public class CategoryController {
     }
 
     @GetMapping()
-    public Category getCategory(@RequestBody Map<String, String> param) throws JsonProcessingException {
-        return categoryService.getCategory(param);
+    public Category getCategory(@RequestParam Map<String, String> category_id) throws JsonProcessingException {
+        return categoryService.getCategory(category_id);
+    }
+
+    @GetMapping("/get_all")
+    public Category[] getAllCategory() throws JsonProcessingException {
+        return categoryService.getAllCategory();
     }
 
     @GetMapping("/search")
-    public Category[] searchCategory(@RequestBody Map<String, String> param) throws JsonProcessingException {
+    public Category[] searchCategory(@RequestParam Map<String, String> param) throws JsonProcessingException {
         return categoryService.searchCategories(param);
     }
 

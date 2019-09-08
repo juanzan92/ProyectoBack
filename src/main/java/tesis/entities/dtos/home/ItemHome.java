@@ -1,6 +1,7 @@
 package tesis.entities.dtos.home;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import tesis.entities.dtos.item.Picture;
 
 import java.util.List;
 
@@ -15,8 +16,8 @@ public class ItemHome {
     @JsonProperty("tag")
     private String tag;
 
-    @JsonProperty("picture")
-    private String picture;
+    @JsonProperty("pictures")
+    List<Picture> pictures;
 
     public String getTitle() {
         return title;
@@ -42,11 +43,11 @@ public class ItemHome {
         this.tag = tag;
     }
 
-    public String getPicture() {
-        return picture;
+    public List<Picture> getPictures() {
+        return pictures;
     }
 
-    public void setPicture(String picture) {
-        this.picture = picture;
+    public void setPictures(List<Picture> pictures) {
+        this.pictures = pictures;
     }
 }

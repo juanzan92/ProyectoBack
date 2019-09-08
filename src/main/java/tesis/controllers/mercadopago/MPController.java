@@ -43,4 +43,9 @@ public class MPController {
     public String merchantOrder(@RequestParam Long merchant_order_id) throws IOException {
         return paymentService.createMerchantOrder(merchant_order_id);
     }
+
+    @DeleteMapping("/payments")
+    public void cancelPayment(@RequestParam String subscriptionId) throws IOException, MPException {
+        paymentService.cancelPayment(subscriptionId);
+    }
 }
