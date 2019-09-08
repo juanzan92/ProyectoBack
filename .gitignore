@@ -9,3 +9,4 @@ target/
 # Ignore property files to avoid being targeted by AWS Credential Scanner Bot.
 src/main/resources/aws.properties
 src/main/resources/application.properties
+src/main/resources/*
