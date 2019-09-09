@@ -21,6 +21,10 @@ import java.util.Map;
 public class SubscriptionService {
     @Autowired
     RestClient restClient;
+
+    @Autowired
+    ItemService itemService;
+
     String urlBase = "https://rtge19cj13.execute-api.us-east-1.amazonaws.com/prod/generic_ep";
     ForDynamo forDynamo = new ForDynamo("subscriptions", "subscription_id");
 
@@ -49,20 +53,10 @@ public class SubscriptionService {
     }
 
     public String cancelSubscription(Subscription subscription) throws JsonProcessingException {
-        ItemService itemService = new ItemService();
-        ObjectMapper objectMapper = new ObjectMapper();
-
-        // Item item = itemService.getItem(objectMapper.convertValue(subscription, Map.class));
-        Item item = new Item();
-        item.setItemId(subscription.getItemId());
-        item = itemService.getItem(objectMapper.convertValue(item, HashMap.class));
-
+        Item item = itemService.getItem(DynamoBuilder.buildMap("item_id", subscription.getItemId()));
         item.setStock(item.getStock()-subscription.getQuantity());
         itemService.updateItem(item);
-
         subscription.setSubscriptionStatus(SubscriptionStatus.CANCELLED);
-
-        //return deleteSubscription(param);
         return updateSubscription(subscription);
     }
 }
