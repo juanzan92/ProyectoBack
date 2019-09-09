@@ -1,14 +1,20 @@
 package tesis.services.account;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
+import org.springframework.util.MultiValueMap;
 import tesis.entities.builders.dynamo.DynamoBuilder;
 import tesis.entities.dtos.ForDynamo;
 import tesis.entities.dtos.account.Subscription;
+import tesis.entities.dtos.item.Item;
+import tesis.entities.enums.user.SubscriptionStatus;
 import tesis.services.RestClient;
+import tesis.services.item.ItemService;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @Service
@@ -40,5 +46,23 @@ public class SubscriptionService {
 
     public String deleteSubscription(Map<String, String> param) throws JsonProcessingException {
         return restClient.request(urlBase, DynamoBuilder.getObject(param, forDynamo), HttpMethod.DELETE, String.class);
+    }
+
+    public String cancelSubscription(Subscription subscription) throws JsonProcessingException {
+        ItemService itemService = new ItemService();
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        // Item item = itemService.getItem(objectMapper.convertValue(subscription, Map.class));
+        Item item = new Item();
+        item.setItemId(subscription.getItemId());
+        item = itemService.getItem(objectMapper.convertValue(item, HashMap.class));
+
+        item.setStock(item.getStock()-subscription.getQuantity());
+        itemService.updateItem(item);
+
+        subscription.setSubscriptionStatus(SubscriptionStatus.CANCELLED);
+
+        //return deleteSubscription(param);
+        return updateSubscription(subscription);
     }
 }
