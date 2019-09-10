@@ -168,4 +168,12 @@ public class Subscription {
         this.itemId = itemId;
         return this;
     }
+
+    public String getSubscriptionId() {
+        return subscriptionId;
+    }
+
+    public void setSubscriptionId(String subscriptionId) {
+        this.subscriptionId = subscriptionId;
+    }
 }
