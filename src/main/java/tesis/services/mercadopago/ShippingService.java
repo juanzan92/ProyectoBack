@@ -13,6 +13,7 @@ import javax.validation.constraints.NotNull;
 
 @Service
 public class ShippingService {
+
     @Autowired
     RestClient restClient;
     String urlBase = "https://rtge19cj13.execute-api.us-east-1.amazonaws.com/prod/generic_ep";
