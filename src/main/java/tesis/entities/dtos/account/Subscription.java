@@ -2,7 +2,7 @@ package tesis.entities.dtos.account;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.mercadopago.resources.datastructures.merchantorder.MerchantOrderPayment;
-import com.mercadopago.resources.datastructures.merchantorder.Shipment;
+import tesis.entities.dtos.mercadopago.Shipment;
 import tesis.entities.enums.user.SubscriptionStatus;
 
 import java.util.ArrayList;
@@ -11,46 +11,46 @@ import java.util.Date;
 public class Subscription {
 
     @JsonProperty("date_created")
-    Date dateCreated;
+    private Date dateCreated;
 
     @JsonProperty("item_id")
-    String itemId;
+    private String itemId;
 
     @JsonProperty("merchant_order_id")
     private String merchantOrderId;
 
     @JsonProperty("preference_id")
-    String preferenceId;
+    private String preferenceId;
 
     @JsonProperty("paid_amount")
-    float paidAmount;
+    private float paidAmount;
 
     @JsonProperty("payment")
-    ArrayList<MerchantOrderPayment> payment;
+    private ArrayList<MerchantOrderPayment> payment;
 
     @JsonProperty("quantity")
     private int quantity;
 
     @JsonProperty("refunded_amount")
-    float refundedAmount;
+    private float refundedAmount;
 
     @JsonProperty("shipments")
-    ArrayList<Shipment> shipments;
+    private ArrayList<Shipment> shipments;
 
     @JsonProperty("subscription_id")
     private String subscriptionId;
 
     @JsonProperty("subscription_status")
-    SubscriptionStatus subscriptionStatus;
+    private SubscriptionStatus subscriptionStatus;
 
     @JsonProperty("total_amount")
-    float totalAmount;
+    private float totalAmount;
 
     @JsonProperty("username")
     private String username;
 
     @JsonProperty("vendor_name")
-    String vendorName;
+    private String vendorName;
 
     public String getMerchantOrderId() {
         return merchantOrderId;
