@@ -4,7 +4,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
+import tesis.entities.builders.dynamo.CognitoBuilder;
 import tesis.entities.builders.dynamo.DynamoBuilder;
+import tesis.entities.dtos.ForCognito;
 import tesis.entities.dtos.ForDynamo;
 import tesis.entities.dtos.account.User;
 import tesis.entities.dtos.mercadopago.Consumer;
@@ -22,6 +24,7 @@ public class UserService {
 
     String urlBase = "https://rtge19cj13.execute-api.us-east-1.amazonaws.com/prod/user_ep";
     ForDynamo forDynamo = new ForDynamo("users", "username");
+    ForCognito forCognito = new ForCognito();
 
     public String createUser(@NotNull User user) throws JsonProcessingException {
         return restClient.request(urlBase, DynamoBuilder.saveObject(user, forDynamo), HttpMethod.POST, String.class);
@@ -44,6 +47,12 @@ public class UserService {
     public User searchUser(@NotNull String filter, @NotNull String value) throws JsonProcessingException {
         User[] users = restClient.request(DynamoBuilder.searchObjects(DynamoBuilder.buildSearchParameters(forDynamo, filter, value), urlBase + "/index_search"), HttpMethod.GET, User[].class);
         return users[0];
+    }
+
+    public String deleteUser(Map<String, String> username) throws JsonProcessingException {
+        forCognito.setUserPoolId("us-east-1_vwGNEHsur");
+        restClient.request(urlBase + "/cognito", CognitoBuilder.deleteObject(username, forCognito ), HttpMethod.DELETE, String.class);
+        return restClient.request(urlBase, DynamoBuilder.getObject(username, forDynamo), HttpMethod.DELETE, String.class);
     }
 
     public String createVendorUser(Vendor vendor) throws JsonProcessingException {
