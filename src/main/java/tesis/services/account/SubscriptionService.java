@@ -53,6 +53,7 @@ public class SubscriptionService {
     }
 
     public String cancelSubscription(Subscription subscription) throws JsonProcessingException {
+        //if (subscription.getSubscriptionStatus() = CANCELLED)
         Item item = itemService.getItem(DynamoBuilder.buildMap("item_id", subscription.getItemId()));
         item.setStock(item.getStock()+subscription.getQuantity());
         itemService.updateItem(item);
