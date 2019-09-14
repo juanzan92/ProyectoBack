@@ -8,7 +8,7 @@ import tesis.entities.enums.user.SubscriptionStatus;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Subscription extends Throwable {
+public class Subscription {
 
     @JsonProperty("date_created")
     Date dateCreated;
