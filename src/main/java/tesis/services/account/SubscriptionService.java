@@ -1,11 +1,9 @@
 package tesis.services.account;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
-import org.springframework.util.MultiValueMap;
 import tesis.entities.builders.dynamo.DynamoBuilder;
 import tesis.entities.dtos.ForDynamo;
 import tesis.entities.dtos.account.Subscription;
@@ -14,7 +12,6 @@ import tesis.entities.enums.user.SubscriptionStatus;
 import tesis.services.RestClient;
 import tesis.services.item.ItemService;
 
-import java.util.HashMap;
 import java.util.Map;
 
 @Service
@@ -57,15 +54,19 @@ public class SubscriptionService {
     }
 
     public String cancelSubscription(Subscription subscription) throws JsonProcessingException {
-        subscription = getSubscription(DynamoBuilder.buildMap("subscription_id", subscription.getSubscriptionId()));
-        if (subscription.getSubscriptionStatus() == SubscriptionStatus.CANCELLED) {
-            return "Subscription already CANCELLED. Nothing Done";
-        };
-        Item item = itemService.getItem(DynamoBuilder.buildMap("item_id", subscription.getItemId()));
-        item.setStock(item.getStock()+subscription.getQuantity());
-        itemService.updateItem(item);
-        subscription.setSubscriptionStatus(SubscriptionStatus.CANCELLED);
-        return updateSubscription(subscription);
+        try {
+            subscription = getSubscription(DynamoBuilder.buildMap("subscription_id", subscription.getSubscriptionId()));
+            if (subscription.getSubscriptionStatus() == SubscriptionStatus.CANCELLED) {
+                throw new IllegalStateException( "Subscription already CANCELLED. Nothing Done");
+            }
+            Item item = itemService.getItem(DynamoBuilder.buildMap("item_id", subscription.getItemId()));
+            item.setStock(item.getStock() + subscription.getQuantity());
+            itemService.updateItem(item);
+            subscription.setSubscriptionStatus(SubscriptionStatus.CANCELLED);
+            return updateSubscription(subscription);
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
 }
