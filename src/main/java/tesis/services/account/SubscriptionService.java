@@ -29,6 +29,10 @@ public class SubscriptionService {
     ForDynamo forDynamo = new ForDynamo("subscriptions", "subscription_id");
 
     public String createSubscription(Subscription subscription) throws JsonProcessingException {
+        Item item = itemService.getItem(DynamoBuilder.buildMap("item_id", subscription.getItemId()));
+        if (item.getItemId() == null) {
+            return "Item not found - Nothing Done";
+        };
         return restClient.request(urlBase, DynamoBuilder.saveObject(subscription, forDynamo), HttpMethod.POST, String.class);
     }
 

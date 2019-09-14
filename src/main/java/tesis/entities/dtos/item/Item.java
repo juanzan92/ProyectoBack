@@ -1,6 +1,7 @@
 package tesis.entities.dtos.item;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import tesis.entities.enums.item.ItemStatus;
 
 import java.util.List;
 import java.util.Map;
@@ -35,7 +36,8 @@ public class Item {
     private int stock;
 
     @JsonProperty("item_status")
-    private String status;
+    //private String status;
+    ItemStatus status;        // hacer el switch y testear todos los métodos.
 
     @JsonProperty("description_short")
     private String descriptionShort;
@@ -109,11 +111,7 @@ public class Item {
         return stock;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public String getDescriptionShort() {
+   public String getDescriptionShort() {
         return descriptionShort;
     }
 
@@ -159,10 +157,6 @@ public class Item {
         this.stock = stock;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public void setDescriptionShort(String descriptionShort) {
         this.descriptionShort = descriptionShort;
     }
@@ -190,4 +184,8 @@ public class Item {
     public boolean isInDiscount() {
         return inDiscount;
     }
+
+    public ItemStatus getStatus() { return status; }
+
+    public void setStatus(ItemStatus status) { this.status = status; }
 }
