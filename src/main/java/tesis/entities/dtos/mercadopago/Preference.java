@@ -6,22 +6,23 @@ public class Preference {
     @JsonProperty("item_id")
     private String itemId;
 
-    @JsonProperty("consumer")
-    Consumer consumer;
+    @JsonProperty("consumer_username")
+    String consumer_username;
 
     @JsonProperty("quantity")
     int quantity;
 
-    public Consumer getConsumer() {
-        return consumer;
+    public String getConsumerUsername() {
+        return consumer_username;
+    }
+
+    public Preference setConsumerUsername(String consumer_username) {
+        this.consumer_username = consumer_username;
+        return this;
     }
 
     public String getItemId() {
         return itemId;
-    }
-
-    public void setConsumer(Consumer consumer) {
-        this.consumer = consumer;
     }
 
     public int getQuantity() {

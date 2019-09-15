@@ -3,47 +3,20 @@ package tesis.entities.dtos.mercadopago;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Address {
-    @JsonProperty("zip_code")
-    private String zipCode = null;
+    @JsonProperty("address_name")
+    private String addressName;
 
-    @JsonProperty("street_name")
-    private String streetName = null;
+    @JsonProperty("address_number")
+    private int addressNumber;
 
-    @JsonProperty("street_number")
-    private Integer streetNumber = null;
+    @JsonProperty("address_code")
+    private Long addressCode;
 
     @JsonProperty("floor")
     private String floor = null;
 
     @JsonProperty("apartment")
     private String apartment = null;
-
-    public String getZipCode() {
-        return zipCode;
-    }
-
-    public Address setZipCode(String zipCode) {
-        this.zipCode = zipCode;
-        return this;
-    }
-
-    public String getStreetName() {
-        return streetName;
-    }
-
-    public Address setStreetName(String streetName) {
-        this.streetName = streetName;
-        return this;
-    }
-
-    public Integer getStreetNumber() {
-        return streetNumber;
-    }
-
-    public Address setStreetNumber(Integer streetNumber) {
-        this.streetNumber = streetNumber;
-        return this;
-    }
 
     public String getFloor() {
         return floor;
@@ -60,6 +33,33 @@ public class Address {
 
     public Address setApartment(String apartment) {
         this.apartment = apartment;
+        return this;
+    }
+
+    public String getAddressName() {
+        return addressName;
+    }
+
+    public Address setAddressName(String addressName) {
+        this.addressName = addressName;
+        return this;
+    }
+
+    public int getAddressNumber() {
+        return addressNumber;
+    }
+
+    public Address setAddressNumber(int addressNumber) {
+        this.addressNumber = addressNumber;
+        return this;
+    }
+
+    public Long getAddressCode() {
+        return addressCode;
+    }
+
+    public Address setAddressCode(Long addressCode) {
+        this.addressCode = addressCode;
         return this;
     }
 }

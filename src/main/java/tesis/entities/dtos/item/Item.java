@@ -61,15 +61,15 @@ public class Item {
     @JsonProperty("last_updated")
     private String lastUpdated;
 
-    @JsonProperty("dimentions")
-    Map<String, Float> dimentions;
+    @JsonProperty("dimensions")
+    private Dimensions dimensions;
 
-    public Map<String, Float> getDimentions() {
-        return dimentions;
+    public Dimensions getDimensions() {
+        return dimensions;
     }
 
-    public Item setDimentions(Map<String, Float> dimentions) {
-        this.dimentions = dimentions;
+    public Item setDimensions(Dimensions dimentions) {
+        this.dimensions = dimentions;
         return this;
     }
 

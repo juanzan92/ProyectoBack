@@ -1,6 +1,7 @@
 package tesis.entities.builders.mercadopago;
 
 import tesis.entities.dtos.account.Subscription;
+import tesis.entities.dtos.account.User;
 import tesis.entities.dtos.mercadopago.MerchantOrder;
 import tesis.entities.enums.user.SubscriptionStatus;
 
@@ -8,7 +9,7 @@ import java.util.Date;
 
 public class SubscriptionBuilder {
 
-    public static Subscription orderBuilder(MerchantOrder merchantOrder, String vendorName, String consumerName) {
+    public static Subscription orderBuilder(MerchantOrder merchantOrder, String vendorName, User consumer) {
         return new Subscription().setDateCreated(merchantOrder.getDateCreated() != null ? merchantOrder.getDateCreated() : new Date())
                 .setMerchantOrderId(merchantOrder.getId())
                 .setSubscriptionStatus(SubscriptionStatus.IN_PROGRESS)
@@ -21,6 +22,6 @@ public class SubscriptionBuilder {
                 .setPaidAmount(merchantOrder.getPaidAmount())
                 .setTotalAmount(merchantOrder.getTotalAmount())
                 .setVendorName(vendorName)
-                .setUsername(consumerName);
+                .setUsername(consumer.getUsername());
     }
 }

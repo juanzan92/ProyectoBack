@@ -1,7 +1,7 @@
 package tesis.entities.dtos.mercadopago;
 
-
 import com.fasterxml.jackson.annotation.JsonProperty;
+import tesis.entities.dtos.item.Item;
 import tesis.entities.enums.mercadopago.ShipmentStatus;
 
 import java.util.Date;
@@ -9,37 +9,40 @@ import java.util.Date;
 public class Shipment {
 
     @JsonProperty("id")
-    private Integer shipmentId = null;
+    private Integer shipmentId;
+
+    @JsonProperty("subscription_id")
+    private String subscriptionId;
 
     @JsonProperty("shipment_type")
-    private String shipmentType = null;
+    private String shipmentType;
 
     @JsonProperty("shipment_mode")
-    private String shipmentMode = null;
+    private String shipmentMode;
 
     @JsonProperty("picking_type")
-    private String pickingType = null;
+    private String pickingType;
 
-    @JsonProperty("status")
-    private ShipmentStatus status = null;
+    @JsonProperty("shipment_status")
+    private ShipmentStatus shipmentStatus;
 
     @JsonProperty("substatus")
-    private String substatus = null;
+    private String substatus;
 
-    @JsonProperty("items")
-    private Object items = null;
+    @JsonProperty("items_description")
+    private Item[] items_description;
 
     @JsonProperty("date_created")
-    private Date dateCreated = null;
+    private Date dateCreated;
 
     @JsonProperty("last_modified")
-    private Date lastModified = null;
+    private Date lastModified;
 
     @JsonProperty("date_first_printed")
-    private Date dateFirstPrinted = null;
+    private Date dateFirstPrinted;
 
     @JsonProperty("service_id")
-    private String serviceId = null;
+    private String serviceId;
 
     @JsonProperty("sender_id")
     private Integer senderId = null;
@@ -51,6 +54,15 @@ public class Shipment {
     private Address receiverAddress = null;
 
     public Shipment() {
+    }
+
+    public String getSubscriptionId() {
+        return subscriptionId;
+    }
+
+    public Shipment setSubscriptionId(String subscriptionId) {
+        this.subscriptionId = subscriptionId;
+        return this;
     }
 
     public Integer getShipmentId() {
@@ -89,12 +101,12 @@ public class Shipment {
         return this;
     }
 
-    public ShipmentStatus getStatus() {
-        return status;
+    public ShipmentStatus getShipmentStatus() {
+        return shipmentStatus;
     }
 
-    public Shipment setStatus(ShipmentStatus status) {
-        this.status = status;
+    public Shipment setShipmentStatus(ShipmentStatus shipmentStatus) {
+        this.shipmentStatus = shipmentStatus;
         return this;
     }
 
@@ -107,12 +119,12 @@ public class Shipment {
         return this;
     }
 
-    public Object getItems() {
-        return this.items;
+    public Item[] getItems_description() {
+        return items_description;
     }
 
-    public Shipment setItems(Object items) {
-        this.items = items;
+    public Shipment setItems_description(Item[] items_description) {
+        this.items_description = items_description;
         return this;
     }
 

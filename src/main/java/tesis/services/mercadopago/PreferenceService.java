@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tesis.entities.builders.dynamo.DynamoBuilder;
 import tesis.entities.builders.mercadopago.PreferenceBuilder;
+import tesis.entities.dtos.account.User;
 import tesis.entities.dtos.item.Item;
 import tesis.entities.dtos.mercadopago.Preference;
 import tesis.entities.dtos.mercadopago.Vendor;
@@ -14,7 +15,6 @@ import tesis.entities.marshallers.mercadopago.PreferenceMarshaller;
 import tesis.services.account.UserService;
 import tesis.services.item.ItemService;
 
-import javax.annotation.PostConstruct;
 import java.util.HashMap;
 
 @Service
@@ -25,17 +25,20 @@ public class PreferenceService {
     @Autowired
     ItemService itemService;
 
-    public HashMap<String, String> createPreference(Preference preferenceDTO) throws MPException, JsonProcessingException {
+    private String username = "username";
+
+    public HashMap<String, String> createPreference(Preference preference) throws MPException, JsonProcessingException {
         try {
 
-            Item item = itemService.getItem(DynamoBuilder.buildMap("item_id", preferenceDTO.getItemId()));
-            Vendor vendor = userService.getVendor(DynamoBuilder.buildMap("username", item.getVendorUsername()));
-
+            Item item = itemService.getItem(DynamoBuilder.buildMap("item_id", preference.getItemId()));
+            Vendor vendor = userService.getVendor(DynamoBuilder.buildMap(username, item.getVendorUsername()));
             MercadoPago.SDK.setAccessToken(vendor.getAccessToken());
 
-            com.mercadopago.resources.Preference preference = PreferenceBuilder.buildPreference(preferenceDTO, item, preferenceDTO.getConsumer());
+            User consumer = userService.getUser(DynamoBuilder.buildMap(username, preference.getConsumerUsername()));
 
-            return PreferenceMarshaller.buildUrlPreference(preference);
+            com.mercadopago.resources.Preference mpPreference = PreferenceBuilder.buildPreference(preference, item, consumer);
+
+            return PreferenceMarshaller.buildUrlPreference(mpPreference);
         } catch (Exception e) {
             throw e;
         }
