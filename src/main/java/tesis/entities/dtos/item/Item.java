@@ -61,6 +61,9 @@ public class Item {
     @JsonProperty("last_updated")
     private String lastUpdated;
 
+    @JsonProperty("end_date")
+    private String endDate;
+
     @JsonProperty("dimentions")
     Map<String, Float> dimentions;
 
@@ -189,5 +192,13 @@ public class Item {
 
     public boolean isInDiscount() {
         return inDiscount;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
 }
