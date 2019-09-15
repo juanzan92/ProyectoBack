@@ -49,7 +49,6 @@ public class UserService {
     }
 
     public String deleteUser(Map<String, String> username) throws JsonProcessingException {
-        forCognito.setUserPoolId("us-east-1_vwGNEHsur");
         restClient.request(urlBase + "/cognito", CognitoBuilder.deleteObject(username, forCognito ), HttpMethod.DELETE, String.class);
         return restClient.request(urlBase, DynamoBuilder.getObject(username, forDynamo), HttpMethod.DELETE, String.class);
     }

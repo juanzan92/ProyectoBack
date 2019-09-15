@@ -7,7 +7,10 @@ import org.springframework.stereotype.Service;
 import tesis.entities.builders.dynamo.DynamoBuilder;
 import tesis.entities.dtos.ForDynamo;
 import tesis.entities.dtos.account.Subscription;
+import tesis.entities.dtos.item.Item;
+import tesis.entities.enums.user.SubscriptionStatus;
 import tesis.services.RestClient;
+import tesis.services.item.ItemService;
 
 import java.util.Map;
 
@@ -15,6 +18,10 @@ import java.util.Map;
 public class SubscriptionService {
     @Autowired
     RestClient restClient;
+
+    @Autowired
+    ItemService itemService;
+
     String urlBase = "https://rtge19cj13.execute-api.us-east-1.amazonaws.com/prod/generic_ep";
     ForDynamo forDynamo = new ForDynamo("subscriptions", "subscription_id");
 
@@ -41,4 +48,21 @@ public class SubscriptionService {
     public String deleteSubscription(Map<String, String> param) throws JsonProcessingException {
         return restClient.request(urlBase, DynamoBuilder.getObject(param, forDynamo), HttpMethod.DELETE, String.class);
     }
+
+    public String cancelSubscription(Subscription subscription) throws JsonProcessingException {
+        try {
+            subscription = getSubscription(DynamoBuilder.buildMap("subscription_id", subscription.getSubscriptionId()));
+            if (subscription.getSubscriptionStatus() == SubscriptionStatus.CANCELLED) {
+                throw new IllegalStateException( "Subscription already CANCELLED. Nothing Done");
+            }
+            Item item = itemService.getItem(DynamoBuilder.buildMap("item_id", subscription.getItemId()));
+            item.setStock(item.getStock() + subscription.getQuantity());
+            itemService.updateItem(item);
+            subscription.setSubscriptionStatus(SubscriptionStatus.CANCELLED);
+            return updateSubscription(subscription);
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
 }
