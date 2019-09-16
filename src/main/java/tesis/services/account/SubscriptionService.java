@@ -8,6 +8,7 @@ import tesis.entities.builders.dynamo.DynamoBuilder;
 import tesis.entities.dtos.ForDynamo;
 import tesis.entities.dtos.account.Subscription;
 import tesis.entities.dtos.item.Item;
+import tesis.entities.enums.item.ItemStatus;
 import tesis.entities.enums.user.SubscriptionStatus;
 import tesis.services.RestClient;
 import tesis.services.item.ItemService;
@@ -28,8 +29,16 @@ public class SubscriptionService {
     public String createSubscription(Subscription subscription) throws JsonProcessingException {
         Item item = itemService.getItem(DynamoBuilder.buildMap("item_id", subscription.getItemId()));
         if (item.getItemId() == null) {
-            return "Item not found - Nothing Done";
-        };
+            throw new IllegalArgumentException("Item not found - Transaction Canceled");
+        }
+        if (item.getStatus() != ItemStatus.ACTIVE) {
+            throw new IllegalArgumentException("Item is NOT ACTIVE - Transaction Canceled");
+        }
+        if ((item.getStock() - subscription.getQuantity()) < 0) {
+            throw new IllegalArgumentException("Not Enough stock to Subscribe - Transaction Canceled");
+        }
+        item.setStock(item.getStock() - subscription.getQuantity());
+        itemService.updateItem(item);
         return restClient.request(urlBase, DynamoBuilder.saveObject(subscription, forDynamo), HttpMethod.POST, String.class);
     }
 
@@ -57,7 +66,7 @@ public class SubscriptionService {
         try {
             subscription = getSubscription(DynamoBuilder.buildMap("subscription_id", subscription.getSubscriptionId()));
             if (subscription.getSubscriptionStatus() == SubscriptionStatus.CANCELLED) {
-                throw new IllegalStateException( "Subscription already CANCELLED. Nothing Done");
+                throw new IllegalStateException("Subscription already CANCELLED. Nothing Done");
             }
             Item item = itemService.getItem(DynamoBuilder.buildMap("item_id", subscription.getItemId()));
             item.setStock(item.getStock() + subscription.getQuantity());
