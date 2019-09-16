@@ -8,7 +8,7 @@ import tesis.entities.enums.user.SubscriptionStatus;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Subscription extends Throwable {
+public class Subscription{
 
     @JsonProperty("date_created")
     private Date dateCreated;
@@ -176,13 +176,5 @@ public class Subscription extends Throwable {
     public Subscription setItemId(String itemId) {
         this.itemId = itemId;
         return this;
-    }
-
-    public String getSubscriptionId() {
-        return subscriptionId;
-    }
-
-    public void setSubscriptionId(String subscriptionId) {
-        this.subscriptionId = subscriptionId;
     }
 }
