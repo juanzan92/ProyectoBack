@@ -1,8 +1,11 @@
 package tesis.entities.dtos.mercadopago;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.mercadopago.resources.datastructures.preference.Shipments;
 import tesis.entities.dtos.item.Item;
+import tesis.entities.enums.mercadopago.PickingType;
 import tesis.entities.enums.mercadopago.ShipmentStatus;
+import tesis.entities.enums.mercadopago.ShipmentType;
 
 import java.util.Date;
 
@@ -12,13 +15,13 @@ public class Shipment {
     private Integer shipmentId;
 
     @JsonProperty("shipment_type")
-    private String shipmentType;
+    private ShipmentType shipmentType;
 
     @JsonProperty("shipment_mode")
-    private String shipmentMode;
+    private Shipments.ShipmentMode shipmentMode;
 
     @JsonProperty("picking_type")
-    private String pickingType;
+    private PickingType pickingType;
 
     @JsonProperty("shipment_status")
     private ShipmentStatus shipmentStatus;
@@ -62,29 +65,29 @@ public class Shipment {
         return this;
     }
 
-    public String getShipmentType() {
-        return this.shipmentType;
+    public ShipmentType getShipmentType() {
+        return shipmentType;
     }
 
-    public Shipment setShipmentType(String shipmentType) {
+    public Shipment setShipmentType(ShipmentType shipmentType) {
         this.shipmentType = shipmentType;
         return this;
     }
 
-    public String getShipmentMode() {
-        return this.shipmentMode;
+    public Shipments.ShipmentMode getShipmentMode() {
+        return shipmentMode;
     }
 
-    public Shipment setShipmentMode(String shipmentMode) {
+    public Shipment setShipmentMode(Shipments.ShipmentMode shipmentMode) {
         this.shipmentMode = shipmentMode;
         return this;
     }
 
-    public String getPickingType() {
-        return this.pickingType;
+    public PickingType getPickingType() {
+        return pickingType;
     }
 
-    public Shipment setPickingType(String pickingType) {
+    public Shipment setPickingType(PickingType pickingType) {
         this.pickingType = pickingType;
         return this;
     }
