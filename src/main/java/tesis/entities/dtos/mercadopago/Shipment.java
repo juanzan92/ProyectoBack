@@ -11,9 +11,6 @@ public class Shipment {
     @JsonProperty("id")
     private Integer shipmentId;
 
-    @JsonProperty("subscription_id")
-    private String subscriptionId;
-
     @JsonProperty("shipment_type")
     private String shipmentType;
 
@@ -54,15 +51,6 @@ public class Shipment {
     private Address receiverAddress = null;
 
     public Shipment() {
-    }
-
-    public String getSubscriptionId() {
-        return subscriptionId;
-    }
-
-    public Shipment setSubscriptionId(String subscriptionId) {
-        this.subscriptionId = subscriptionId;
-        return this;
     }
 
     public Integer getShipmentId() {

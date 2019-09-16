@@ -1,6 +1,5 @@
 package tesis.controllers.mercadopago;
 
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,8 +13,8 @@ public class ShippingController {
     ShippingService shippingService;
 
     @PutMapping()
-    public String updateShipmentStatus(@RequestBody Shipment shipment) throws JsonProcessingException {
-        return shippingService.updateShipment(shipment);
+    public String updateShipmentStatus(@RequestHeader("subscription_id") String subscriptionId, @RequestBody Shipment shipment) throws JsonProcessingException {
+        return shippingService.updateShipment(subscriptionId, shipment);
     }
 
     @PostMapping()
