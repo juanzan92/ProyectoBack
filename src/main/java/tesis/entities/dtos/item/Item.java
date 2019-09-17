@@ -1,11 +1,14 @@
 package tesis.entities.dtos.item;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import lombok.Setter;
 import tesis.entities.enums.item.ItemStatus;
 
 import java.util.List;
 import java.util.Map;
 
+@Getter @Setter
 public class Item {
 
     @JsonProperty("title")
@@ -36,8 +39,7 @@ public class Item {
     private int stock;
 
     @JsonProperty("item_status")
-    //private String status;
-    ItemStatus status;        // hacer el switch y testear todos los métodos.
+    ItemStatus status;
 
     @JsonProperty("description_short")
     private String descriptionShort;
@@ -66,126 +68,8 @@ public class Item {
     @JsonProperty("dimentions")
     Map<String, Float> dimentions;
 
-    public Map<String, Float> getDimentions() {
-        return dimentions;
-    }
-
     public Item setDimentions(Map<String, Float> dimentions) {
         this.dimentions = dimentions;
         return this;
     }
-
-    public String getVendorUsername() {
-        return vendorUsername;
-    }
-
-    public void setVendorUsername(String vendorUsername) {
-        this.vendorUsername = vendorUsername;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public float getInitialPrice() {
-        return initialPrice;
-    }
-
-    public float getActualPrice() {
-        return actualPrice;
-    }
-
-    public boolean getInDiscount() {
-        return inDiscount;
-    }
-
-    public float getInitialStock() {
-        return initialStock;
-    }
-
-    public int getStock() {
-        return stock;
-    }
-
-   public String getDescriptionShort() {
-        return descriptionShort;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String getDateCreated() {
-        return dateCreated;
-    }
-
-    public String getLastUpdated() {
-        return lastUpdated;
-    }
-
-    // Setter Methods
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public void setInitialPrice(float initialPrice) {
-        this.initialPrice = initialPrice;
-    }
-
-    public void setActualPrice(float actualPrice) {
-        this.actualPrice = actualPrice;
-    }
-
-    public void setInDiscount(boolean inDiscount) {
-        this.inDiscount = inDiscount;
-    }
-
-    public void setInitialStock(float initialStock) {
-        this.initialStock = initialStock;
-    }
-
-    public void setStock(int stock) {
-        this.stock = stock;
-    }
-
-    public void setDescriptionShort(String descriptionShort) {
-        this.descriptionShort = descriptionShort;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setDateCreated(String dateCreated) {
-        this.dateCreated = dateCreated;
-    }
-
-    public void setLastUpdated(String lastUpdated) {
-        this.lastUpdated = lastUpdated;
-    }
-
-    public String getItemId() {
-        return itemId;
-    }
-
-    public void setItemId(String itemId) {
-        this.itemId = itemId;
-    }
-
-    public boolean isInDiscount() {
-        return inDiscount;
-    }
-
-    public ItemStatus getStatus() { return status; }
-
-    public void setStatus(ItemStatus status) { this.status = status; }
 }
