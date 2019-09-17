@@ -28,15 +28,6 @@ public class SubscriptionService {
 
     public String createSubscription(Subscription subscription) throws JsonProcessingException {
         Item item = itemService.getItem(DynamoBuilder.buildMap("item_id", subscription.getItemId()));
-        if (item.getItemId() == null) {
-            throw new IllegalArgumentException("Item not found - Transaction Canceled");
-        }
-        if (item.getStatus() != ItemStatus.ACTIVE) {
-            throw new IllegalArgumentException("Item is NOT ACTIVE - Transaction Canceled");
-        }
-        if ((item.getStock() - subscription.getQuantity()) < 0) {
-            throw new IllegalArgumentException("Not Enough stock to Subscribe - Transaction Canceled");
-        }
         item.setStock(item.getStock() - subscription.getQuantity());
         itemService.updateItem(item);
         return restClient.request(urlBase, DynamoBuilder.saveObject(subscription, forDynamo), HttpMethod.POST, String.class);
