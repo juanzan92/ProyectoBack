@@ -45,7 +45,7 @@ public class ShippingService {
             subscription.getShipments().add(shipment);
 
             return restClient.request(urlBase, DynamoBuilder.saveObject(subscription, forDynamo), HttpMethod.PUT, String.class);
-        } catch (Exception e){
+        } catch (Exception e) {
             throw new Exception();
         }
     }
