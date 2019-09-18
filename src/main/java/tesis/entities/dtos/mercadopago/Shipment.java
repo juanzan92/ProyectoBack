@@ -2,7 +2,6 @@ package tesis.entities.dtos.mercadopago;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.mercadopago.resources.datastructures.preference.Shipments;
-import tesis.entities.dtos.item.Item;
 import tesis.entities.enums.mercadopago.PickingType;
 import tesis.entities.enums.mercadopago.ShipmentStatus;
 import tesis.entities.enums.mercadopago.ShipmentType;
@@ -29,29 +28,23 @@ public class Shipment {
     @JsonProperty("substatus")
     private String substatus;
 
-    @JsonProperty("items_description")
-    private Item[] items_description;
-
     @JsonProperty("date_created")
     private Date dateCreated;
 
     @JsonProperty("last_modified")
     private Date lastModified;
 
-    @JsonProperty("date_first_printed")
-    private Date dateFirstPrinted;
-
     @JsonProperty("service_id")
     private String serviceId;
 
     @JsonProperty("sender_id")
-    private Integer senderId = null;
+    private Integer senderId;
 
     @JsonProperty("receiver_id")
-    private Integer receiverId = null;
+    private Integer receiverId;
 
     @JsonProperty("receiver_address")
-    private Address receiverAddress = null;
+    private Address receiverAddress;
 
     public Shipment() {
     }
@@ -110,15 +103,6 @@ public class Shipment {
         return this;
     }
 
-    public Item[] getItems_description() {
-        return items_description;
-    }
-
-    public Shipment setItems_description(Item[] items_description) {
-        this.items_description = items_description;
-        return this;
-    }
-
     public Date getDateCreated() {
         return this.dateCreated;
     }
@@ -134,15 +118,6 @@ public class Shipment {
 
     public Shipment setLastModified(Date lastModified) {
         this.lastModified = lastModified;
-        return this;
-    }
-
-    public Date getDateFirstPrinted() {
-        return this.dateFirstPrinted;
-    }
-
-    public Shipment setDateFirstPrinted(Date dateFirstPrinted) {
-        this.dateFirstPrinted = dateFirstPrinted;
         return this;
     }
 

@@ -12,6 +12,7 @@ import tesis.services.RestClient;
 import tesis.services.account.SubscriptionService;
 
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 import java.util.HashMap;
 
 @Service
@@ -30,13 +31,22 @@ public class ShippingService {
         return restClient.request(urlBase, DynamoBuilder.saveObject(shipment, forDynamo), HttpMethod.POST, String.class);
     }
 
-    public String updateShipment(@NotNull String subscriptionId, @NotNull Shipment shipment) throws JsonProcessingException {
-        HashMap subscriptionMap = new HashMap();
-        subscriptionMap.put("subscription_id", subscriptionId);
+    public String updateShipment(@NotNull String subscriptionId, @NotNull Shipment shipment) throws Exception {
+        try {
+            shipment.setLastModified(new Date());
+            shipment.setDateCreated(new Date());
 
-        Subscription subscription = subscriptionService.getSubscription(subscriptionMap);
-        subscription.getShipments().add(shipment);
+            HashMap subscriptionMap = new HashMap();
+            subscriptionMap.put("subscription_id", subscriptionId);
 
-        return restClient.request(urlBase, DynamoBuilder.saveObject(subscription, forDynamo), HttpMethod.PUT, String.class);
+            Subscription subscription = subscriptionService.getSubscription(subscriptionMap);
+
+
+            subscription.getShipments().add(shipment);
+
+            return restClient.request(urlBase, DynamoBuilder.saveObject(subscription, forDynamo), HttpMethod.PUT, String.class);
+        } catch (Exception e){
+            throw new Exception();
+        }
     }
 }

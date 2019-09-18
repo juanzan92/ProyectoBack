@@ -36,9 +36,8 @@ public class ShipmentBuilder {
                 .setPickingType(PickingType.CARRIER_OFFICE)
                 .setShipmentStatus(ShipmentStatus.PENDING)
                 .setDateCreated(new Date())
-                .setLastModified(new Date())
-                .setSenderId(123)//TODO ver como mapear esto de número a string para mostrar en el front
-                .setReceiverId(111));
+                .setLastModified(new Date()));
+
         return shipments;
     }
 }

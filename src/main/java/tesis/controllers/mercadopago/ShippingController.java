@@ -13,7 +13,7 @@ public class ShippingController {
     ShippingService shippingService;
 
     @PutMapping()
-    public String updateShipmentStatus(@RequestHeader("subscription_id") String subscriptionId, @RequestBody Shipment shipment) throws JsonProcessingException {
+    public String updateShipmentStatus(@RequestHeader("subscription_id") String subscriptionId, @RequestBody Shipment shipment) throws Exception {
         return shippingService.updateShipment(subscriptionId, shipment);
     }
 
