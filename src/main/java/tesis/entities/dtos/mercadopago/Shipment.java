@@ -11,7 +11,7 @@ import java.util.Date;
 public class Shipment {
 
     @JsonProperty("id")
-    private Integer shipmentId;
+    private String shipmentId;
 
     @JsonProperty("shipment_type")
     private ShipmentType shipmentType;
@@ -49,11 +49,11 @@ public class Shipment {
     public Shipment() {
     }
 
-    public Integer getShipmentId() {
+    public String getShipmentId() {
         return shipmentId;
     }
 
-    public Shipment setShipmentId(Integer shipmentId) {
+    public Shipment setShipmentId(String shipmentId) {
         this.shipmentId = shipmentId;
         return this;
     }

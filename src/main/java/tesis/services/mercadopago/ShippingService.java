@@ -12,8 +12,10 @@ import tesis.services.RestClient;
 import tesis.services.account.SubscriptionService;
 
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
-import java.util.HashMap;
+import java.util.UUID;
 
 @Service
 public class ShippingService {
@@ -33,14 +35,10 @@ public class ShippingService {
 
     public String updateShipment(@NotNull String subscriptionId, @NotNull Shipment shipment) throws Exception {
         try {
-            shipment.setLastModified(new Date());
-            shipment.setDateCreated(new Date());
+            shipment.setShipmentId(UUID.randomUUID().toString())
+                    .setLastModified(new Date()).setDateCreated(new Date());
 
-            HashMap subscriptionMap = new HashMap();
-            subscriptionMap.put("subscription_id", subscriptionId);
-
-            Subscription subscription = subscriptionService.getSubscription(subscriptionMap);
-
+            Subscription subscription = subscriptionService.getSubscription(DynamoBuilder.buildMap("subscription_id", subscriptionId));
 
             subscription.getShipments().add(shipment);
 
@@ -48,5 +46,13 @@ public class ShippingService {
         } catch (Exception e) {
             throw new Exception();
         }
+    }
+
+    public ArrayList<Shipment> getShipments(String subscriptionId) throws JsonProcessingException {
+        Subscription subscription = subscriptionService.getSubscription(DynamoBuilder.buildMap("subscription_id", subscriptionId));
+
+        subscription.getShipments().sort(Comparator.comparing(s -> s.getDateCreated()));
+
+        return subscription.getShipments();
     }
 }

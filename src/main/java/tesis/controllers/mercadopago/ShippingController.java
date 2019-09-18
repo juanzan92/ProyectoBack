@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.*;
 import tesis.entities.dtos.mercadopago.Shipment;
 import tesis.services.mercadopago.ShippingService;
 
+import java.util.ArrayList;
+
 @RestController
 @RequestMapping("/shipping")
 public class ShippingController {
@@ -20,5 +22,10 @@ public class ShippingController {
     @PostMapping()
     public String createShipment(@RequestBody Shipment shipment) throws JsonProcessingException {
         return shippingService.createShipment(shipment);
+    }
+
+    @GetMapping
+    public ArrayList<Shipment> getShipments(@RequestParam("subscription_id") String subscriptionId) throws JsonProcessingException {
+        return shippingService.getShipments(subscriptionId);
     }
 }
