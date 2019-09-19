@@ -32,7 +32,7 @@ public class PreferenceService {
             Item item = itemService.getItem(DynamoBuilder.buildMap("item_id", preferenceDTO.getItemId()));
             Vendor vendor = userService.getVendor(DynamoBuilder.buildMap("username", item.getVendorUsername()));
 
-            if (item.getItemId() == null) {
+            if (item == null) {
                 throw new IllegalArgumentException("Item not found - Transaction Canceled");
             }
             if (item.getStatus() != ItemStatus.ACTIVE) {

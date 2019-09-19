@@ -1,6 +1,7 @@
 package tesis.services.item;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import org.apache.commons.validator.Var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
@@ -24,11 +25,15 @@ public class ItemService {
     ForDynamo forDynamo = new ForDynamo("items", "item_id");
 
     public String createItem(Item item) throws JsonProcessingException {
-        User user = userService.getUser(DynamoBuilder.buildMap("username", item.getVendorUsername()));
-        if (user.getUsername() == null ) {
-            throw new IllegalArgumentException("Vendor not found - Item Creation Canceled");
+        try {
+            User user = userService.getUser(DynamoBuilder.buildMap("username", item.getVendorUsername()));
+            if (user == null) {
+                throw new IllegalArgumentException("Vendor not found - Item Creation Canceled");
+            }
+            return restClient.request(urlBase, DynamoBuilder.saveObject(item, forDynamo), HttpMethod.POST, String.class);
+        } catch (Exception e) {
+            throw e;
         }
-        return restClient.request(urlBase, DynamoBuilder.saveObject(item, forDynamo), HttpMethod.POST, String.class);
     }
 
     public Item getItem(Map<String, String> param) throws JsonProcessingException {
