@@ -27,7 +27,7 @@ public class ShippingService {
     SubscriptionService subscriptionService;
 
     String urlBase = "https://rtge19cj13.execute-api.us-east-1.amazonaws.com/prod/generic_ep";
-    ForDynamo forDynamo = new ForDynamo("subscriptions", "subscription_id"); //TODO ver como filtrar por shipment_id y actualizar ese valor
+    ForDynamo forDynamo = new ForDynamo("subscriptions", "subscription_id");
 
     public String createShipment(@NotNull Shipment shipment) throws JsonProcessingException {
         return restClient.request(urlBase, DynamoBuilder.saveObject(shipment, forDynamo), HttpMethod.POST, String.class);
