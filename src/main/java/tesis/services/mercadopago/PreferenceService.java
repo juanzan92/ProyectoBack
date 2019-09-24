@@ -11,10 +11,12 @@ import tesis.entities.dtos.account.User;
 import tesis.entities.dtos.item.Item;
 import tesis.entities.dtos.mercadopago.Preference;
 import tesis.entities.dtos.mercadopago.Vendor;
+import tesis.entities.enums.item.ItemStatus;
 import tesis.entities.marshallers.mercadopago.PreferenceMarshaller;
 import tesis.services.account.UserService;
 import tesis.services.item.ItemService;
 
+import javax.annotation.PostConstruct;
 import java.util.HashMap;
 
 @Service
@@ -31,6 +33,16 @@ public class PreferenceService {
         try {
 
             Item item = itemService.getItem(DynamoBuilder.buildMap("item_id", preference.getItemId()));
+            if (item == null) {
+                throw new IllegalArgumentException("Item not found - Transaction Canceled");
+            }
+            if (item.getStatus() != ItemStatus.ACTIVE) {
+                throw new IllegalArgumentException("Item is NOT ACTIVE - Transaction Canceled");
+            }
+            if (item.getStock() <= preference.getQuantity()) {
+                throw new IllegalArgumentException("Not Enough stock to Subscribe - Transaction Canceled");
+            }
+
             Vendor vendor = userService.getVendor(DynamoBuilder.buildMap(username, item.getVendorUsername()));
             MercadoPago.SDK.setAccessToken(vendor.getAccessToken());
 

@@ -11,55 +11,46 @@ import java.util.Date;
 public class Subscription{
 
     @JsonProperty("date_created")
-    private Date dateCreated;
+    Date dateCreated;
 
     @JsonProperty("item_id")
-    private String itemId;
+    String itemId;
 
     @JsonProperty("merchant_order_id")
     private String merchantOrderId;
 
     @JsonProperty("preference_id")
-    private String preferenceId;
+    String preferenceId;
 
     @JsonProperty("paid_amount")
-    private float paidAmount;
+    float paidAmount;
 
     @JsonProperty("payment")
-    private ArrayList<MerchantOrderPayment> payment;
+    ArrayList<MerchantOrderPayment> payment;
 
     @JsonProperty("quantity")
     private int quantity;
 
     @JsonProperty("refunded_amount")
-    private float refundedAmount;
+    float refundedAmount;
 
     @JsonProperty("shipments")
-    private ArrayList<Shipment> shipments;
+    ArrayList<Shipment> shipments;
 
     @JsonProperty("subscription_id")
     private String subscriptionId;
 
     @JsonProperty("subscription_status")
-    private SubscriptionStatus subscriptionStatus;
+    SubscriptionStatus subscriptionStatus;
 
     @JsonProperty("total_amount")
-    private float totalAmount;
+    float totalAmount;
 
     @JsonProperty("username")
     private String username;
 
     @JsonProperty("vendor_name")
-    private String vendorName;
-
-    public String getSubscriptionId() {
-        return subscriptionId;
-    }
-
-    public Subscription setSubscriptionId(String subscriptionId) {
-        this.subscriptionId = subscriptionId;
-        return this;
-    }
+    String vendorName;
 
     public String getMerchantOrderId() {
         return merchantOrderId;
@@ -176,5 +167,13 @@ public class Subscription{
     public Subscription setItemId(String itemId) {
         this.itemId = itemId;
         return this;
+    }
+
+    public String getSubscriptionId() {
+        return subscriptionId;
+    }
+
+    public void setSubscriptionId(String subscriptionId) {
+        this.subscriptionId = subscriptionId;
     }
 }

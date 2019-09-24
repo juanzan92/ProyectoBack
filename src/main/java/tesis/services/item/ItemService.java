@@ -1,25 +1,39 @@
 package tesis.services.item;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import org.apache.commons.validator.Var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import tesis.entities.builders.dynamo.DynamoBuilder;
 import tesis.entities.dtos.ForDynamo;
+import tesis.entities.dtos.account.User;
 import tesis.entities.dtos.item.Item;
 import tesis.services.RestClient;
+import tesis.services.account.UserService;
 
 import java.util.Map;
 
 @Service
 public class ItemService {
     @Autowired
+    UserService userService;
+
+    @Autowired
     RestClient restClient;
     String urlBase = "https://rtge19cj13.execute-api.us-east-1.amazonaws.com/prod/generic_ep";
     ForDynamo forDynamo = new ForDynamo("items", "item_id");
 
     public String createItem(Item item) throws JsonProcessingException {
-        return restClient.request(urlBase, DynamoBuilder.saveObject(item, forDynamo), HttpMethod.POST, String.class);
+        try {
+            User user = userService.getUser(DynamoBuilder.buildMap("username", item.getVendorUsername()));
+            if (user == null) {
+                throw new IllegalArgumentException("Vendor not found - Item Creation Canceled");
+            }
+            return restClient.request(urlBase, DynamoBuilder.saveObject(item, forDynamo), HttpMethod.POST, String.class);
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
     public Item getItem(Map<String, String> param) throws JsonProcessingException {
