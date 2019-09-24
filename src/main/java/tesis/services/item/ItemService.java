@@ -1,7 +1,6 @@
 package tesis.services.item;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import org.apache.commons.validator.Var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
@@ -49,6 +48,10 @@ public class ItemService {
     }
 
     public String updateItem(Item item) throws JsonProcessingException {
+        Map<String, String> map_item_id = DynamoBuilder.buildMap("item_id", item.getItemId());
+        if (restClient.request(DynamoBuilder.getObject(map_item_id, forDynamo, urlBase), HttpMethod.GET, Item.class) == null) {
+            throw new IllegalArgumentException("Item not found - Item Update Canceled");
+        }
         return restClient.request(urlBase, DynamoBuilder.saveObject(item, forDynamo), HttpMethod.PUT, String.class);
     }
 
