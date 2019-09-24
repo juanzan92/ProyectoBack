@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import tesis.entities.builders.dynamo.DynamoBuilder;
 import tesis.entities.builders.mercadopago.SubscriptionBuilder;
 import tesis.entities.dtos.account.Subscription;
+import tesis.entities.dtos.account.User;
 import tesis.entities.dtos.mercadopago.MerchantOrder;
 import tesis.entities.dtos.mercadopago.Vendor;
 import tesis.services.RestClient;
@@ -41,7 +42,7 @@ public class PaymentService {
 
         String vendorUser = userService.searchUser("email", merchantOrder.getCollector().getEmail()).getUsername();
 
-        String consumerUser = userService.searchUser("email", merchantOrder.getPayer().getEmail()).getUsername();
+        User consumerUser = userService.searchUser("email", merchantOrder.getPayer().getEmail());
 
         return subscriptionService.createSubscription(SubscriptionBuilder.orderBuilder(merchantOrder, vendorUser, consumerUser));
     }

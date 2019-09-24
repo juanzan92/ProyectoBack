@@ -39,7 +39,7 @@ public class Item {
     private int stock;
 
     @JsonProperty("item_status")
-    ItemStatus status;
+    private ItemStatus status;
 
     @JsonProperty("description_short")
     private String descriptionShort;
@@ -65,11 +65,15 @@ public class Item {
     @JsonProperty("last_updated")
     private String lastUpdated;
 
-    @JsonProperty("dimentions")
-    Map<String, Float> dimentions;
+    @JsonProperty("dimensions")
+    private Dimensions dimensions;
 
-    public Item setDimentions(Map<String, Float> dimentions) {
-        this.dimentions = dimentions;
+    public Dimensions getDimensions() {
+        return dimensions;
+    }
+
+    public Item setDimensions(Dimensions dimentions) {
+        this.dimensions = dimentions;
         return this;
     }
 }
