@@ -2,13 +2,13 @@ package tesis.entities.dtos.account;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.mercadopago.resources.datastructures.merchantorder.MerchantOrderPayment;
-import com.mercadopago.resources.datastructures.merchantorder.Shipment;
+import tesis.entities.dtos.mercadopago.Shipment;
 import tesis.entities.enums.user.SubscriptionStatus;
 
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Subscription {
+public class Subscription{
 
     @JsonProperty("date_created")
     Date dateCreated;
