@@ -65,6 +65,9 @@ public class Item {
     @JsonProperty("last_updated")
     private String lastUpdated;
 
+    @JsonProperty("end_date")
+    private String endDate;
+
     @JsonProperty("dimensions")
     private Dimensions dimensions;
 
