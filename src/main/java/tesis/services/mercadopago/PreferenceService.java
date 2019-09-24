@@ -16,6 +16,7 @@ import tesis.entities.marshallers.mercadopago.PreferenceMarshaller;
 import tesis.services.account.UserService;
 import tesis.services.item.ItemService;
 
+import javax.annotation.PostConstruct;
 import java.util.HashMap;
 
 @Service
@@ -31,21 +32,18 @@ public class PreferenceService {
     public HashMap<String, String> createPreference(Preference preference) throws MPException, JsonProcessingException {
         try {
 
-<<<<<<< HEAD
+            Item item = itemService.getItem(DynamoBuilder.buildMap("item_id", preference.getItemId()));
             if (item == null) {
                 throw new IllegalArgumentException("Item not found - Transaction Canceled");
             }
             if (item.getStatus() != ItemStatus.ACTIVE) {
                 throw new IllegalArgumentException("Item is NOT ACTIVE - Transaction Canceled");
             }
-            if (item.getStock() <= preferenceDTO.getQuantity()) {
+            if (item.getStock() <= preference.getQuantity()) {
                 throw new IllegalArgumentException("Not Enough stock to Subscribe - Transaction Canceled");
             }
 
-=======
-            Item item = itemService.getItem(DynamoBuilder.buildMap("item_id", preference.getItemId()));
             Vendor vendor = userService.getVendor(DynamoBuilder.buildMap(username, item.getVendorUsername()));
->>>>>>> f3ac6198e1f5e6be4abe49887c456c3424c028c1
             MercadoPago.SDK.setAccessToken(vendor.getAccessToken());
 
             User consumer = userService.getUser(DynamoBuilder.buildMap(username, preference.getConsumerUsername()));
