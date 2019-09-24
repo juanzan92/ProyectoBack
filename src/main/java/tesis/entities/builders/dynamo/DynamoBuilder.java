@@ -31,6 +31,13 @@ public class DynamoBuilder {
         return uriComponentsBuilder.toUriString();
     }
 
+    public static String getObject(Object param, ForDynamo forDynamo, String urlbase) {
+        UriComponentsBuilder uriComponentsBuilder = UriComponentsBuilder.fromHttpUrl(urlbase)
+                .queryParams(buildMultiValueMap(forDynamo))
+                .queryParams(buildMultiValueMap(param));
+        return uriComponentsBuilder.toUriString();
+    }
+
     public static String getAllObject(ForDynamo forDynamo, String urlbase) {
         UriComponentsBuilder uriComponentsBuilder = UriComponentsBuilder.fromHttpUrl(urlbase)
                 .queryParams(buildMultiValueMap(forDynamo));
