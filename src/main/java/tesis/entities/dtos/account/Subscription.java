@@ -8,11 +8,7 @@ import tesis.entities.enums.user.SubscriptionStatus;
 import java.util.ArrayList;
 import java.util.Date;
 
-<<<<<<< HEAD
 public class Subscription {
-=======
-public class Subscription{
->>>>>>> f3ac6198e1f5e6be4abe49887c456c3424c028c1
 
     @JsonProperty("date_created")
     private Date dateCreated;
