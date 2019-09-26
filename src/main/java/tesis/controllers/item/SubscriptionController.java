@@ -3,6 +3,7 @@ package tesis.controllers.item;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import tesis.entities.dtos.ForReports;
 import tesis.entities.dtos.account.Subscription;
 import tesis.services.account.SubscriptionService;
 
@@ -22,6 +23,11 @@ public class SubscriptionController {
     @GetMapping("/search")
     public Subscription[] searchSubscription(@RequestParam Map<String, String> param) throws JsonProcessingException {
         return subscriptionService.searchSubscription(param);
+    }
+
+    @GetMapping("/get_sub_by_cat")
+    public ForReports get_sub_by_cat() throws JsonProcessingException {
+        return subscriptionService.getSubscriptionByCategories();
     }
 
     @GetMapping("/get_all")

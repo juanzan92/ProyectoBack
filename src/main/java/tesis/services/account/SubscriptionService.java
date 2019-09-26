@@ -6,11 +6,14 @@ import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import tesis.entities.builders.dynamo.DynamoBuilder;
 import tesis.entities.dtos.ForDynamo;
+import tesis.entities.dtos.ForReports;
 import tesis.entities.dtos.account.Subscription;
+import tesis.entities.dtos.item.Category;
 import tesis.entities.dtos.item.Item;
 import tesis.entities.enums.item.ItemStatus;
 import tesis.entities.enums.user.SubscriptionStatus;
 import tesis.services.RestClient;
+import tesis.services.item.CategoryService;
 import tesis.services.item.ItemService;
 
 import java.util.Map;
@@ -22,6 +25,9 @@ public class SubscriptionService {
 
     @Autowired
     ItemService itemService;
+
+    @Autowired
+    CategoryService categoryService;
 
     String urlBase = "https://rtge19cj13.execute-api.us-east-1.amazonaws.com/prod/generic_ep";
     ForDynamo forDynamo = new ForDynamo("subscriptions", "subscription_id");
@@ -43,6 +49,10 @@ public class SubscriptionService {
 
     public Subscription[] searchSubscription(Map<String, String> param) throws JsonProcessingException {
         return restClient.request(DynamoBuilder.searchObjects(param, forDynamo, urlBase + "/index_search"), HttpMethod.GET, Subscription[].class);
+    }
+
+    public Subscription[] searchSubscription() throws JsonProcessingException {
+        return restClient.request(DynamoBuilder.searchObjects(forDynamo, urlBase + "/index_search"), HttpMethod.GET, Subscription[].class);
     }
 
     public String updateSubscription(Subscription subscription) throws JsonProcessingException {
@@ -67,6 +77,18 @@ public class SubscriptionService {
         } catch (Exception e) {
             throw e;
         }
+    }
+
+    public ForReports getSubscriptionByCategories() throws JsonProcessingException {
+        forDynamo.setIndexName("category_name");
+        Subscription subscription[] = new Subscription[0];
+        Category categories[] = categoryService.getAllCategory();
+        for (Category category: categories)
+        {
+            forDynamo.setSearchPattern(category.categoryName);
+            subscription = searchSubscription();
+        }
+        return new ForReports();
     }
 
 }
