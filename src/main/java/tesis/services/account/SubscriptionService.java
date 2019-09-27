@@ -79,16 +79,23 @@ public class SubscriptionService {
         }
     }
 
-    public ForReports getSubscriptionByCategories() throws JsonProcessingException {
+    public ForReports[] getSubscriptionByCategories() throws JsonProcessingException {
         forDynamo.setIndexName("category_name");
+        ForReports forReports[] = new ForReports[0];
         Subscription subscription[] = new Subscription[0];
         Category categories[] = categoryService.getAllCategory();
+        Integer i = 0;
         for (Category category: categories)
         {
             forDynamo.setSearchPattern(category.categoryName);
             subscription = searchSubscription();
+            forReports[i].setSubject(category.getCategoryName());
+            forReports[i].setA(subscription.length);
+            forReports[i].setB(subscription.length);
+            forReports[i].setFullMark(subscription.length);
+            i++;
         }
-        return new ForReports();
+        return forReports ;
     }
 
 }

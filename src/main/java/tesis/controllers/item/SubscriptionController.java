@@ -26,7 +26,7 @@ public class SubscriptionController {
     }
 
     @GetMapping("/get_sub_by_cat")
-    public ForReports get_sub_by_cat() throws JsonProcessingException {
+    public ForReports[] get_sub_by_cat() throws JsonProcessingException {
         return subscriptionService.getSubscriptionByCategories();
     }
 
