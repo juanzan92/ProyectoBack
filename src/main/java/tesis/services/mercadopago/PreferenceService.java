@@ -39,7 +39,7 @@ public class PreferenceService {
             if (item.getStatus() != ItemStatus.ACTIVE) {
                 throw new IllegalArgumentException("Item is NOT ACTIVE - Transaction Canceled");
             }
-            if (item.getStock() <= preference.getQuantity()) {
+            if (item.getStock() < preference.getQuantity()) {
                 throw new IllegalArgumentException("Not Enough stock to Subscribe - Transaction Canceled");
             }
 

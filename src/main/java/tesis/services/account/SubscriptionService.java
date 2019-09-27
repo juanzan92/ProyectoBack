@@ -27,10 +27,19 @@ public class SubscriptionService {
     ForDynamo forDynamo = new ForDynamo("subscriptions", "subscription_id");
 
     public String createSubscription(Subscription subscription) throws JsonProcessingException {
-        Item item = itemService.getItem(DynamoBuilder.buildMap("item_id", subscription.getItemId()));
-        item.setStock(item.getStock() - subscription.getQuantity());
-        itemService.updateItem(item);
-        return restClient.request(urlBase, DynamoBuilder.saveObject(subscription, forDynamo), HttpMethod.POST, String.class);
+        try {
+            Item item = itemService.getItem(DynamoBuilder.buildMap("item_id", subscription.getItemId()));
+            int newItemQuantity = item.getStock() - subscription.getQuantity();
+            item.setStock(newItemQuantity);
+
+            if (newItemQuantity == 0) item.setStatus(ItemStatus.COMPLETED);
+
+            itemService.updateItem(item);
+
+            return restClient.request(urlBase, DynamoBuilder.saveObject(subscription, forDynamo), HttpMethod.POST, String.class);
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
     public Subscription getSubscription(Map<String, String> param) throws JsonProcessingException {
