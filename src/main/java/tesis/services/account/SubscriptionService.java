@@ -6,7 +6,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import tesis.entities.builders.dynamo.DynamoBuilder;
 import tesis.entities.dtos.ForDynamo;
-import tesis.entities.dtos.ForReports;
+import tesis.entities.dtos.ForReportsSimpleRadar;
 import tesis.entities.dtos.account.Subscription;
 import tesis.entities.dtos.item.Category;
 import tesis.entities.dtos.item.Item;
@@ -78,24 +78,24 @@ public class SubscriptionService {
         }
     }
 
-    public ForReports[] getSubscriptionByCategories() throws JsonProcessingException {
+    public ForReportsSimpleRadar[] getSubscriptionByCategories() throws JsonProcessingException {
         forDynamo.setIndexName("category_name");
         Category categories[] = categoryService.getAllCategory();
-        ForReports forReports[] = new ForReports[categories.length];
+        ForReportsSimpleRadar simpleRadar[] = new ForReportsSimpleRadar[categories.length];
         Subscription subscription[] = new Subscription[0];
         Integer i = 0;
         for (Category category: categories)
         {
-            forReports[i] = new ForReports("",0,0,0);
-            forReports[i].setSubject(category.getCategoryName());
+            simpleRadar[i] = new ForReportsSimpleRadar("",0,0,0);
+            simpleRadar[i].setSubject(category.getCategoryName());
             forDynamo.setSearchPattern(category.categoryName);
             subscription = searchSubscription();
-            forReports[i].setSubject(category.getCategoryName());
-            forReports[i].setValueA(subscription.length);
-            forReports[i].setValueB(subscription.length);
-            forReports[i].setFullMark(subscription.length);
+            simpleRadar[i].setSubject(category.getCategoryName());
+            simpleRadar[i].setValueA(subscription.length);
+            simpleRadar[i].setValueB(subscription.length);
+            simpleRadar[i].setFullMark(subscription.length);
             i++;
         }
-        return forReports ;
+        return simpleRadar;
     }
 }

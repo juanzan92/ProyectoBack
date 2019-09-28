@@ -6,7 +6,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import tesis.entities.builders.dynamo.DynamoBuilder;
 import tesis.entities.dtos.ForDynamo;
-import tesis.entities.dtos.ForReports;
+import tesis.entities.dtos.ForReportsSimpleRadar;
 import tesis.entities.dtos.account.User;
 import tesis.entities.dtos.item.Category;
 import tesis.entities.dtos.item.Item;
@@ -69,24 +69,24 @@ public class ItemService {
         return restClient.request(urlBase, DynamoBuilder.getObject(param, forDynamo), HttpMethod.DELETE, String.class);
     }
 
-    public ForReports[] getSoldItemsByCategories() throws JsonProcessingException {
+    public ForReportsSimpleRadar[] getSoldItemsByCategories() throws JsonProcessingException {
         forDynamo.setIndexName("category");
         Category categories[] = categoryService.getAllCategory();
-        ForReports forReports[] = new ForReports[categories.length];
+        ForReportsSimpleRadar simpleRadar[] = new ForReportsSimpleRadar[categories.length];
         Item items[] = new Item[0];
         Integer i = 0;
         for (Category category : categories) {
-            forReports[i] = new ForReports("",0,0,0);
-            forReports[i].setSubject(category.getCategoryName());
+            simpleRadar[i] = new ForReportsSimpleRadar("",0,0,0);
+            simpleRadar[i].setSubject(category.getCategoryName());
             forDynamo.setSearchPattern(category.categoryName);
             items = searchItems();
             for (Item item : items) {
-                forReports[i].setValueA(forReports[i].getValueA() + (item.getInitialStock() - item.getStock()));
-                forReports[i].setValueB(forReports[i].getValueA());
-                forReports[i].setFullMark(forReports[i].getValueA());
+                simpleRadar[i].setValueA(simpleRadar[i].getValueA() + (item.getInitialStock() - item.getStock()));
+                simpleRadar[i].setValueB(simpleRadar[i].getValueA());
+                simpleRadar[i].setFullMark(simpleRadar[i].getValueA());
             }
             i++;
         }
-        return forReports;
+        return simpleRadar;
     }
 }

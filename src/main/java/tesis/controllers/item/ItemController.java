@@ -3,7 +3,7 @@ package tesis.controllers.item;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import tesis.entities.dtos.ForReports;
+import tesis.entities.dtos.ForReportsSimpleRadar;
 import tesis.entities.dtos.item.Item;
 import tesis.services.item.ItemService;
 
@@ -26,7 +26,7 @@ public class ItemController {
     }
 
     @GetMapping("/get_sold_items_by_cat")
-    public ForReports[] get_sold_items_by_cat() throws JsonProcessingException {
+    public ForReportsSimpleRadar[] get_sold_items_by_cat() throws JsonProcessingException {
         return itemService.getSoldItemsByCategories();
     }
     @GetMapping("/get_all")
