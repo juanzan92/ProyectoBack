@@ -36,15 +36,24 @@ public class PaymentService {
     }
 
     public String createMerchantOrder(Long merchantOrderId) throws IOException {
-        String url = "https://api.mercadopago.com/merchant_orders/" + merchantOrderId + "?access_token=TEST-6597192979858931-082414-a77f17d601ed0de0e44bec1ee3f6e297-463910841";
+        try {
+            String url = "https://api.mercadopago.com/merchant_orders/" + merchantOrderId + "?access_token=TEST-6597192979858931-082414-a77f17d601ed0de0e44bec1ee3f6e297-463910841";
 
-        MerchantOrder merchantOrder = restClient.request(url, HttpMethod.GET, MerchantOrder.class);
+            MerchantOrder merchantOrder = restClient.request(url, HttpMethod.GET, MerchantOrder.class);
 
-        String vendorUser = userService.searchUser("email", merchantOrder.getCollector().getEmail()).getUsername();
+            if (merchantOrder.getCollector().getEmail() != null && merchantOrder.getPayer().getEmail() != null) {
 
-        User consumerUser = userService.searchUser("email", merchantOrder.getPayer().getEmail());
+                String vendorUser = userService.searchUser("email", merchantOrder.getCollector().getEmail()).getUsername();
 
-        return subscriptionService.createSubscription(SubscriptionBuilder.orderBuilder(merchantOrder, vendorUser, consumerUser));
+                User consumerUser = userService.searchUser("email", merchantOrder.getPayer().getEmail());
+
+                return subscriptionService.createSubscription(SubscriptionBuilder.orderBuilder(merchantOrder, vendorUser, consumerUser));
+            }
+
+        } catch (Exception e) {
+            throw e;
+        }
+        return null;
     }
 
     public void cancelPayment(String subscriptionId) throws JsonProcessingException, MPException {
