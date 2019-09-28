@@ -40,8 +40,8 @@ public class MPController {
     }
 
     @PostMapping("/merchant_order")
-    public String merchantOrder(@RequestParam Long merchant_order_id) throws IOException {
-        return paymentService.createMerchantOrder(merchant_order_id);
+    public String merchantOrder(@RequestParam("merchant_order_id") Long merchantOrderId) throws IOException {
+        return paymentService.createMerchantOrder(merchantOrderId);
     }
 
     @DeleteMapping("/payments")
