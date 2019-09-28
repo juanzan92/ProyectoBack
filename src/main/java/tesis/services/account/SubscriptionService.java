@@ -10,7 +10,6 @@ import tesis.entities.dtos.ForReports;
 import tesis.entities.dtos.account.Subscription;
 import tesis.entities.dtos.item.Category;
 import tesis.entities.dtos.item.Item;
-import tesis.entities.enums.item.ItemStatus;
 import tesis.entities.enums.user.SubscriptionStatus;
 import tesis.services.RestClient;
 import tesis.services.item.CategoryService;
@@ -81,21 +80,22 @@ public class SubscriptionService {
 
     public ForReports[] getSubscriptionByCategories() throws JsonProcessingException {
         forDynamo.setIndexName("category_name");
-        ForReports forReports[] = new ForReports[0];
-        Subscription subscription[] = new Subscription[0];
         Category categories[] = categoryService.getAllCategory();
+        ForReports forReports[] = new ForReports[categories.length];
+        Subscription subscription[] = new Subscription[0];
         Integer i = 0;
         for (Category category: categories)
         {
+            forReports[i] = new ForReports("",0,0,0);
+            forReports[i].setSubject(category.getCategoryName());
             forDynamo.setSearchPattern(category.categoryName);
             subscription = searchSubscription();
             forReports[i].setSubject(category.getCategoryName());
-            forReports[i].setA(subscription.length);
-            forReports[i].setB(subscription.length);
+            forReports[i].setValueA(subscription.length);
+            forReports[i].setValueB(subscription.length);
             forReports[i].setFullMark(subscription.length);
             i++;
         }
         return forReports ;
     }
-
 }
