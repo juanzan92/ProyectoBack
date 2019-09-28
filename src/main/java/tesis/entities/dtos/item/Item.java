@@ -33,7 +33,7 @@ public class Item {
     private boolean inDiscount;
 
     @JsonProperty("initial_stock")
-    private float initialStock;
+    private int initialStock;
 
     @JsonProperty("stock")
     private int stock;
