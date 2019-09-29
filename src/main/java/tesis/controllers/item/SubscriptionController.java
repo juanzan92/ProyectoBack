@@ -45,7 +45,7 @@ public class SubscriptionController {
     }
 
     @DeleteMapping("/cancel")
-    public String cancelSubscription(@RequestBody Subscription subscription) throws JsonProcessingException {
-        return subscriptionService.cancelSubscription(subscription);
+    public String cancelSubscription(@RequestParam("subscription_id") String subscriptionId) throws JsonProcessingException {
+        return subscriptionService.cancelSubscription(subscriptionId);
     }
 }

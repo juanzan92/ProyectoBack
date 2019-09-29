@@ -61,16 +61,22 @@ public class SubscriptionService {
         return restClient.request(urlBase, DynamoBuilder.getObject(param, forDynamo), HttpMethod.DELETE, String.class);
     }
 
-    public String cancelSubscription(Subscription subscription) throws JsonProcessingException {
+    public String cancelSubscription(String subscriptionId) throws JsonProcessingException {
         try {
-            subscription = getSubscription(DynamoBuilder.buildMap("subscription_id", subscription.getSubscriptionId()));
-            if (subscription.getSubscriptionStatus() == SubscriptionStatus.CANCELLED) {
-                throw new IllegalStateException("Subscription already CANCELLED. Nothing Done");
+            Subscription subscription = getSubscription(DynamoBuilder.buildMap("subscription_id", subscriptionId));
+
+            if (subscription.getSubscriptionStatus() != SubscriptionStatus.IN_PROGRESS) {
+                throw new IllegalStateException("Subscription already FINISHED. Nothing Done");
             }
+
+            subscription.setSubscriptionStatus(SubscriptionStatus.CANCELLED);
+
             Item item = itemService.getItem(DynamoBuilder.buildMap("item_id", subscription.getItemId()));
             item.setStock(item.getStock() + subscription.getQuantity());
+            if (item.getStatus() == ItemStatus.COMPLETED) item.setStatus(ItemStatus.ACTIVE);
+
             itemService.updateItem(item);
-            subscription.setSubscriptionStatus(SubscriptionStatus.CANCELLED);
+
             return updateSubscription(subscription);
         } catch (Exception e) {
             throw e;
