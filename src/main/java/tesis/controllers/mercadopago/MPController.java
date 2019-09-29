@@ -40,7 +40,7 @@ public class MPController {
     }
 
     @PostMapping("/merchant_order")
-    public String merchantOrder(@RequestParam("merchant_order_id") Long merchantOrderId, @RequestParam("preference_id") String preferenceId) throws IOException, MPException {
+    public Map merchantOrder(@RequestParam("merchant_order_id") Long merchantOrderId, @RequestParam("preference_id") String preferenceId) throws IOException, MPException {
         return paymentService.createMerchantOrder(merchantOrderId, preferenceId);
     }
 

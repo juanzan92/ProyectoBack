@@ -13,11 +13,14 @@ import tesis.entities.dtos.account.Subscription;
 import tesis.entities.dtos.account.User;
 import tesis.entities.dtos.mercadopago.MerchantOrder;
 import tesis.entities.dtos.mercadopago.Vendor;
+import tesis.entities.marshallers.mercadopago.SubscriptionMarshaller;
 import tesis.services.RestClient;
 import tesis.services.account.SubscriptionService;
 import tesis.services.account.UserService;
 
+import javax.annotation.PostConstruct;
 import java.io.IOException;
+import java.util.Map;
 
 @Service
 public class PaymentService {
@@ -28,20 +31,31 @@ public class PaymentService {
     @Autowired
     UserService userService;
 
+    String appOwnerToken = "TEST-6597192979858931-082414-a77f17d601ed0de0e44bec1ee3f6e297-463910841";
+    String accessToken = "?access_token=" + appOwnerToken;
+    String mpLink = "https://api.mercadopago.com";
+
+    @PostConstruct
+    private void configureSDK() {
+        try {
+            MercadoPago.SDK.setAccessToken(appOwnerToken);
+        } catch (MPException e) {
+            e.printStackTrace();
+        }
+    }
+
     public Payment analizeNotification(String notificationType, Long id) throws JsonProcessingException {
-        String url = "https://api.mercadopago.com/v1/" + notificationType + "/" + id + "?access_token=" + "TEST-6597192979858931-082414-a77f17d601ed0de0e44bec1ee3f6e297-463910841";
+        String url = mpLink + "/v1/" + notificationType + "/" + id + accessToken;
         Payment payment = restClient.request(url, HttpMethod.GET, Payment.class);
 
         return payment;
     }
 
-    public String createMerchantOrder(Long merchantOrderId, String preferenceId) throws IOException, MPException {
+    public Map createMerchantOrder(Long merchantOrderId, String preferenceId) throws IOException, MPException {
         try {
-            String url = "https://api.mercadopago.com/merchant_orders/" + merchantOrderId + "?access_token=TEST-6597192979858931-082414-a77f17d601ed0de0e44bec1ee3f6e297-463910841";
+            String url = mpLink + "/merchant_orders/" + merchantOrderId + accessToken;
 
             MerchantOrder merchantOrder = restClient.request(url, HttpMethod.GET, MerchantOrder.class);
-
-            MercadoPago.SDK.setAccessToken("TEST-6597192979858931-082414-a77f17d601ed0de0e44bec1ee3f6e297-463910841");
 
             com.mercadopago.resources.Preference preference = com.mercadopago.resources.Preference.findById(preferenceId); //TODO el email del payer debería salir del merchant order, pero últimamente viene null. Revisar luego
 
@@ -51,7 +65,9 @@ public class PaymentService {
 
                 User consumerUser = userService.searchUser("email", preference.getPayer().getEmail());
 
-                return subscriptionService.createSubscription(SubscriptionBuilder.orderBuilder(merchantOrder, vendorUser, consumerUser));
+                Subscription subscription = subscriptionService.createSubscription(SubscriptionBuilder.orderBuilder(merchantOrder, vendorUser, consumerUser));
+
+                return SubscriptionMarshaller.buildSubscription(subscription);
             }
 
         } catch (Exception e) {

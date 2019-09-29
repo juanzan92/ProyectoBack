@@ -26,7 +26,7 @@ public class SubscriptionService {
     String urlBase = "https://rtge19cj13.execute-api.us-east-1.amazonaws.com/prod/generic_ep";
     ForDynamo forDynamo = new ForDynamo("subscriptions", "subscription_id");
 
-    public String createSubscription(Subscription subscription) throws JsonProcessingException {
+    public Subscription createSubscription(Subscription subscription) throws JsonProcessingException {
         try {
             Item item = itemService.getItem(DynamoBuilder.buildMap("item_id", subscription.getItemId()));
             int newItemQuantity = item.getStock() - subscription.getQuantity();
@@ -35,8 +35,7 @@ public class SubscriptionService {
             if (newItemQuantity == 0) item.setStatus(ItemStatus.COMPLETED);
 
             itemService.updateItem(item);
-
-            return restClient.request(urlBase, DynamoBuilder.saveObject(subscription, forDynamo), HttpMethod.POST, String.class);
+            return restClient.request(urlBase, DynamoBuilder.saveObject(subscription, forDynamo), HttpMethod.POST, Subscription.class);
         } catch (Exception e) {
             throw e;
         }

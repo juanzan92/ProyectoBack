@@ -30,7 +30,7 @@ public class SubscriptionController {
     }
 
     @PostMapping()
-    public String createSubscription(@RequestBody Subscription subscription) throws JsonProcessingException {
+    public Subscription createSubscription(@RequestBody Subscription subscription) throws JsonProcessingException {
         return subscriptionService.createSubscription(subscription);
     }
 
