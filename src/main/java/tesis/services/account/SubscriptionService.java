@@ -28,6 +28,10 @@ public class SubscriptionService {
     @Autowired
     CategoryService categoryService;
 
+    @Autowired
+    KvsVendorService kvsVendorService;
+
+
     String urlBase = "https://rtge19cj13.execute-api.us-east-1.amazonaws.com/prod/generic_ep";
     ForDynamo forDynamo = new ForDynamo("subscriptions", "subscription_id");
 
@@ -35,6 +39,9 @@ public class SubscriptionService {
         Item item = itemService.getItem(DynamoBuilder.buildMap("item_id", subscription.getItemId()));
         item.setStock(item.getStock() - subscription.getQuantity());
         itemService.updateItem(item);
+        subscription.setCategory(item.getCategory());
+        kvsVendorService.updateKvsVendor(item.getVendorUsername(),"graph01", 1);
+        kvsVendorService.updateKvsVendor(item.getVendorUsername(),"graph02", subscription.getQuantity());
         return restClient.request(urlBase, DynamoBuilder.saveObject(subscription, forDynamo), HttpMethod.POST, String.class);
     }
 
@@ -84,9 +91,8 @@ public class SubscriptionService {
         ForReportsSimpleRadar simpleRadar[] = new ForReportsSimpleRadar[categories.length];
         Subscription subscription[] = new Subscription[0];
         Integer i = 0;
-        for (Category category: categories)
-        {
-            simpleRadar[i] = new ForReportsSimpleRadar("",0,0,0);
+        for (Category category : categories) {
+            simpleRadar[i] = new ForReportsSimpleRadar("", 0, 0, 0);
             simpleRadar[i].setSubject(category.getCategoryName());
             forDynamo.setSearchPattern(category.categoryName);
             subscription = searchSubscription();

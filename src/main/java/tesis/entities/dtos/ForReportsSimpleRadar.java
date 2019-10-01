@@ -11,8 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ForReportsSimpleRadar {
-    //@JsonProperty("data")
-    //String data;
+
     @JsonProperty("subject")
     String subject;
 
