@@ -26,6 +26,10 @@ public class KvsVendorService {
 
     public String updateKvsVendor(String username, String graph, String category, Integer quantity) throws JsonProcessingException {
         KvsVendor kvsVendor = getKvsVendor(DynamoBuilder.buildMap("username", username));
+        if (kvsVendor == null) {
+            kvsVendor = new KvsVendor();
+            kvsVendor.setUsername(username);
+        }
         switch (graph) {
             case "graph01":
                 kvsVendor.updateGraph01(category, quantity);

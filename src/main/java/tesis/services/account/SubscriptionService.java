@@ -31,7 +31,6 @@ public class SubscriptionService {
     @Autowired
     KvsVendorService kvsVendorService;
 
-
     String urlBase = "https://rtge19cj13.execute-api.us-east-1.amazonaws.com/prod/generic_ep";
     ForDynamo forDynamo = new ForDynamo("subscriptions", "subscription_id");
 
@@ -40,8 +39,8 @@ public class SubscriptionService {
         item.setStock(item.getStock() - subscription.getQuantity());
         itemService.updateItem(item);
         subscription.setCategory(item.getCategory());
-        kvsVendorService.updateKvsVendor(item.getVendorUsername(),"graph01", 1);
-        kvsVendorService.updateKvsVendor(item.getVendorUsername(),"graph02", subscription.getQuantity());
+        kvsVendorService.updateKvsVendor(item.getVendorUsername(),"graph01",  item.getCategory(), 1);
+      //  kvsVendorService.updateKvsVendor(item.getVendorUsername(),"graph02", item.getCategory(), subscription.getQuantity());
         return restClient.request(urlBase, DynamoBuilder.saveObject(subscription, forDynamo), HttpMethod.POST, String.class);
     }
 
