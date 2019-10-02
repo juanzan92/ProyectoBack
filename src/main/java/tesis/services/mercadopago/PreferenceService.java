@@ -16,7 +16,6 @@ import tesis.entities.marshallers.mercadopago.PreferenceMarshaller;
 import tesis.services.account.UserService;
 import tesis.services.item.ItemService;
 
-import javax.annotation.PostConstruct;
 import java.util.HashMap;
 
 @Service
