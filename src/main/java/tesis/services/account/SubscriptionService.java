@@ -39,8 +39,8 @@ public class SubscriptionService {
         item.setStock(item.getStock() - subscription.getQuantity());
         itemService.updateItem(item);
         subscription.setCategory(item.getCategory());
-        kvsVendorService.updateKvsVendor(item.getVendorUsername(),"graph01",  item.getCategory(), 1);
-      //  kvsVendorService.updateKvsVendor(item.getVendorUsername(),"graph02", item.getCategory(), subscription.getQuantity());
+        kvsVendorService.updateKvsVendor(item.getVendorUsername(), "graph01", item.getCategory(), 1);
+        kvsVendorService.updateKvsVendor(item.getVendorUsername(), "graph02", item.getCategory(), subscription.getQuantity());
         return restClient.request(urlBase, DynamoBuilder.saveObject(subscription, forDynamo), HttpMethod.POST, String.class);
     }
 

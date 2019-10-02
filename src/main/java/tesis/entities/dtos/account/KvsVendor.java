@@ -20,21 +20,23 @@ public class KvsVendor {
     @JsonProperty("graph02")    // Items vendidos por Categoria
             ArrayList<ForReportsSimpleRadar> graph02;
 
-    public KvsVendor(){
+    public KvsVendor() {
         graph01 = new ArrayList<ForReportsSimpleRadar>();
         graph02 = new ArrayList<ForReportsSimpleRadar>();
     }
 
-    public void updateGraph01(String category, Integer quantity) {
+    public void updateGraphSimpleRadar(String category, Integer quantity, ArrayList<ForReportsSimpleRadar> graph) {
         boolean found = false;
-        for (ForReportsSimpleRadar radar : graph01) {
+        for (ForReportsSimpleRadar radar : graph) {
             if (radar.getSubject() != null && radar.getSubject().contains(category)) {
                 radar.setValueA(radar.getValueA() + quantity);
+                radar.setValueB(radar.getValueA());
+                radar.setFullMark(radar.getValueA());
                 found = true;
             }
         }
-        if (!found ){
-            graph01.add(new ForReportsSimpleRadar(category, quantity, quantity, quantity));
+        if (!found) {
+            graph.add(new ForReportsSimpleRadar(category, quantity, quantity, quantity));
         }
     }
 

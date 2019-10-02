@@ -32,9 +32,10 @@ public class KvsVendorService {
         }
         switch (graph) {
             case "graph01":
-                kvsVendor.updateGraph01(category, quantity);
+                kvsVendor.updateGraphSimpleRadar(category, quantity, kvsVendor.getGraph01());
                 return restClient.request(urlBase, DynamoBuilder.saveObject(kvsVendor, forDynamo), HttpMethod.PUT, String.class);
             case "graph02":
+                kvsVendor.updateGraphSimpleRadar(category, quantity, kvsVendor.getGraph02());
                 return restClient.request(urlBase, DynamoBuilder.saveObject(kvsVendor, forDynamo), HttpMethod.PUT, String.class);
             default:
                 throw new IllegalArgumentException("Graph not found - Vendor KVS Update Canceled");
