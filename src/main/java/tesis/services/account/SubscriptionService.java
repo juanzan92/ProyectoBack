@@ -39,7 +39,6 @@ public class SubscriptionService {
     String urlBase = "https://rtge19cj13.execute-api.us-east-1.amazonaws.com/prod/generic_ep";
     ForDynamo forDynamo = new ForDynamo("subscriptions", "subscription_id");
 
-
     String appOwnerToken = "TEST-6597192979858931-082414-a77f17d601ed0de0e44bec1ee3f6e297-463910841";
     String accessToken = "?access_token=" + appOwnerToken;
     String mpLink = "https://api.mercadopago.com";
