@@ -1,14 +1,18 @@
 package tesis.services.item;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.mercadopago.exceptions.MPException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import tesis.entities.builders.dynamo.DynamoBuilder;
 import tesis.entities.dtos.ForDynamo;
+import tesis.entities.dtos.account.Subscription;
 import tesis.entities.dtos.account.User;
 import tesis.entities.dtos.item.Item;
+import tesis.entities.enums.item.ItemStatus;
 import tesis.services.RestClient;
+import tesis.services.account.SubscriptionService;
 import tesis.services.account.UserService;
 
 import java.util.Map;
@@ -19,7 +23,11 @@ public class ItemService {
     UserService userService;
 
     @Autowired
+    SubscriptionService subscriptionService;
+
+    @Autowired
     RestClient restClient;
+
     String urlBase = "https://rtge19cj13.execute-api.us-east-1.amazonaws.com/prod/generic_ep";
     ForDynamo forDynamo = new ForDynamo("items", "item_id");
 
@@ -55,8 +63,26 @@ public class ItemService {
         return restClient.request(urlBase, DynamoBuilder.saveObject(item, forDynamo), HttpMethod.PUT, String.class);
     }
 
-    public String deleteItem(Map<String, String> param) throws JsonProcessingException {
-        return restClient.request(urlBase, DynamoBuilder.getObject(param, forDynamo), HttpMethod.DELETE, String.class);
+    public String cancelItem(String itemId) throws JsonProcessingException, MPException {
+        try {
+            Item item = getItem(DynamoBuilder.buildMap("item_id", itemId));
+
+            if (item.getStatus() != ItemStatus.ACTIVE) {
+                throw new IllegalStateException("Item already FINISHED. Nothing to do");
+            }
+
+            Subscription[] subscriptions = subscriptionService.searchSubscription(DynamoBuilder.buildMap("item_id", item.getItemId()));
+
+            for (Subscription subscription : subscriptions) {
+                subscriptionService.cancelSubscription(subscription.getSubscriptionId());
+            }
+
+            item.setStatus(ItemStatus.CANCELLED);
+
+            return restClient.request(urlBase, DynamoBuilder.saveObject(item, forDynamo), HttpMethod.PUT, String.class);
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
 }
