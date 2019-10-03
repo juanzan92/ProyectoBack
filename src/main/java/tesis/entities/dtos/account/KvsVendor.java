@@ -14,10 +14,10 @@ public class KvsVendor {
     @JsonProperty("username")
     private String username;
 
-    @JsonProperty("graph01")    // Subscripciones por Categoria
+    @JsonProperty("graph_01")    // Subscripciones por Categoria
             ArrayList<ForReportsSimpleRadar> graph01;
 
-    @JsonProperty("graph02")    // Items vendidos por Categoria
+    @JsonProperty("graph_02")    // Items vendidos por Categoria
             ArrayList<ForReportsSimpleRadar> graph02;
 
     public KvsVendor() {
