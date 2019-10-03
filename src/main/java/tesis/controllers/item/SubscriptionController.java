@@ -37,11 +37,6 @@ public class SubscriptionController {
         return subscriptionService.searchSubscription(param);
     }
 
-    @GetMapping("/get_sub_by_cat")
-    public ForReportsSimpleRadar[] get_sub_by_cat() throws JsonProcessingException {
-        return subscriptionService.getSubscriptionByCategories();
-    }
-
     @GetMapping("/get_all")
     public Subscription[] getAllSubscription() throws JsonProcessingException {
         return subscriptionService.getAllSubscription();

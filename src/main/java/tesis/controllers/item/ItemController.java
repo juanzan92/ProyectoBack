@@ -25,10 +25,6 @@ public class ItemController {
         return itemService.getItem(item_id);
     }
 
-    @GetMapping("/get_sold_items_by_cat")
-    public ForReportsSimpleRadar[] get_sold_items_by_cat() throws JsonProcessingException {
-        return itemService.getSoldItemsByCategories();
-    }
     @GetMapping("/get_all")
     public Item[] getAllItem() throws JsonProcessingException {
         return itemService.getAllItem();

@@ -152,7 +152,7 @@ public class SubscriptionService {
         return restClient.request(DynamoBuilder.searchObjects(param, forDynamo, urlBase + "/index_search"), HttpMethod.GET, Subscription[].class);
     }
 
-    public Subscription[] searchSubscription() throws JsonProcessingException {
+    public Subscription[] searchSubscription(ForDynamo forDynamo) throws JsonProcessingException {
         return restClient.request(DynamoBuilder.searchObjects(forDynamo, urlBase + "/index_search"), HttpMethod.GET, Subscription[].class);
     }
 
@@ -168,25 +168,5 @@ public class SubscriptionService {
         String url = mpLink + "/v1/" + notificationType + "/" + id + accessToken;
         Payment payment = restClient.request(url, HttpMethod.GET, Payment.class);
         return payment;
-    }
-
-    public ForReportsSimpleRadar[] getSubscriptionByCategories() throws JsonProcessingException {
-        forDynamo.setIndexName("category_name");
-        Category categories[] = categoryService.getAllCategory();
-        ForReportsSimpleRadar simpleRadar[] = new ForReportsSimpleRadar[categories.length];
-        Subscription subscription[] = new Subscription[0];
-        Integer i = 0;
-        for (Category category : categories) {
-            simpleRadar[i] = new ForReportsSimpleRadar("", 0, 0, 0);
-            simpleRadar[i].setSubject(category.getCategoryName());
-            forDynamo.setSearchPattern(category.categoryName);
-            subscription = searchSubscription();
-            simpleRadar[i].setSubject(category.getCategoryName());
-            simpleRadar[i].setValueA(subscription.length);
-            simpleRadar[i].setValueB(subscription.length);
-            simpleRadar[i].setFullMark(subscription.length);
-            i++;
-        }
-        return simpleRadar;
     }
 }

@@ -6,9 +6,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import tesis.entities.builders.dynamo.DynamoBuilder;
 import tesis.entities.dtos.ForDynamo;
-import tesis.entities.dtos.ForReportsSimpleRadar;
 import tesis.entities.dtos.account.User;
-import tesis.entities.dtos.item.Category;
 import tesis.entities.dtos.item.Item;
 import tesis.services.RestClient;
 import tesis.services.account.UserService;
@@ -19,9 +17,6 @@ import java.util.Map;
 public class ItemService {
     @Autowired
     UserService userService;
-
-    @Autowired
-    CategoryService categoryService;
 
     @Autowired
     RestClient restClient;
@@ -53,7 +48,7 @@ public class ItemService {
         return restClient.request(DynamoBuilder.searchObjects(param, forDynamo, urlBase + "/index_search"), HttpMethod.GET, Item[].class);
     }
 
-    public Item[] searchItems() throws JsonProcessingException {
+    public Item[] searchItems(ForDynamo forDynamo) throws JsonProcessingException {
         return restClient.request(DynamoBuilder.searchObjects(forDynamo, urlBase + "/index_search"), HttpMethod.GET, Item[].class);
     }
 
@@ -67,26 +62,5 @@ public class ItemService {
 
     public String deleteItem(Map<String, String> param) throws JsonProcessingException {
         return restClient.request(urlBase, DynamoBuilder.getObject(param, forDynamo), HttpMethod.DELETE, String.class);
-    }
-
-    public ForReportsSimpleRadar[] getSoldItemsByCategories() throws JsonProcessingException {
-        forDynamo.setIndexName("category");
-        Category categories[] = categoryService.getAllCategory();
-        ForReportsSimpleRadar simpleRadar[] = new ForReportsSimpleRadar[categories.length];
-        Item items[] = new Item[0];
-        Integer i = 0;
-        for (Category category : categories) {
-            simpleRadar[i] = new ForReportsSimpleRadar("",0,0,0);
-            simpleRadar[i].setSubject(category.getCategoryName());
-            forDynamo.setSearchPattern(category.categoryName);
-            items = searchItems();
-            for (Item item : items) {
-                simpleRadar[i].setValueA(simpleRadar[i].getValueA() + (item.getInitialStock() - item.getStock()));
-                simpleRadar[i].setValueB(simpleRadar[i].getValueA());
-                simpleRadar[i].setFullMark(simpleRadar[i].getValueA());
-            }
-            i++;
-        }
-        return simpleRadar;
     }
 }
