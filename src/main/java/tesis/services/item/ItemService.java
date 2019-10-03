@@ -48,8 +48,8 @@ public class ItemService {
     }
 
     public String updateItem(Item item) throws JsonProcessingException {
-        Map<String, String> map_item_id = DynamoBuilder.buildMap("item_id", item.getItemId());
-        if (restClient.request(DynamoBuilder.getObject(map_item_id, forDynamo, urlBase), HttpMethod.GET, Item.class) == null) {
+        Map<String, String> itemMap = DynamoBuilder.buildMap("item_id", item.getItemId());
+        if (restClient.request(DynamoBuilder.getObject(itemMap, forDynamo, urlBase), HttpMethod.GET, Item.class) == null) {
             throw new IllegalArgumentException("Item not found - Item Update Canceled");
         }
         return restClient.request(urlBase, DynamoBuilder.saveObject(item, forDynamo), HttpMethod.PUT, String.class);

@@ -6,7 +6,6 @@ import lombok.Setter;
 import tesis.entities.enums.item.ItemStatus;
 
 import java.util.List;
-import java.util.Map;
 
 @Getter @Setter
 public class Item {
