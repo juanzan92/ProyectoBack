@@ -2,8 +2,6 @@ package tesis.entities.dtos.item;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.List;
-
 public class Review {
 
     @JsonProperty("review_id")
