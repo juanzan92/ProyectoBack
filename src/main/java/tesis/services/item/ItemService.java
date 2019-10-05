@@ -61,6 +61,10 @@ public class ItemService {
         return restClient.request(DynamoBuilder.searchObjects(param, forDynamo, urlBase + "/index_search"), HttpMethod.GET, Item[].class);
     }
 
+    public Item[] searchItems(ForDynamo forDynamo) throws JsonProcessingException {
+        return restClient.request(DynamoBuilder.searchObjects(forDynamo, urlBase + "/index_search"), HttpMethod.GET, Item[].class);
+    }
+
     public String updateItem(Item item) throws JsonProcessingException {
         Map<String, String> itemMap = DynamoBuilder.buildMap("item_id", item.getItemId());
         if (restClient.request(DynamoBuilder.getObject(itemMap, forDynamo, urlBase), HttpMethod.GET, Item.class) == null) {
@@ -90,5 +94,4 @@ public class ItemService {
             throw e;
         }
     }
-
 }

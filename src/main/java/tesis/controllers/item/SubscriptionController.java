@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.mercadopago.exceptions.MPException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import tesis.entities.dtos.ForReportsSimpleRadar;
 import tesis.entities.dtos.account.Subscription;
 import tesis.services.account.SubscriptionService;
 

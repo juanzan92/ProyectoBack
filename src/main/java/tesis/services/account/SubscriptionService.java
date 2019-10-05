@@ -10,8 +10,10 @@ import org.springframework.stereotype.Service;
 import tesis.entities.builders.dynamo.DynamoBuilder;
 import tesis.entities.builders.mercadopago.SubscriptionBuilder;
 import tesis.entities.dtos.ForDynamo;
+import tesis.entities.dtos.ForReportsSimpleRadar;
 import tesis.entities.dtos.account.Subscription;
 import tesis.entities.dtos.account.User;
+import tesis.entities.dtos.item.Category;
 import tesis.entities.dtos.item.Item;
 import tesis.entities.dtos.mercadopago.MerchantOrder;
 import tesis.entities.dtos.mercadopago.Vendor;
@@ -19,6 +21,7 @@ import tesis.entities.enums.item.ItemStatus;
 import tesis.entities.enums.user.SubscriptionStatus;
 import tesis.entities.marshallers.mercadopago.SubscriptionMarshaller;
 import tesis.services.RestClient;
+import tesis.services.item.CategoryService;
 import tesis.services.item.ItemService;
 
 import javax.annotation.PostConstruct;
@@ -35,6 +38,12 @@ public class SubscriptionService {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    CategoryService categoryService;
+
+    @Autowired
+    KvsVendorService kvsVendorService;
 
     String urlBase = "https://rtge19cj13.execute-api.us-east-1.amazonaws.com/prod/generic_ep";
     ForDynamo forDynamo = new ForDynamo("subscriptions", "subscription_id");
@@ -53,6 +62,16 @@ public class SubscriptionService {
         } catch (MPException e) {
             e.printStackTrace();
         }
+    }
+
+    public Subscription createSubscription(Subscription subscription) throws JsonProcessingException {
+        Item item = itemService.getItem(DynamoBuilder.buildMap("item_id", subscription.getItemId()));
+        item.setStock(item.getStock() - subscription.getQuantity());
+        itemService.updateItem(item);
+        subscription.setCategory(item.getCategory());
+        kvsVendorService.updateKvsVendor(item.getVendorUsername(), "graph01", item.getCategory(), 1);
+        kvsVendorService.updateKvsVendor(item.getVendorUsername(), "graph02", item.getCategory(), subscription.getQuantity());
+        return restClient.request(urlBase, DynamoBuilder.saveObject(subscription, forDynamo), HttpMethod.POST, Subscription.class);
     }
 
     public Map createSubscription(Long merchantOrderId, String preferenceId) throws IOException, MPException {
@@ -121,10 +140,6 @@ public class SubscriptionService {
         }
     }
 
-    public Subscription createSubscription(Subscription subscription) throws JsonProcessingException {
-        return restClient.request(urlBase, DynamoBuilder.saveObject(subscription, forDynamo), HttpMethod.POST, Subscription.class);
-    }
-
     public Subscription getSubscription(Map<String, String> param) throws JsonProcessingException {
         return restClient.request(DynamoBuilder.getObject(param, forDynamo, urlBase), HttpMethod.GET, Subscription.class);
     }
@@ -135,6 +150,10 @@ public class SubscriptionService {
 
     public Subscription[] searchSubscription(Map<String, String> param) throws JsonProcessingException {
         return restClient.request(DynamoBuilder.searchObjects(param, forDynamo, urlBase + "/index_search"), HttpMethod.GET, Subscription[].class);
+    }
+
+    public Subscription[] searchSubscription(ForDynamo forDynamo) throws JsonProcessingException {
+        return restClient.request(DynamoBuilder.searchObjects(forDynamo, urlBase + "/index_search"), HttpMethod.GET, Subscription[].class);
     }
 
     public String updateSubscription(Subscription subscription) throws JsonProcessingException {
@@ -148,7 +167,6 @@ public class SubscriptionService {
     public Payment analizeNotification(String notificationType, Long id) throws JsonProcessingException {
         String url = mpLink + "/v1/" + notificationType + "/" + id + accessToken;
         Payment payment = restClient.request(url, HttpMethod.GET, Payment.class);
-
         return payment;
     }
 }
