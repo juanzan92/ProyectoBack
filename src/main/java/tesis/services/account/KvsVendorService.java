@@ -6,9 +6,11 @@ import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import tesis.entities.builders.dynamo.DynamoBuilder;
 import tesis.entities.dtos.ForDynamo;
+import tesis.entities.dtos.ForReportsSimpleRadar;
 import tesis.entities.dtos.account.KvsVendor;
 import tesis.services.RestClient;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 @Service
@@ -30,16 +32,8 @@ public class KvsVendorService {
             kvsVendor = new KvsVendor();
             kvsVendor.setUsername(username);
         }
-        switch (graph) {
-            case "graph01":
-                kvsVendor.updateGraphSimpleRadar(category, quantity, kvsVendor.getGraph01());
-                break;
-            case "graph02":
-                kvsVendor.updateGraphSimpleRadar(category, quantity, kvsVendor.getGraph02());
-                break;
-            default:
-                throw new IllegalArgumentException("Graph not found - Vendor KVS Update Canceled");
-        }
+        ArrayList<ForReportsSimpleRadar> graphList = graph == "graph01" ? kvsVendor.getGraph01() : kvsVendor.getGraph02();
+        kvsVendor.updateGraphSimpleRadar(category, quantity, graphList);
         return restClient.request(urlBase, DynamoBuilder.saveObject(kvsVendor, forDynamo), HttpMethod.PUT, String.class);
     }
 }
