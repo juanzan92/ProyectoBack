@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Date;
+import java.util.HashMap;
 
 @Service
 public class BucketService {
@@ -60,7 +61,7 @@ public class BucketService {
                 .withCannedAcl(CannedAccessControlList.PublicRead));
     }
 
-    public String uploadFile(MultipartFile multipartFile) {
+    public HashMap uploadFile(MultipartFile multipartFile) {
 
         String fileUrl = "";
         try {
@@ -72,7 +73,10 @@ public class BucketService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return fileUrl;
+
+        HashMap <String, String> response = new HashMap<>();
+        response.put("response_url", fileUrl);
+        return response;
     }
 
     public String deleteFileFromS3Bucket(String fileUrl) {
