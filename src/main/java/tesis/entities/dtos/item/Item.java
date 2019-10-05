@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import tesis.entities.enums.item.ItemStatus;
 
+import java.util.Date;
 import java.util.List;
 
 @Getter @Setter
@@ -59,13 +60,13 @@ public class Item {
     List<Object> tags;
 
     @JsonProperty("date_created")
-    private String dateCreated;
+    private Date dateCreated;
 
     @JsonProperty("last_updated")
-    private String lastUpdated;
+    private Date lastUpdated;
 
     @JsonProperty("end_date")
-    private String endDate;
+    private Date endDate;
 
     @JsonProperty("dimensions")
     private Dimensions dimensions;
