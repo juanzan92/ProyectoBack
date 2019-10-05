@@ -1,8 +1,10 @@
 package tesis.controllers.item;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.mercadopago.exceptions.MPException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import tesis.entities.dtos.ForReportsSimpleRadar;
 import tesis.entities.dtos.item.Item;
 import tesis.services.item.ItemService;
 
@@ -20,7 +22,7 @@ public class ItemController {
     }
 
     @GetMapping()
-    public Item getItem(@RequestParam Map<String, String>  item_id) throws JsonProcessingException {
+    public Item getItem(@RequestParam Map<String, String> item_id) throws JsonProcessingException {
         return itemService.getItem(item_id);
     }
 
@@ -40,7 +42,7 @@ public class ItemController {
     }
 
     @DeleteMapping()
-    public String deleteItem(@RequestBody Map<String, String> param) throws JsonProcessingException {
-        return itemService.deleteItem(param);
+    public String cancelItem(@RequestParam("item_id") String itemId) throws JsonProcessingException, MPException {
+        return itemService.cancelItem(itemId);
     }
 }

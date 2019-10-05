@@ -1,11 +1,14 @@
 package tesis.controllers.item;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.mercadopago.exceptions.MPException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import tesis.entities.dtos.ForReportsSimpleRadar;
 import tesis.entities.dtos.account.Subscription;
 import tesis.services.account.SubscriptionService;
 
+import java.io.IOException;
 import java.util.Map;
 
 @RestController
@@ -13,6 +16,16 @@ import java.util.Map;
 public class SubscriptionController {
     @Autowired
     SubscriptionService subscriptionService;
+
+    @PostMapping()
+    public Map createSubscription(@RequestParam("merchant_order_id") Long merchantOrderId, @RequestParam("preference_id") String preferenceId) throws IOException, MPException {
+        return subscriptionService.createSubscription(merchantOrderId, preferenceId);
+    }
+
+    @DeleteMapping()
+    public String cancelSubscription(@RequestParam("subscription_id") String subscriptionId) throws JsonProcessingException, MPException {
+        return subscriptionService.cancelSubscription(subscriptionId);
+    }
 
     @GetMapping()
     public Subscription getSubscription(@RequestParam Map<String, String> subscription_id) throws JsonProcessingException {
@@ -29,23 +42,8 @@ public class SubscriptionController {
         return subscriptionService.getAllSubscription();
     }
 
-    @PostMapping()
-    public String createSubscription(@RequestBody Subscription subscription) throws JsonProcessingException {
-        return subscriptionService.createSubscription(subscription);
-    }
-
     @PutMapping()
     public String updateSubscription(@RequestBody Subscription subscription) throws JsonProcessingException {
         return subscriptionService.updateSubscription(subscription);
-    }
-
-    @DeleteMapping()
-    public String deleteSubscription(@RequestBody Map<String, String> param) throws JsonProcessingException {
-        return subscriptionService.deleteSubscription(param);
-    }
-
-    @DeleteMapping("/cancel")
-    public String cancelSubscription(@RequestBody Subscription subscription) throws JsonProcessingException {
-        return subscriptionService.cancelSubscription(subscription);
     }
 }
