@@ -15,6 +15,7 @@ import tesis.services.RestClient;
 import tesis.services.account.SubscriptionService;
 import tesis.services.account.UserService;
 
+import java.util.Date;
 import java.util.Map;
 
 @Service
@@ -37,6 +38,11 @@ public class ItemService {
             if (user == null) {
                 throw new IllegalArgumentException("Vendor not found - Item Creation Canceled");
             }
+
+            item.setStatus(ItemStatus.ACTIVE);
+            item.setDateCreated(new Date());
+            item.setLastUpdated(new Date());
+
             return restClient.request(urlBase, DynamoBuilder.saveObject(item, forDynamo), HttpMethod.POST, String.class);
         } catch (Exception e) {
             throw e;
