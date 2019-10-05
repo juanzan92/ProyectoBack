@@ -6,8 +6,8 @@ import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import tesis.entities.builders.dynamo.DynamoBuilder;
 import tesis.entities.dtos.ForDynamo;
-import tesis.services.RestClient;
 import tesis.entities.dtos.item.Category;
+import tesis.services.RestClient;
 
 import java.util.Map;
 

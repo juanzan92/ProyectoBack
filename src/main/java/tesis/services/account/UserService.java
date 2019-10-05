@@ -9,7 +9,6 @@ import tesis.entities.builders.dynamo.DynamoBuilder;
 import tesis.entities.dtos.ForCognito;
 import tesis.entities.dtos.ForDynamo;
 import tesis.entities.dtos.account.User;
-import tesis.entities.dtos.mercadopago.Consumer;
 import tesis.entities.dtos.mercadopago.Vendor;
 import tesis.services.RestClient;
 
@@ -50,7 +49,6 @@ public class UserService {
     }
 
     public String deleteUser(Map<String, String> username) throws JsonProcessingException {
-        forCognito.setUserPoolId("us-east-1_vwGNEHsur");
         restClient.request(urlBase + "/cognito", CognitoBuilder.deleteObject(username, forCognito ), HttpMethod.DELETE, String.class);
         return restClient.request(urlBase, DynamoBuilder.getObject(username, forDynamo), HttpMethod.DELETE, String.class);
     }
@@ -65,9 +63,5 @@ public class UserService {
 
     public Vendor[] getAllVendor() throws JsonProcessingException {
         return restClient.request(DynamoBuilder.getAllObject(forDynamo, urlBase + "/get_all"), HttpMethod.GET, Vendor[].class);
-    }
-
-    public Consumer getConsumer(@NotNull Map<String, String> param) throws JsonProcessingException {
-        return restClient.request(DynamoBuilder.getObject(param, forDynamo, urlBase), HttpMethod.GET, Consumer.class);
     }
 }

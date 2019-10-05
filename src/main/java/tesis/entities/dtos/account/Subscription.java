@@ -2,13 +2,20 @@ package tesis.entities.dtos.account;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.mercadopago.resources.datastructures.merchantorder.MerchantOrderPayment;
-import com.mercadopago.resources.datastructures.merchantorder.Shipment;
+import lombok.Getter;
+import lombok.Setter;
+import tesis.entities.dtos.mercadopago.Shipment;
 import tesis.entities.enums.user.SubscriptionStatus;
 
 import java.util.ArrayList;
 import java.util.Date;
 
+@Getter
+@Setter
 public class Subscription {
+
+    @JsonProperty("category")
+    String category;
 
     @JsonProperty("date_created")
     Date dateCreated;
@@ -52,17 +59,9 @@ public class Subscription {
     @JsonProperty("vendor_name")
     String vendorName;
 
-    public String getMerchantOrderId() {
-        return merchantOrderId;
-    }
-
     public Subscription setMerchantOrderId(String merchantOrderId) {
         this.merchantOrderId = merchantOrderId;
         return this;
-    }
-
-    public SubscriptionStatus getSubscriptionStatus() {
-        return subscriptionStatus;
     }
 
     public Subscription setSubscriptionStatus(SubscriptionStatus subscriptionStatus) {
@@ -70,17 +69,9 @@ public class Subscription {
         return this;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
     public Subscription setUsername(String username) {
         this.username = username;
         return this;
-    }
-
-    public int getQuantity() {
-        return quantity;
     }
 
     public Subscription setQuantity(int quantity) {
@@ -88,17 +79,9 @@ public class Subscription {
         return this;
     }
 
-    public String getPreferenceId() {
-        return preferenceId;
-    }
-
     public Subscription setPreferenceId(String preferenceId) {
         this.preferenceId = preferenceId;
         return this;
-    }
-
-    public ArrayList<MerchantOrderPayment> getPayment() {
-        return payment;
     }
 
     public Subscription setPayment(ArrayList<MerchantOrderPayment> payment) {
@@ -106,17 +89,9 @@ public class Subscription {
         return this;
     }
 
-    public ArrayList<Shipment> getShipments() {
-        return shipments;
-    }
-
     public Subscription setShipments(ArrayList<Shipment> shipments) {
         this.shipments = shipments;
         return this;
-    }
-
-    public String getVendorName() {
-        return vendorName;
     }
 
     public Subscription setVendorName(String vendorName) {
@@ -124,17 +99,9 @@ public class Subscription {
         return this;
     }
 
-    public Date getDateCreated() {
-        return dateCreated;
-    }
-
     public Subscription setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
         return this;
-    }
-
-    public float getTotalAmount() {
-        return totalAmount;
     }
 
     public Subscription setTotalAmount(float totalAmount) {
@@ -142,26 +109,14 @@ public class Subscription {
         return this;
     }
 
-    public float getPaidAmount() {
-        return paidAmount;
-    }
-
     public Subscription setPaidAmount(float paidAmount) {
         this.paidAmount = paidAmount;
         return this;
     }
 
-    public float getRefundedAmount() {
-        return refundedAmount;
-    }
-
     public Subscription setRefundedAmount(float refundedAmount) {
         this.refundedAmount = refundedAmount;
         return this;
-    }
-
-    public String getItemId() {
-        return itemId;
     }
 
     public Subscription setItemId(String itemId) {

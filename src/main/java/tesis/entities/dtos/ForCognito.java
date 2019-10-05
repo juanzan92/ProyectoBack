@@ -13,9 +13,12 @@ public class ForCognito {
     public ForCognito(String userPoolId, String username){
         this.userPoolId = userPoolId;
         this.username = username;
+        this.setUserPoolId("us-east-1_90Kvm5SGo");  // test pool us-east-1_vwGNEHsur
     }
 
-    public ForCognito(){}
+    public ForCognito(){
+        this.setUserPoolId("us-east-1_90Kvm5SGo");  // test pool us-east-1_vwGNEHsur
+    }
 
     public String getUserPoolId() {
         return userPoolId;
