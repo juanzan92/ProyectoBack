@@ -96,7 +96,7 @@ public class SubscriptionService {
 
                 item.setStock(newItemQuantity);
 
-                if (newItemQuantity == 0) item.setStatus(ItemStatus.COMPLETED);
+                if (newItemQuantity == 0) item.setStatus(ItemStatus.FINISHED);
 
                 itemService.updateItem(item);
 
@@ -128,7 +128,7 @@ public class SubscriptionService {
             Item item = itemService.getItem(DynamoBuilder.buildMap(itemId, subscription.getItemId()));
             item.setStock(item.getStock() + subscription.getQuantity());
 
-            if (item.getStatus() == ItemStatus.COMPLETED) item.setStatus(ItemStatus.ACTIVE);
+            if (item.getStatus() == ItemStatus.FINISHED) item.setStatus(ItemStatus.ACTIVE);
 
             itemService.updateItem(item);
 
