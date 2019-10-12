@@ -15,13 +15,13 @@ public class ReportController {
     @Autowired
     ReportService reportService;
 
-    @GetMapping("/get_sold_items_by_cat")
-    public ForReportsSimpleRadar[] get_sold_items_by_cat() throws JsonProcessingException {
+    @GetMapping("/sold_by_category")
+    public ForReportsSimpleRadar[] getSoldItemsByCategory() throws JsonProcessingException {
         return reportService.getSoldItemsByCategories();
     }
 
-    @GetMapping("/get_sub_by_cat")
-    public ForReportsSimpleRadar[] get_sub_by_cat() throws JsonProcessingException {
+    @GetMapping("/subscription_by_cat")
+    public ForReportsSimpleRadar[] getSubscriptionByCategory() throws JsonProcessingException {
         return reportService.getSubscriptionByCategories();
     }
 
