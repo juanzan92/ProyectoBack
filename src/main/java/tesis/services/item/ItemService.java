@@ -15,6 +15,7 @@ import tesis.services.RestClient;
 import tesis.services.account.SubscriptionService;
 import tesis.services.account.UserService;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
 
@@ -90,6 +91,29 @@ public class ItemService {
             item.setStatus(ItemStatus.CANCELLED);
 
             return restClient.request(urlBase, DynamoBuilder.saveObject(item, forDynamo), HttpMethod.PUT, String.class);
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    public ArrayList<Item> getListing(String category, Map<String, Map> param) throws JsonProcessingException {
+        try {
+            Map price = param.get("price");
+
+            forDynamo.setIndexName("category");
+            forDynamo.setSearchPattern(category);
+            Item[] items = searchItems(forDynamo);
+
+            ArrayList<Item> filteredItems = new ArrayList<>();
+
+            for (Item item : items) {
+                float maxAmount = ((Integer) price.get("max_amount")).floatValue();
+                float minAmount = ((Integer) price.get("min_amount")).floatValue();
+
+                if (maxAmount >= item.getActualPrice() && minAmount <= item.getActualPrice())
+                    filteredItems.add(item);
+            }
+            return filteredItems;
         } catch (Exception e) {
             throw e;
         }
