@@ -14,6 +14,7 @@ public class SubscriptionBuilder {
                 .setMerchantOrderId(merchantOrder.getId())
                 .setSubscriptionStatus(SubscriptionStatus.IN_PROGRESS)
                 .setItemId(merchantOrder.getItems().get(0).getId())
+                .setItemTitle(merchantOrder.getItems().get(0).getTitle())
                 .setQuantity(merchantOrder.getItems().get(0).getQuantity())
                 .setPayment(merchantOrder.getPayments())
                 .setPreferenceId(merchantOrder.getPreferenceId())
