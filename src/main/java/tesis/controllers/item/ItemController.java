@@ -4,10 +4,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.mercadopago.exceptions.MPException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import tesis.entities.dtos.ForReportsSimpleRadar;
 import tesis.entities.dtos.item.Item;
 import tesis.services.item.ItemService;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 @RestController
@@ -15,6 +15,11 @@ import java.util.Map;
 public class ItemController {
     @Autowired
     ItemService itemService;
+
+    @PostMapping("/listing/{category}")
+    public ArrayList<Item> listingCategories(@PathVariable String category, @RequestBody Map<String, Map> param) throws JsonProcessingException {
+        return itemService.getListing(category, param);
+    }
 
     @PostMapping()
     public String createItem(@RequestBody Item item) throws JsonProcessingException {

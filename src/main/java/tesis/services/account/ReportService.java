@@ -3,7 +3,6 @@ package tesis.services.account;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tesis.entities.builders.dynamo.DynamoBuilder;
 import tesis.entities.dtos.ForDynamo;
 import tesis.entities.dtos.ForReportsSimpleRadar;
 import tesis.entities.dtos.account.Subscription;
@@ -12,6 +11,8 @@ import tesis.entities.dtos.item.Item;
 import tesis.services.RestClient;
 import tesis.services.item.CategoryService;
 import tesis.services.item.ItemService;
+
+import java.util.ArrayList;
 
 @Service
 public class ReportService {
@@ -31,28 +32,28 @@ public class ReportService {
     @Autowired
     SubscriptionService subscriptionService;
 
-    String urlBase = "https://rtge19cj13.execute-api.us-east-1.amazonaws.com/prod/generic_ep";
-
     public ForReportsSimpleRadar[] getSoldItemsByCategories() throws JsonProcessingException {
         ForDynamo forDynamo = new ForDynamo("items", "item_id");
         forDynamo.setIndexName("category");
         Category categories[] = categoryService.getAllCategory();
-        ForReportsSimpleRadar simpleRadar[] = new ForReportsSimpleRadar[categories.length];
-        Item items[] = new Item[0];
-        Integer i = 0;
-        for (Category category : categories) {
-            simpleRadar[i] = new ForReportsSimpleRadar("", 0, 0, 0);
-            simpleRadar[i].setSubject(category.getCategoryName());
-            forDynamo.setSearchPattern(category.categoryName);
-            items = itemService.searchItems(forDynamo);
+        ArrayList<ForReportsSimpleRadar> simpleRadar = new ArrayList<>();
+
+        for (int i = 0; i < categories.length; i++) {
+
+            ForReportsSimpleRadar simpleReport = new ForReportsSimpleRadar();
+            simpleReport.setSubject(categories[i].getCategoryName());
+            forDynamo.setSearchPattern(categories[i].getCategoryName());
+            Item[] items = itemService.searchItems(forDynamo);
+
             for (Item item : items) {
-                simpleRadar[i].setValueA(simpleRadar[i].getValueA() + (item.getInitialStock() - item.getStock()));
-                simpleRadar[i].setValueB(simpleRadar[i].getValueA());
-                simpleRadar[i].setFullMark(simpleRadar[i].getValueA());
+                simpleReport.setValueA(simpleReport.getValueA() + (item.getInitialStock() - item.getStock()));
+                simpleReport.setValueB(simpleReport.getValueA());
+                simpleReport.setFullMark(simpleReport.getValueA());
             }
-            i++;
+            simpleRadar.add(simpleReport);
         }
-        return simpleRadar;
+
+        return (ForReportsSimpleRadar[]) simpleRadar.toArray();
     }
 
     public ForReportsSimpleRadar[] getSubscriptionByCategories() throws JsonProcessingException {
@@ -65,7 +66,7 @@ public class ReportService {
         for (Category category : categories) {
             simpleRadar[i] = new ForReportsSimpleRadar("", 0, 0, 0);
             simpleRadar[i].setSubject(category.getCategoryName());
-            forDynamo.setSearchPattern(category.categoryName);
+            forDynamo.setSearchPattern(category.getCategoryName());
             subscription = subscriptionService.searchSubscription(forDynamo);
             simpleRadar[i].setSubject(category.getCategoryName());
             simpleRadar[i].setValueA(subscription.length);

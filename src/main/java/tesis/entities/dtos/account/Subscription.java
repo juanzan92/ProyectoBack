@@ -59,6 +59,18 @@ public class Subscription {
     @JsonProperty("vendor_name")
     String vendorName;
 
+    @JsonProperty("item_title")
+    String itemTitle;
+
+    public String getItemTitle() {
+        return itemTitle;
+    }
+
+    public Subscription setItemTitle(String itemTitle) {
+        this.itemTitle = itemTitle;
+        return this;
+    }
+
     public Subscription setMerchantOrderId(String merchantOrderId) {
         this.merchantOrderId = merchantOrderId;
         return this;
