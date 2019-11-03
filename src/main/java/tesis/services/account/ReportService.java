@@ -32,8 +32,6 @@ public class ReportService {
     @Autowired
     SubscriptionService subscriptionService;
 
-    String urlBase = "https://rtge19cj13.execute-api.us-east-1.amazonaws.com/prod/generic_ep";
-
     public ForReportsSimpleRadar[] getSoldItemsByCategories() throws JsonProcessingException {
         ForDynamo forDynamo = new ForDynamo("items", "item_id");
         forDynamo.setIndexName("category");

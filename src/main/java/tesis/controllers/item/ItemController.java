@@ -16,7 +16,7 @@ public class ItemController {
     @Autowired
     ItemService itemService;
 
-    @GetMapping("/listing/{category}")
+    @PostMapping("/listing/{category}")
     public ArrayList<Item> listingCategories(@PathVariable String category, @RequestBody Map<String, Map> param) throws JsonProcessingException {
         return itemService.getListing(category, param);
     }
