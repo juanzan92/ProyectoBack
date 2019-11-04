@@ -13,6 +13,7 @@ import tesis.services.home.HomeService;
 import java.util.Map;
 
 @RestController
+@CrossOrigin(allowedHeaders = "*", maxAge = 3600, allowCredentials = "true")
 @RequestMapping("/catalog/items/home")
 public class HomeController {
     @Autowired

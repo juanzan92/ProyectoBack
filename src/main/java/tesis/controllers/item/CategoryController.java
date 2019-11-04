@@ -9,6 +9,7 @@ import tesis.services.item.CategoryService;
 import java.util.Map;
 
 @RestController
+@CrossOrigin(allowedHeaders = "*", maxAge = 3600, allowCredentials = "true")
 @RequestMapping("/catalog/categories")
 public class CategoryController {
     @Autowired

@@ -9,6 +9,7 @@ import tesis.services.mercadopago.ShippingService;
 import java.util.ArrayList;
 
 @RestController
+@CrossOrigin(allowedHeaders = "*", maxAge = 3600, allowCredentials = "true")
 @RequestMapping("/shipping")
 public class ShippingController {
     @Autowired
