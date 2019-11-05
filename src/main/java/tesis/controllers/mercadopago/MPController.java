@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
+@CrossOrigin(allowedHeaders = "*", maxAge = 3600, allowCredentials = "true")
 @RequestMapping("/mp")
 public class MPController {
     @Autowired

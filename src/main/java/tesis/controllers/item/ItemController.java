@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 @RestController
+@CrossOrigin(allowedHeaders = "*", maxAge = 3600, allowCredentials = "true")
 @RequestMapping("/catalog/items")
 public class ItemController {
     @Autowired

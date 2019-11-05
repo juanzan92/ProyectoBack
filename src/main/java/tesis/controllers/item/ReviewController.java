@@ -10,6 +10,7 @@ import javax.validation.constraints.NotNull;
 import java.util.Map;
 
 @RestController
+@CrossOrigin(allowedHeaders = "*", maxAge = 3600, allowCredentials = "true")
 @RequestMapping("/catalog/reviews")
 public class ReviewController {
     @Autowired
