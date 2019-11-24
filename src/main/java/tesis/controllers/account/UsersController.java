@@ -27,6 +27,11 @@ public class UsersController {
         return usersService.getUser(username);
     }
 
+    @PutMapping()
+    public String updateUser(@RequestBody User user) throws JsonProcessingException {
+        return usersService.updateUser(user);
+    }
+
     @GetMapping("/get_all")
     public User[] getAllUser() throws JsonProcessingException {
         return usersService.getAllUser();
