@@ -64,4 +64,8 @@ public class UserService {
     public Vendor[] getAllVendor() throws JsonProcessingException {
         return restClient.request(DynamoBuilder.getAllObject(forDynamo, urlBase + "/get_all"), HttpMethod.GET, Vendor[].class);
     }
+
+    public String updateUser(@NotNull User user) throws JsonProcessingException {
+        return restClient.request(urlBase, DynamoBuilder.saveObject(user, forDynamo), HttpMethod.PUT, String.class);
+    }
 }
