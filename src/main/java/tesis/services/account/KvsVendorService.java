@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import tesis.entities.builders.dynamo.DynamoBuilder;
+import tesis.entities.dtos.ForBarReport;
 import tesis.entities.dtos.ForDynamo;
 import tesis.entities.dtos.ForReportsSimpleRadar;
 import tesis.entities.dtos.account.KvsVendor;
@@ -34,6 +35,26 @@ public class KvsVendorService {
         }
         ArrayList<ForReportsSimpleRadar> graphList = graph == "graph01" ? kvsVendor.getGraph01() : kvsVendor.getGraph02();
         kvsVendor.updateGraphSimpleRadar(category, quantity, graphList);
+        return restClient.request(urlBase, DynamoBuilder.saveObject(kvsVendor, forDynamo), HttpMethod.PUT, String.class);
+    }
+
+    public String updateKvsBarChart(String username, int month, int quantity) throws JsonProcessingException {
+        KvsVendor kvsVendor = getKvsVendor(DynamoBuilder.buildMap("username", username));
+
+        ArrayList<ForBarReport> graph03 = kvsVendor.getGraph03();
+
+        for (ForBarReport monthReport : graph03) {
+            if (monthReport.getMonth() == new Integer(month)) {
+                Integer actualMonthQuantity = monthReport.getQuantity();
+                if (actualMonthQuantity == null) {
+                    monthReport.setQuantity(new Integer(quantity));
+                } else {
+                    monthReport.setQuantity(actualMonthQuantity + new Integer(quantity));
+                }
+                break;
+            }
+        }
+
         return restClient.request(urlBase, DynamoBuilder.saveObject(kvsVendor, forDynamo), HttpMethod.PUT, String.class);
     }
 }

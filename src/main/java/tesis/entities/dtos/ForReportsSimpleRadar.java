@@ -21,6 +21,6 @@ public class ForReportsSimpleRadar {
     @JsonProperty("B")
     Integer valueB;
 
-    @JsonProperty("fullMark")
+    @JsonProperty("full_mark")
     Integer fullMark;
 }
