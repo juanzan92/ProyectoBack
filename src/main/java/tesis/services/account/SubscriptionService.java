@@ -26,6 +26,7 @@ import tesis.services.item.ItemService;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
+import java.util.Date;
 import java.util.Map;
 
 @Service
@@ -48,7 +49,7 @@ public class SubscriptionService {
     String urlBase = "https://rtge19cj13.execute-api.us-east-1.amazonaws.com/prod/generic_ep";
     ForDynamo forDynamo = new ForDynamo("subscriptions", "subscription_id");
 
-    String appOwnerToken = "TEST-6597192979858931-082414-a77f17d601ed0de0e44bec1ee3f6e297-463910841";
+    String appOwnerToken = "TEST-7512170400736377-110521-6635401b642d70c2f62abee2d6aefdaf-486477479";//TODO no sabemos porque de repente el apponwertoken es el del vendedor, averiguar eso.
     String accessToken = "?access_token=" + appOwnerToken;
     String mpLink = "https://api.mercadopago.com";
 
@@ -71,6 +72,7 @@ public class SubscriptionService {
         subscription.setCategory(item.getCategory());
         kvsVendorService.updateKvsVendor(item.getVendorUsername(), "graph01", item.getCategory(), 1);
         kvsVendorService.updateKvsVendor(item.getVendorUsername(), "graph02", item.getCategory(), subscription.getQuantity());
+        kvsVendorService.updateKvsBarChart(item.getVendorUsername(), new Date().getMonth(), subscription.getQuantity());
         return restClient.request(urlBase, DynamoBuilder.saveObject(subscription, forDynamo), HttpMethod.POST, Subscription.class);
     }
 

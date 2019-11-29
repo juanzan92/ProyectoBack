@@ -2,12 +2,13 @@ package tesis.controllers.account;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import tesis.entities.dtos.ForReportsSimpleRadar;
+import tesis.entities.dtos.account.KvsVendor;
+import tesis.services.account.KvsVendorService;
 import tesis.services.account.ReportService;
+
+import java.util.Map;
 
 @RestController
 @CrossOrigin(allowedHeaders = "*", maxAge = 3600, allowCredentials = "true")
@@ -16,6 +17,9 @@ public class ReportController {
 
     @Autowired
     ReportService reportService;
+
+    @Autowired
+    KvsVendorService kvsVendorService;
 
     @GetMapping("/sold_by_category")
     public ForReportsSimpleRadar[] getSoldItemsByCategory() throws JsonProcessingException {
@@ -27,4 +31,8 @@ public class ReportController {
         return reportService.getSubscriptionByCategories();
     }
 
+    @GetMapping()
+    public KvsVendor getKvsVendor(@RequestParam Map<String, String> param) throws JsonProcessingException {
+        return kvsVendorService.getKvsVendor(param);
+    }
 }
