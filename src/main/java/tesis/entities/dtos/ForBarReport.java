@@ -8,6 +8,8 @@ import lombok.Setter;
 
 @Setter
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class ForBarReport {
 
     @JsonProperty("month")
@@ -15,9 +17,4 @@ public class ForBarReport {
 
     @JsonProperty("quantity")
     Integer quantity;
-
-    public ForBarReport(Integer month, Integer quantity){
-        this.month = month;
-        this.quantity = quantity;
-    }
 }

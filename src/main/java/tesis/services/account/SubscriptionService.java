@@ -10,10 +10,8 @@ import org.springframework.stereotype.Service;
 import tesis.entities.builders.dynamo.DynamoBuilder;
 import tesis.entities.builders.mercadopago.SubscriptionBuilder;
 import tesis.entities.dtos.ForDynamo;
-import tesis.entities.dtos.ForReportsSimpleRadar;
 import tesis.entities.dtos.account.Subscription;
 import tesis.entities.dtos.account.User;
-import tesis.entities.dtos.item.Category;
 import tesis.entities.dtos.item.Item;
 import tesis.entities.dtos.mercadopago.MerchantOrder;
 import tesis.entities.dtos.mercadopago.Vendor;
@@ -26,7 +24,6 @@ import tesis.services.item.ItemService;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
-import java.util.Date;
 import java.util.Map;
 
 @Service
@@ -70,9 +67,7 @@ public class SubscriptionService {
         item.setStock(item.getStock() - subscription.getQuantity());
         itemService.updateItem(item);
         subscription.setCategory(item.getCategory());
-        kvsVendorService.updateKvsVendor(item.getVendorUsername(), "graph01", item.getCategory(), 1);
-        kvsVendorService.updateKvsVendor(item.getVendorUsername(), "graph02", item.getCategory(), subscription.getQuantity());
-        kvsVendorService.updateKvsBarChart(item.getVendorUsername(), new Date().getMonth(), subscription.getQuantity());
+        kvsVendorService.updateKvs(item, subscription);
         return restClient.request(urlBase, DynamoBuilder.saveObject(subscription, forDynamo), HttpMethod.POST, Subscription.class);
     }
 

@@ -28,11 +28,6 @@ public class KvsVendor {
         graph01 = new ArrayList<ForReportsSimpleRadar>();
         graph02 = new ArrayList<ForReportsSimpleRadar>();
         graph03 = new ArrayList<ForBarReport>();
-
-        for (int i = 1; i <= 12; i++) {
-            ForBarReport newMonth = new ForBarReport(new Integer(i), new Integer(0));
-            graph03.add(newMonth);
-        }
     }
 
     public void updateGraphSimpleRadar(String category, Integer quantity, ArrayList<ForReportsSimpleRadar> graph) {
