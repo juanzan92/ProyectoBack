@@ -8,7 +8,7 @@ public class ItemBuilder {
     public static Item buildItem(tesis.entities.dtos.item.Item dynamoItem, int quantity) {
         return new Item().setId(dynamoItem.getItemId())
                 .setTitle(dynamoItem.getTitle())
-                .setDescription(dynamoItem.getDescription())
+                .setDescription("description")
                 .setQuantity(quantity)
                 .setCurrencyId(CategoryId.ARS.toString())
                 .setCategoryId(dynamoItem.getCategory())

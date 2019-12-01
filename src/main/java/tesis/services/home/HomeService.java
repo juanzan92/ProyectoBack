@@ -18,62 +18,73 @@ public class HomeService {
     @Autowired
     RestClient restClient;
     String urlBase = "https://rtge19cj13.execute-api.us-east-1.amazonaws.com/prod/generic_ep";
-    ForDynamo forDynamo = new ForDynamo("items_home", "item_id");
 
     public String createItemCarrouselMain(ItemCarrouselMain itemCarrouselMain) throws JsonProcessingException {
+        ForDynamo forDynamo = new ForDynamo("items_home", "item_id");
         itemCarrouselMain.setTag("CarrouselMain");
         return restClient.request(urlBase, DynamoBuilder.saveObject(itemCarrouselMain, forDynamo), HttpMethod.POST, String.class);
     }
 
     public ItemCarrouselMain[] searchItemsCarrouselMain() throws JsonProcessingException {
+        ForDynamo forDynamo = new ForDynamo("items_home", "item_id");
         forDynamo.setSearchParams("tag", "CarrouselMain");
         return restClient.request(DynamoBuilder.searchObjects(forDynamo, urlBase + "/index_search"), HttpMethod.GET, ItemCarrouselMain[].class);
     }
 
     public String updateItemCarrouselMain(ItemCarrouselMain itemCarrouselMain) throws JsonProcessingException {
+        ForDynamo forDynamo = new ForDynamo("items_home", "item_id");
         itemCarrouselMain.setTag("CarrouselMain");
         return restClient.request(urlBase, DynamoBuilder.saveObject(itemCarrouselMain, forDynamo), HttpMethod.PUT, String.class);
     }
 
     public String deleteItemCarrouselMain(Map<String, String> param) throws JsonProcessingException {
+        ForDynamo forDynamo = new ForDynamo("items_home", "item_id");
         return restClient.request(urlBase, DynamoBuilder.getObject(param, forDynamo), HttpMethod.DELETE, String.class);
     }
 
     public String createItemHurryUp(ItemHurryUp itemHurryUp) throws JsonProcessingException {
+        ForDynamo forDynamo = new ForDynamo("items_home", "item_id");
         itemHurryUp.setTag("HurryUp");
         return restClient.request(urlBase, DynamoBuilder.saveObject(itemHurryUp, forDynamo), HttpMethod.POST, String.class);
     }
 
     public ItemHurryUp[] searchItemsHurryUp() throws JsonProcessingException {
+        ForDynamo forDynamo = new ForDynamo("items_home", "item_id");
         forDynamo.setSearchParams("tag", "HurryUp");
         return restClient.request(DynamoBuilder.searchObjects(forDynamo, urlBase + "/index_search"), HttpMethod.GET, ItemHurryUp[].class);
     }
 
     public String updateItemHurryUp(ItemHurryUp itemHurryUp) throws JsonProcessingException {
+        ForDynamo forDynamo = new ForDynamo("items_home", "item_id");
         itemHurryUp.setTag("HurryUp");
         return restClient.request(urlBase, DynamoBuilder.saveObject(itemHurryUp, forDynamo), HttpMethod.PUT, String.class);
     }
 
     public String deleteItemHurryUp(Map<String, String> param) throws JsonProcessingException {
+        ForDynamo forDynamo = new ForDynamo("items_home", "item_id");
         return restClient.request(urlBase, DynamoBuilder.getObject(param, forDynamo), HttpMethod.DELETE, String.class);
     }
 
     public String createItemCarrouselBottom(ItemCarrouselBottom itemCarrouselBottom) throws JsonProcessingException {
+        ForDynamo forDynamo = new ForDynamo("items_home", "item_id");
         itemCarrouselBottom.setTag("CarrouselBottom");
         return restClient.request(urlBase, DynamoBuilder.saveObject(itemCarrouselBottom, forDynamo), HttpMethod.POST, String.class);
     }
 
     public ItemCarrouselBottom[] searchItemsCarrouselBottom() throws JsonProcessingException {
+        ForDynamo forDynamo = new ForDynamo("items_home", "item_id");
         forDynamo.setSearchParams("tag", "CarrouselBottom");
         return restClient.request(DynamoBuilder.searchObjects(forDynamo, urlBase + "/index_search"), HttpMethod.GET, ItemCarrouselBottom[].class);
     }
 
     public String updateItemCarrouselBottom(ItemCarrouselBottom itemCarrouselBottom) throws JsonProcessingException {
+        ForDynamo forDynamo = new ForDynamo("items_home", "item_id");
         itemCarrouselBottom.setTag("CarrouselBottom");
         return restClient.request(urlBase, DynamoBuilder.saveObject(itemCarrouselBottom, forDynamo), HttpMethod.PUT, String.class);
     }
 
     public String deleteItemCarrouselBottom(Map<String, String> param) throws JsonProcessingException {
+        ForDynamo forDynamo = new ForDynamo("items_home", "item_id");
         return restClient.request(urlBase, DynamoBuilder.getObject(param, forDynamo), HttpMethod.DELETE, String.class);
     }
 

@@ -10,10 +10,8 @@ import org.springframework.stereotype.Service;
 import tesis.entities.builders.dynamo.DynamoBuilder;
 import tesis.entities.builders.mercadopago.SubscriptionBuilder;
 import tesis.entities.dtos.ForDynamo;
-import tesis.entities.dtos.ForReportsSimpleRadar;
 import tesis.entities.dtos.account.Subscription;
 import tesis.entities.dtos.account.User;
-import tesis.entities.dtos.item.Category;
 import tesis.entities.dtos.item.Item;
 import tesis.entities.dtos.mercadopago.MerchantOrder;
 import tesis.entities.dtos.mercadopago.Vendor;
@@ -48,7 +46,7 @@ public class SubscriptionService {
     String urlBase = "https://rtge19cj13.execute-api.us-east-1.amazonaws.com/prod/generic_ep";
     ForDynamo forDynamo = new ForDynamo("subscriptions", "subscription_id");
 
-    String appOwnerToken = "TEST-6597192979858931-082414-a77f17d601ed0de0e44bec1ee3f6e297-463910841";
+    String appOwnerToken = "TEST-7512170400736377-110521-6635401b642d70c2f62abee2d6aefdaf-486477479";//TODO no sabemos porque de repente el apponwertoken es el del vendedor, averiguar eso.
     String accessToken = "?access_token=" + appOwnerToken;
     String mpLink = "https://api.mercadopago.com";
 
@@ -69,8 +67,7 @@ public class SubscriptionService {
         item.setStock(item.getStock() - subscription.getQuantity());
         itemService.updateItem(item);
         subscription.setCategory(item.getCategory());
-        kvsVendorService.updateKvsVendor(item.getVendorUsername(), "graph01", item.getCategory(), 1);
-        kvsVendorService.updateKvsVendor(item.getVendorUsername(), "graph02", item.getCategory(), subscription.getQuantity());
+        kvsVendorService.updateKvs(item, subscription);
         return restClient.request(urlBase, DynamoBuilder.saveObject(subscription, forDynamo), HttpMethod.POST, Subscription.class);
     }
 
@@ -122,7 +119,7 @@ public class SubscriptionService {
 
             MercadoPago.SDK.setAccessToken(vendor.getAccessToken());
 
-            Payment payment = Payment.findById(subscription.getPayment().get(0).getId());
+            Payment payment = Payment.findById(subscription.getPayment().get(0).getId().toString());
             payment.refund();
 
             Item item = itemService.getItem(DynamoBuilder.buildMap(itemId, subscription.getItemId()));

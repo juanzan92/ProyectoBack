@@ -17,6 +17,7 @@ import tesis.services.account.UserService;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 @Service
@@ -82,7 +83,10 @@ public class ItemService {
                 throw new IllegalStateException("Item already FINISHED. Nothing to do");
             }
 
-            Subscription[] subscriptions = subscriptionService.searchSubscription(DynamoBuilder.buildMap("item_id", item.getItemId()));
+            HashMap<String, String> map = DynamoBuilder.buildMap("item_id", item.getItemId());
+            map.put ("index_name","item_id");
+            map.put ("search_pattern", item.getItemId());
+            Subscription[] subscriptions = subscriptionService.searchSubscription(map);
 
             for (Subscription subscription : subscriptions) {
                 subscriptionService.cancelSubscription(subscription.getSubscriptionId());

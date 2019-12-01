@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.mercadopago.resources.datastructures.merchantorder.MerchantOrderPayment;
 import lombok.Getter;
 import lombok.Setter;
+import tesis.entities.dtos.mercadopago.Payment;
 import tesis.entities.dtos.mercadopago.Shipment;
 import tesis.entities.enums.user.SubscriptionStatus;
 
@@ -33,7 +34,7 @@ public class Subscription {
     float paidAmount;
 
     @JsonProperty("payment")
-    ArrayList<MerchantOrderPayment> payment;
+    ArrayList<Payment> payment;
 
     @JsonProperty("quantity")
     private int quantity;
@@ -61,6 +62,30 @@ public class Subscription {
 
     @JsonProperty("item_title")
     String itemTitle;
+
+    @JsonProperty("shipping_cost")
+    float shippingCost;
+
+    @JsonProperty("transaction_amount")
+    float transactionAmount;
+
+    public float getTransactionAmount() {
+        return transactionAmount;
+    }
+
+    public Subscription setTransactionAmount(float transactionAmount) {
+        this.transactionAmount = transactionAmount;
+        return this;
+    }
+
+    public float getShippingCost() {
+        return shippingCost;
+    }
+
+    public Subscription setShippingCost(float shippingCost) {
+        this.shippingCost = shippingCost;
+        return this;
+    }
 
     public String getItemTitle() {
         return itemTitle;
@@ -96,7 +121,7 @@ public class Subscription {
         return this;
     }
 
-    public Subscription setPayment(ArrayList<MerchantOrderPayment> payment) {
+    public Subscription setPayment(ArrayList<Payment> payment) {
         this.payment = payment;
         return this;
     }

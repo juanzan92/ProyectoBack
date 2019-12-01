@@ -3,6 +3,7 @@ package tesis.entities.dtos.account;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
+import tesis.entities.dtos.ForBarReport;
 import tesis.entities.dtos.ForReportsSimpleRadar;
 
 import java.util.ArrayList;
@@ -20,9 +21,13 @@ public class KvsVendor {
     @JsonProperty("graph_02")    // Items vendidos por Categoria
             ArrayList<ForReportsSimpleRadar> graph02;
 
+    @JsonProperty("graph_03")    // Items vendidos por mes
+            ArrayList<ForBarReport> graph03;
+
     public KvsVendor() {
         graph01 = new ArrayList<ForReportsSimpleRadar>();
         graph02 = new ArrayList<ForReportsSimpleRadar>();
+        graph03 = new ArrayList<ForBarReport>();
     }
 
     public void updateGraphSimpleRadar(String category, Integer quantity, ArrayList<ForReportsSimpleRadar> graph) {
@@ -39,6 +44,4 @@ public class KvsVendor {
             graph.add(new ForReportsSimpleRadar(category, quantity, quantity, quantity));
         }
     }
-
-
 }

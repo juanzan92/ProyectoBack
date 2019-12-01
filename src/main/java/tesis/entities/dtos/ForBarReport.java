@@ -10,17 +10,14 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ForReportsSimpleRadar {
+public class ForBarReport {
 
-    @JsonProperty("subject")
-    String subject;
+    @JsonProperty("month")
+    Integer month;
 
-    @JsonProperty("A")
-    Integer valueA;
+    @JsonProperty("quantity")
+    Integer quantity;
 
-    @JsonProperty("B")
-    Integer valueB;
-
-    @JsonProperty("full_mark")
-    Integer fullMark;
+    @JsonProperty("income")
+    Double income;
 }
