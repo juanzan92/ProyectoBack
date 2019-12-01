@@ -38,6 +38,7 @@ public class ReportController {
 
     @PutMapping()
     public String updateKvsVendor(@RequestParam Map<String, String> param) throws JsonProcessingException {
-        return kvsVendorService.updateKvsVendor(param.get("username"), param.get("category"), new Integer(param.get("quantity")));
+        return kvsVendorService.updateKvsVendor(param.get("username"), param.get("category")
+                , new Integer(param.get("quantity")), new Double(param.get("income")));
     }
 }

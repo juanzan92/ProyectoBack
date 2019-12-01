@@ -17,4 +17,7 @@ public class ForBarReport {
 
     @JsonProperty("quantity")
     Integer quantity;
+
+    @JsonProperty("income")
+    Double income;
 }

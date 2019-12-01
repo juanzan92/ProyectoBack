@@ -30,7 +30,7 @@ public class KvsVendorService {
         return restClient.request(DynamoBuilder.getObject(param, forDynamo, urlBase), HttpMethod.GET, KvsVendor.class);
     }
 
-    public String updateKvsVendor(String username, String category, Integer quantity) throws JsonProcessingException {
+    public String updateKvsVendor(String username, String category, Integer quantity, Double income) throws JsonProcessingException {
         KvsVendor kvsVendor = getKvsVendor(DynamoBuilder.buildMap("username", username));
         if (kvsVendor == null) {
             kvsVendor = new KvsVendor();
@@ -39,7 +39,7 @@ public class KvsVendorService {
 
         updateGraphSimpleRadar(category, 1, kvsVendor.getGraph01());
         updateGraphSimpleRadar(category, quantity, kvsVendor.getGraph02());
-        updateBarGraph(kvsVendor.getGraph03(), quantity);
+        updateBarGraph(kvsVendor.getGraph03(), quantity, income);
 
         return restClient.request(urlBase, DynamoBuilder.saveObject(kvsVendor, forDynamo), HttpMethod.PUT, String.class);
     }
@@ -59,7 +59,7 @@ public class KvsVendorService {
         }
     }
 
-    public void updateBarGraph(ArrayList<ForBarReport> graph, int quantity) {
+    public void updateBarGraph(ArrayList<ForBarReport> graph, int quantity, double income) {
         Integer month = new Date().getMonth();
 
         if (graph.size() == 0) {
@@ -67,6 +67,7 @@ public class KvsVendorService {
                 ForBarReport barReport = new ForBarReport();
                 barReport.setMonth(new Integer(i));
                 barReport.setQuantity(new Integer(0));
+                barReport.setIncome((income * quantity) / 1000);
                 ForBarReport newMonth = barReport;
                 graph.add(newMonth);
             }
@@ -81,6 +82,6 @@ public class KvsVendorService {
     }
 
     public String updateKvs(Item item, Subscription subscription) throws JsonProcessingException {
-        return updateKvsVendor(item.getVendorUsername(), item.getCategory(), subscription.getQuantity());
+        return updateKvsVendor(item.getVendorUsername(), item.getCategory(), subscription.getQuantity(), (double) item.getActualPrice());
     }
 }
