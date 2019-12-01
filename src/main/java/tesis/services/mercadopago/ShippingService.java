@@ -8,6 +8,8 @@ import tesis.entities.builders.dynamo.DynamoBuilder;
 import tesis.entities.dtos.ForDynamo;
 import tesis.entities.dtos.account.Subscription;
 import tesis.entities.dtos.mercadopago.Shipment;
+import tesis.entities.enums.mercadopago.ShipmentStatus;
+import tesis.entities.enums.user.SubscriptionStatus;
 import tesis.services.RestClient;
 import tesis.services.account.SubscriptionService;
 
@@ -41,6 +43,10 @@ public class ShippingService {
             Subscription subscription = subscriptionService.getSubscription(DynamoBuilder.buildMap("subscription_id", subscriptionId));
 
             subscription.getShipments().add(shipment);
+
+            if (shipment.getShipmentStatus() == ShipmentStatus.DELIVERED) {
+                subscription.setSubscriptionStatus(SubscriptionStatus.FINISHED);
+            }
 
             return restClient.request(urlBase, DynamoBuilder.saveObject(subscription, forDynamo), HttpMethod.PUT, String.class);
         } catch (Exception e) {

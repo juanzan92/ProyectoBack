@@ -1,7 +1,10 @@
 package tesis.entities.dtos.mercadopago;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.mercadopago.resources.datastructures.merchantorder.*;
+import com.mercadopago.resources.datastructures.merchantorder.Collector;
+import com.mercadopago.resources.datastructures.merchantorder.Item;
+import com.mercadopago.resources.datastructures.merchantorder.MerchantOrderPayment;
+import com.mercadopago.resources.datastructures.merchantorder.Payer;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -41,7 +44,7 @@ public class MerchantOrder {
     private Integer sponsorId;
 
     @JsonProperty("payments")
-    private ArrayList<MerchantOrderPayment> payments;
+    private ArrayList<Payment> payments;
 
     @JsonProperty("paid_amount")
     private Float paidAmount;
@@ -151,11 +154,11 @@ public class MerchantOrder {
         return this;
     }
 
-    public ArrayList<MerchantOrderPayment> getPayments() {
+    public ArrayList<Payment> getPayments() {
         return payments;
     }
 
-    public MerchantOrder setPayments(ArrayList<MerchantOrderPayment> payments) {
+    public MerchantOrder setPayments(ArrayList<Payment> payments) {
         this.payments = payments;
         return this;
     }

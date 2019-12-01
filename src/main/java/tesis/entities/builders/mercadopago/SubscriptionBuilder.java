@@ -21,7 +21,9 @@ public class SubscriptionBuilder {
                 .setRefundedAmount(merchantOrder.getRefundedAmount())
                 .setShipments(ShipmentBuilder.buildShipment())
                 .setPaidAmount(merchantOrder.getPaidAmount())
-                .setTotalAmount(merchantOrder.getTotalAmount())
+                .setTotalAmount(merchantOrder.getPayments().get(0).getTotalPaidAmount())
+                .setTransactionAmount(merchantOrder.getPayments().get(0).getTransactionAmount())
+                .setShippingCost(merchantOrder.getShippingCost())
                 .setVendorName(vendorName)
                 .setUsername(consumer.getUsername());
     }

@@ -119,7 +119,7 @@ public class SubscriptionService {
 
             MercadoPago.SDK.setAccessToken(vendor.getAccessToken());
 
-            Payment payment = Payment.findById(subscription.getPayment().get(0).getId());
+            Payment payment = Payment.findById(subscription.getPayment().get(0).getId().toString());
             payment.refund();
 
             Item item = itemService.getItem(DynamoBuilder.buildMap(itemId, subscription.getItemId()));
