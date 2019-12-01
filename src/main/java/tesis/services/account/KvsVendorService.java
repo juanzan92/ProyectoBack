@@ -60,7 +60,7 @@ public class KvsVendorService {
     }
 
     public void updateBarGraph(ArrayList<ForBarReport> graph, int quantity) {
-        Integer month = new Date().getMonth();
+        Integer month = new Date().getMonth()+1;
 
         if (graph.size() == 0) {
             for (int i = 1; i <= 12; i++) {
