@@ -112,7 +112,8 @@ public class SubscriptionService {
             Subscription subscription = getSubscription(DynamoBuilder.buildMap("subscription_id", subscriptionId));
 
             if (subscription.getSubscriptionStatus() != SubscriptionStatus.IN_PROGRESS) {
-                throw new IllegalStateException("Subscription already FINISHED. Nothing Done");
+                //throw new IllegalStateException("Subscription already FINISHED. Nothing Done");
+                return subscription.toString();
             }
 
             Vendor vendor = userService.getVendor(DynamoBuilder.buildMap("username", subscription.getVendorName()));
