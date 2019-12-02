@@ -43,7 +43,8 @@ public class PreferenceService {
             }
 
             Vendor vendor = userService.getVendor(DynamoBuilder.buildMap(username, item.getVendorUsername()));
-            MercadoPago.SDK.setAccessToken(vendor.getAccessToken());
+            Vendor vendorJak = userService.getVendor(DynamoBuilder.buildMap(username, "jak"));
+            MercadoPago.SDK.setAccessToken(vendorJak.getAccessToken());
 
             User consumer = userService.getUser(DynamoBuilder.buildMap(username, preference.getConsumerUsername()));
 
