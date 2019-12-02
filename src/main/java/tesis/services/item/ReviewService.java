@@ -31,7 +31,9 @@ public class ReviewService {
     }
 
     public Review[] searchReviews(Map<String, String> param) throws JsonProcessingException {
-        return restClient.request(DynamoBuilder.searchObjects(param, forDynamo, urlBase + "/index_search"), HttpMethod.GET, Review[].class);
+        ForDynamo searchParams = new ForDynamo("reviews", "review_id");
+        searchParams.setSearchParams("item_id", param.get("item_id"));
+        return restClient.request(DynamoBuilder.searchObjects(param, searchParams, urlBase + "/index_search"), HttpMethod.GET, Review[].class);
     }
 
     public String updateReview(Review review) throws JsonProcessingException {

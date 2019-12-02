@@ -2,7 +2,9 @@ package tesis.controllers.account;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import tesis.entities.dtos.ForReportsSimpleRadar;
 import tesis.entities.dtos.account.KvsVendor;
 import tesis.services.account.KvsVendorService;
@@ -33,7 +35,13 @@ public class ReportController {
 
     @GetMapping()
     public KvsVendor getKvsVendor(@RequestParam Map<String, String> param) throws JsonProcessingException {
-        return kvsVendorService.getKvsVendor(param);
+        KvsVendor kvsVendor = kvsVendorService.getKvsVendor(param);
+        if (kvsVendor == null){
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "entity not found"
+            );
+        }
+        return kvsVendor;
     }
 
     @PutMapping()

@@ -10,11 +10,23 @@ public class Review {
     @JsonProperty("item_id")
     private String itemId;
 
+    @JsonProperty("username")
+    private String username;
+
     @JsonProperty("description")
     private String description;
 
     @JsonProperty("review_score")
     private String reviewScore;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public Review setUsername(String username) {
+        this.username = username;
+        return this;
+    }
 
     public String getReviewId() {
         return reviewId;
