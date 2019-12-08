@@ -128,7 +128,7 @@ public class SubscriptionService {
                 return subscription.toString();
             }
 
-            Vendor vendor = userService.getVendor(DynamoBuilder.buildMap("username", subscription.getVendorName()));
+            Vendor vendor = userService.getVendor(DynamoBuilder.buildMap("username", "jak"));
 
             MercadoPago.SDK.setAccessToken(vendor.getAccessToken());
 
