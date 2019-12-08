@@ -24,6 +24,7 @@ import tesis.services.item.ItemService;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 @Service
@@ -93,7 +94,22 @@ public class SubscriptionService {
 
                 item.setStock(newItemQuantity);
 
-                if (newItemQuantity == 0) item.setStatus(ItemStatus.FINISHED);
+                if (newItemQuantity == 0) {
+                    item.setStatus(ItemStatus.FINISHED);
+                    subscription.setSubscriptionStatus(SubscriptionStatus.DELIVERING);
+                    HashMap<String, String> map = DynamoBuilder.buildMap("item_id", item.getItemId());
+                    map.put("index_name", "item_id");
+                    map.put("search_pattern", item.getItemId());
+                    Subscription[] subscriptions = searchSubscription(map);
+
+                    for (Subscription subscriptionTmp : subscriptions) {
+                        if (subscriptionTmp.getSubscriptionStatus() == SubscriptionStatus.IN_PROGRESS) {
+                            //cancelSubscription(subscription2.getSubscriptionId());
+                            subscriptionTmp.setSubscriptionStatus(SubscriptionStatus.DELIVERING);
+                            updateSubscription(subscriptionTmp);
+                        }
+                    }
+                }
 
                 itemService.updateItem(item);
 
