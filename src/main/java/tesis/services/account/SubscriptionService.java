@@ -102,7 +102,6 @@ public class SubscriptionService {
 
                     for (Subscription subscriptionTmp : subscriptions) {
                         if (subscriptionTmp.getSubscriptionStatus() == SubscriptionStatus.IN_PROGRESS) {
-                            //cancelSubscription(subscription2.getSubscriptionId());
                             subscriptionTmp.setSubscriptionStatus(SubscriptionStatus.DELIVERING);
                             updateSubscription(subscriptionTmp);
                         }
