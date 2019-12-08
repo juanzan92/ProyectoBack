@@ -92,8 +92,6 @@ public class SubscriptionService {
 
                 int newItemQuantity = item.getStock() - subscription.getQuantity();
 
-                item.setStock(newItemQuantity);
-
                 if (newItemQuantity == 0) {
                     item.setStatus(ItemStatus.FINISHED);
                     subscription.setSubscriptionStatus(SubscriptionStatus.DELIVERING);
