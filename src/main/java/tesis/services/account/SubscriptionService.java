@@ -82,7 +82,7 @@ public class SubscriptionService {
 
             if (merchantOrder.getCollector().getEmail() != null && preference.getPayer().getEmail() != null) {
 
-                String vendorUser = userService.searchUser(email, merchantOrder.getCollector().getEmail()).getUsername();
+                String vendorUser = itemService.getItem(DynamoBuilder.buildMap(itemId, merchantOrder.getItems().get(0).getId())).getVendorUsername();
 
                 User consumerUser = userService.searchUser(email, preference.getPayer().getEmail());
 
