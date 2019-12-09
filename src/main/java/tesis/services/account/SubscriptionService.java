@@ -93,7 +93,7 @@ public class SubscriptionService {
                 int newItemQuantity = item.getStock() - subscription.getQuantity();
 
                 if (newItemQuantity == 0) {
-                    item.setStatus(ItemStatus.FINISHED);
+                    item.setStatus(ItemStatus.DELIVERING);
                     subscription.setSubscriptionStatus(SubscriptionStatus.DELIVERING);
                     HashMap<String, String> map = DynamoBuilder.buildMap("item_id", item.getItemId());
                     map.put("index_name", "item_id");
