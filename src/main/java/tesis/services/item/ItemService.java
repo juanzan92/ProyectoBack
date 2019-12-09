@@ -11,6 +11,7 @@ import tesis.entities.dtos.account.Subscription;
 import tesis.entities.dtos.account.User;
 import tesis.entities.dtos.item.Item;
 import tesis.entities.enums.item.ItemStatus;
+import tesis.entities.enums.user.SubscriptionStatus;
 import tesis.services.RestClient;
 import tesis.services.account.SubscriptionService;
 import tesis.services.account.UserService;
@@ -89,8 +90,8 @@ public class ItemService {
             }
 
             HashMap<String, String> map = DynamoBuilder.buildMap("item_id", item.getItemId());
-            map.put ("index_name","item_id");
-            map.put ("search_pattern", item.getItemId());
+            map.put("index_name", "item_id");
+            map.put("search_pattern", item.getItemId());
             Subscription[] subscriptions = subscriptionService.searchSubscription(map);
 
             for (Subscription subscription : subscriptions) {
@@ -100,6 +101,33 @@ public class ItemService {
             item.setStatus(ItemStatus.CANCELLED);
 
             return restClient.request(urlBase, DynamoBuilder.saveObject(item, forDynamo), HttpMethod.PUT, String.class);
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    public void finishItem(String itemId, String subscriptionId) throws JsonProcessingException, MPException {
+        try {
+            Item item = getItem(DynamoBuilder.buildMap("item_id", itemId));
+
+            HashMap<String, String> map = DynamoBuilder.buildMap("item_id", item.getItemId());
+            map.put("index_name", "item_id");
+            map.put("search_pattern", item.getItemId());
+            Subscription[] subscriptions = subscriptionService.searchSubscription(map);
+
+            Boolean itemFinished = true ;
+
+            for (Subscription subscription : subscriptions) {
+                if (subscription.getSubscriptionStatus().equals(SubscriptionStatus.DELIVERING) && !(subscription.getSubscriptionId().equals(subscriptionId))) {
+                    itemFinished = false ;
+                }
+            }
+
+            if (itemFinished)  {
+                item.setStatus(ItemStatus.FINISHED);
+                updateItem(item);
+            }
+
         } catch (Exception e) {
             throw e;
         }

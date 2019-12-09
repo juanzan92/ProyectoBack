@@ -7,11 +7,13 @@ import org.springframework.stereotype.Service;
 import tesis.entities.builders.dynamo.DynamoBuilder;
 import tesis.entities.dtos.ForDynamo;
 import tesis.entities.dtos.account.Subscription;
+import tesis.entities.dtos.item.Item;
 import tesis.entities.dtos.mercadopago.Shipment;
 import tesis.entities.enums.mercadopago.ShipmentStatus;
 import tesis.entities.enums.user.SubscriptionStatus;
 import tesis.services.RestClient;
 import tesis.services.account.SubscriptionService;
+import tesis.services.item.ItemService;
 
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
@@ -27,6 +29,9 @@ public class ShippingService {
 
     @Autowired
     SubscriptionService subscriptionService;
+
+    @Autowired
+    ItemService itemService;
 
     String urlBase = "https://rtge19cj13.execute-api.us-east-1.amazonaws.com/prod/generic_ep";
     ForDynamo forDynamo = new ForDynamo("subscriptions", "subscription_id");
@@ -46,6 +51,7 @@ public class ShippingService {
 
             if (shipment.getShipmentStatus() == ShipmentStatus.DELIVERED) {
                 subscription.setSubscriptionStatus(SubscriptionStatus.FINISHED);
+                itemService.finishItem(subscription.getItemId(), subscription.getSubscriptionId());
             }
 
             return restClient.request(urlBase, DynamoBuilder.saveObject(subscription, forDynamo), HttpMethod.PUT, String.class);
