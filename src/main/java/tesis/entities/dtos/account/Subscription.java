@@ -2,67 +2,98 @@ package tesis.entities.dtos.account;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.mercadopago.resources.datastructures.merchantorder.MerchantOrderPayment;
+import lombok.Getter;
+import lombok.Setter;
+import tesis.entities.dtos.mercadopago.Payment;
 import tesis.entities.dtos.mercadopago.Shipment;
 import tesis.entities.enums.user.SubscriptionStatus;
 
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Subscription{
+@Getter
+@Setter
+public class Subscription {
+
+    @JsonProperty("category")
+    String category;
 
     @JsonProperty("date_created")
-    private Date dateCreated;
+    Date dateCreated;
 
     @JsonProperty("item_id")
-    private String itemId;
+    String itemId;
 
     @JsonProperty("merchant_order_id")
     private String merchantOrderId;
 
     @JsonProperty("preference_id")
-    private String preferenceId;
+    String preferenceId;
 
     @JsonProperty("paid_amount")
-    private float paidAmount;
+    float paidAmount;
 
     @JsonProperty("payment")
-    private ArrayList<MerchantOrderPayment> payment;
+    ArrayList<Payment> payment;
 
     @JsonProperty("quantity")
     private int quantity;
 
     @JsonProperty("refunded_amount")
-    private float refundedAmount;
+    float refundedAmount;
 
     @JsonProperty("shipments")
-    private ArrayList<Shipment> shipments;
+    ArrayList<Shipment> shipments;
 
     @JsonProperty("subscription_id")
     private String subscriptionId;
 
     @JsonProperty("subscription_status")
-    private SubscriptionStatus subscriptionStatus;
+    SubscriptionStatus subscriptionStatus;
 
     @JsonProperty("total_amount")
-    private float totalAmount;
+    float totalAmount;
 
     @JsonProperty("username")
     private String username;
 
     @JsonProperty("vendor_name")
-    private String vendorName;
+    String vendorName;
 
-    public String getSubscriptionId() {
-        return subscriptionId;
+    @JsonProperty("item_title")
+    String itemTitle;
+
+    @JsonProperty("shipping_cost")
+    float shippingCost;
+
+    @JsonProperty("transaction_amount")
+    float transactionAmount;
+
+    public float getTransactionAmount() {
+        return transactionAmount;
     }
 
-    public Subscription setSubscriptionId(String subscriptionId) {
-        this.subscriptionId = subscriptionId;
+    public Subscription setTransactionAmount(float transactionAmount) {
+        this.transactionAmount = transactionAmount;
         return this;
     }
 
-    public String getMerchantOrderId() {
-        return merchantOrderId;
+    public float getShippingCost() {
+        return shippingCost;
+    }
+
+    public Subscription setShippingCost(float shippingCost) {
+        this.shippingCost = shippingCost;
+        return this;
+    }
+
+    public String getItemTitle() {
+        return itemTitle;
+    }
+
+    public Subscription setItemTitle(String itemTitle) {
+        this.itemTitle = itemTitle;
+        return this;
     }
 
     public Subscription setMerchantOrderId(String merchantOrderId) {
@@ -70,17 +101,9 @@ public class Subscription{
         return this;
     }
 
-    public SubscriptionStatus getSubscriptionStatus() {
-        return subscriptionStatus;
-    }
-
     public Subscription setSubscriptionStatus(SubscriptionStatus subscriptionStatus) {
         this.subscriptionStatus = subscriptionStatus;
         return this;
-    }
-
-    public String getUsername() {
-        return username;
     }
 
     public Subscription setUsername(String username) {
@@ -88,17 +111,9 @@ public class Subscription{
         return this;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
-
     public Subscription setQuantity(int quantity) {
         this.quantity = quantity;
         return this;
-    }
-
-    public String getPreferenceId() {
-        return preferenceId;
     }
 
     public Subscription setPreferenceId(String preferenceId) {
@@ -106,17 +121,9 @@ public class Subscription{
         return this;
     }
 
-    public ArrayList<MerchantOrderPayment> getPayment() {
-        return payment;
-    }
-
-    public Subscription setPayment(ArrayList<MerchantOrderPayment> payment) {
+    public Subscription setPayment(ArrayList<Payment> payment) {
         this.payment = payment;
         return this;
-    }
-
-    public ArrayList<Shipment> getShipments() {
-        return shipments;
     }
 
     public Subscription setShipments(ArrayList<Shipment> shipments) {
@@ -124,17 +131,9 @@ public class Subscription{
         return this;
     }
 
-    public String getVendorName() {
-        return vendorName;
-    }
-
     public Subscription setVendorName(String vendorName) {
         this.vendorName = vendorName;
         return this;
-    }
-
-    public Date getDateCreated() {
-        return dateCreated;
     }
 
     public Subscription setDateCreated(Date dateCreated) {
@@ -142,17 +141,9 @@ public class Subscription{
         return this;
     }
 
-    public float getTotalAmount() {
-        return totalAmount;
-    }
-
     public Subscription setTotalAmount(float totalAmount) {
         this.totalAmount = totalAmount;
         return this;
-    }
-
-    public float getPaidAmount() {
-        return paidAmount;
     }
 
     public Subscription setPaidAmount(float paidAmount) {
@@ -160,17 +151,9 @@ public class Subscription{
         return this;
     }
 
-    public float getRefundedAmount() {
-        return refundedAmount;
-    }
-
     public Subscription setRefundedAmount(float refundedAmount) {
         this.refundedAmount = refundedAmount;
         return this;
-    }
-
-    public String getItemId() {
-        return itemId;
     }
 
     public Subscription setItemId(String itemId) {

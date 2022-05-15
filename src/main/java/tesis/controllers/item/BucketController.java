@@ -5,6 +5,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import tesis.services.item.BucketService;
 
+import java.util.HashMap;
+
+@CrossOrigin(allowedHeaders = "*", maxAge = 3600, allowCredentials = "true")
 @RestController
 @RequestMapping("/catalog/img/{id}")
 public class BucketController {
@@ -13,7 +16,7 @@ public class BucketController {
     private BucketService bucketService;
 
     @PostMapping()
-    public String uploadFile(@RequestPart(value = "file") MultipartFile file) {
+    public HashMap uploadFile(@RequestPart(value = "file") MultipartFile file) {
         return bucketService.uploadFile(file);
     }
 

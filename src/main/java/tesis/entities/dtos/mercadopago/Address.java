@@ -18,6 +18,15 @@ public class Address {
     @JsonProperty("apartment")
     private String apartment = null;
 
+    @JsonProperty("address_country")
+    private String addressCountry;
+
+    @JsonProperty("address_region")
+    private String addressRegion;
+
+    @JsonProperty("address_city")
+    private String addressCity;
+    
     public String getFloor() {
         return floor;
     }

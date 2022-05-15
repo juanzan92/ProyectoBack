@@ -7,19 +7,16 @@ import java.util.List;
 public class Category {
 
     @JsonProperty("category_id")
-    public String categoryId;
+    private String categoryId;
 
     @JsonProperty("category_name")
-    public String categoryName;
+    private String categoryName;
 
     @JsonProperty("picture")
-    public String categoryPicture;
-
-    @JsonProperty("tags")
-    List<Object> cateogrytags;
+    private String categoryPicture;
 
     @JsonProperty("total_items_in_category")
-    public String totalItemsInCategory;
+    private String totalItemsInCategory;
 
 
     public String getCategoryId() {

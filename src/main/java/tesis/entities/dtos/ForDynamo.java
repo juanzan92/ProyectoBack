@@ -1,7 +1,10 @@
 package tesis.entities.dtos;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import lombok.Setter;
 
+@Setter @Getter
 public class ForDynamo {
 
     @JsonProperty("table_name")
@@ -21,33 +24,8 @@ public class ForDynamo {
         this.tablePrimary = tablePrimary;
     }
 
-    public String getTableName() {
-        return tableName;
-    }
-
-    public void setTableName(String tableName) {
-        this.tableName = tableName;
-    }
-
-    public String getTablePrimary() {
-        return tablePrimary;
-    }
-
-    public void setTablePrimary(String tablePrimary) {
-        this.tablePrimary = tablePrimary;
-    }
-
-    public String getIndexName() { return indexName; }
-
-    public void setIndexName(String indexName) { this.indexName = indexName;}
-
-    public String getSearchPattern() { return searchPattern; }
-
-    public void setSearchPattern(String searchPattern) { this.searchPattern = searchPattern; }
-
-    public void  setSearchParams ( String indexName, String searchParams) {
+    public void setSearchParams(String indexName, String searchParams) {
         this.setIndexName(indexName);
         this.setSearchPattern(searchParams);
     }
-
 }

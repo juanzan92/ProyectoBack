@@ -11,6 +11,7 @@ import tesis.services.account.UserService;
 import java.util.Map;
 
 @RestController
+@CrossOrigin(allowedHeaders = "*", maxAge = 3600, allowCredentials = "true")
 @RequestMapping("/account/users")
 public class UsersController {
     @Autowired
@@ -24,6 +25,11 @@ public class UsersController {
     @GetMapping()
     public User getUser(@RequestParam Map<String, String>  username) throws JsonProcessingException {
         return usersService.getUser(username);
+    }
+
+    @PutMapping()
+    public String updateUser(@RequestBody User user) throws JsonProcessingException {
+        return usersService.updateUser(user);
     }
 
     @GetMapping("/get_all")

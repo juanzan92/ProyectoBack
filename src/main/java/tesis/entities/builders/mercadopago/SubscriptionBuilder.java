@@ -14,13 +14,16 @@ public class SubscriptionBuilder {
                 .setMerchantOrderId(merchantOrder.getId())
                 .setSubscriptionStatus(SubscriptionStatus.IN_PROGRESS)
                 .setItemId(merchantOrder.getItems().get(0).getId())
+                .setItemTitle(merchantOrder.getItems().get(0).getTitle())
                 .setQuantity(merchantOrder.getItems().get(0).getQuantity())
                 .setPayment(merchantOrder.getPayments())
                 .setPreferenceId(merchantOrder.getPreferenceId())
                 .setRefundedAmount(merchantOrder.getRefundedAmount())
                 .setShipments(ShipmentBuilder.buildShipment())
                 .setPaidAmount(merchantOrder.getPaidAmount())
-                .setTotalAmount(merchantOrder.getTotalAmount())
+                .setTotalAmount(merchantOrder.getPayments().get(0).getTotalPaidAmount())
+                .setTransactionAmount(merchantOrder.getPayments().get(0).getTransactionAmount())
+                .setShippingCost(merchantOrder.getShippingCost())
                 .setVendorName(vendorName)
                 .setUsername(consumer.getUsername());
     }
